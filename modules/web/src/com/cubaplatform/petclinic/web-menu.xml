@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-petclinic"
+          insertBefore="administration">
+        <item screen="petclinic$Owner.browse"/>
+        <item screen="petclinic$Pet.browse"/>
+        <separator/>
+        <item screen="petclinic$Vet.browse"/>
+        <separator/>
+        <item screen="petclinic$Visit.browse"/>
+    </menu>
+    <menu id="application-masterdata"
+          insertBefore="administration">
+        <item screen="petclinic$PetType.browse"/>
+        <item screen="petclinic$Specialty.browse"/>
+    </menu>
+</menu-config>

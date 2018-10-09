@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.cubaplatform.petclinic.web.pet.pet.PetBrowse"
+        focusComponent="petsTable"
+        lookupComponent="petsTable"
+        messagesPack="com.cubaplatform.petclinic.web.pet.pet">
+    <dsContext>
+        <groupDatasource id="petsDs"
+                         class="com.cubaplatform.petclinic.entity.pet.Pet"
+                         view="pet-with-owner-and-type">
+            <query>
+                <![CDATA[select e from petclinic$Pet e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="petsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="petsTable"
+                datasource="petsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="petsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="identificationNumber"/>
+                <column id="birthDate"/>
+                <column id="owner"/>
+                <column id="type"/>
+            </columns>
+            <rows datasource="petsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="petsTable.create"/>
+                <button id="editBtn"
+                        action="petsTable.edit"/>
+                <button id="removeBtn"
+                        action="petsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

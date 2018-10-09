@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.cubaplatform.petclinic.web.vet.specialty.SpecialtyBrowse"
+        focusComponent="specialtiesTable"
+        lookupComponent="specialtiesTable"
+        messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
+    <dsContext>
+        <groupDatasource id="specialtiesDs"
+                         class="com.cubaplatform.petclinic.entity.vet.Specialty"
+                         view="_local">
+            <query>
+                <![CDATA[select e from petclinic$Specialty e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="specialtiesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="specialtiesTable"
+                datasource="specialtiesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="specialtiesTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        openType="DIALOG"/>
+                <action id="edit"
+                        openType="DIALOG"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rows datasource="specialtiesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="specialtiesTable.create"/>
+                <button id="editBtn"
+                        action="specialtiesTable.edit"/>
+                <button id="removeBtn"
+                        action="specialtiesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

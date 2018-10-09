@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.cubaplatform.petclinic.web.pet.pet.PetEdit"
+        datasource="petDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.cubaplatform.petclinic.web.pet.pet">
+    <dsContext>
+        <datasource id="petDs"
+                    class="com.cubaplatform.petclinic.entity.pet.Pet"
+                    view="pet-with-owner-and-type"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="petDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="identificationNumber"/>
+                <field property="birthDate"/>
+                <field property="type"/>
+                <field property="owner"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

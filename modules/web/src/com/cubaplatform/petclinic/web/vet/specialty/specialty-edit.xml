@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.cubaplatform.petclinic.web.vet.specialty.SpecialtyEdit"
+        datasource="specialtyDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
+    <dsContext>
+        <datasource id="specialtyDs"
+                    class="com.cubaplatform.petclinic.entity.vet.Specialty"
+                    view="_local"/>
+    </dsContext>
+    <dialogMode forceDialog="true"
+                height="AUTO"
+                width="600"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="specialtyDs">
+            <column width="250px">
+                <field property="name"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.cubaplatform.petclinic.web.owner.owner.OwnerBrowse"
+        focusComponent="ownersTable"
+        lookupComponent="ownersTable"
+        messagesPack="com.cubaplatform.petclinic.web.owner.owner">
+    <dsContext>
+        <groupDatasource id="ownersDs"
+                         class="com.cubaplatform.petclinic.entity.owner.Owner"
+                         view="owner-with-pets">
+            <query>
+                <![CDATA[select e from petclinic$Owner e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="ownersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="ownersTable"
+                datasource="ownersDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="ownersTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="firstName"/>
+                <column id="lastName"/>
+                <column id="address"/>
+                <column id="city"/>
+                <column id="telephone"/>
+                <column id="email"/>
+            </columns>
+            <rows datasource="ownersDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="ownersTable.create"/>
+                <button id="editBtn"
+                        action="ownersTable.edit"/>
+                <button id="removeBtn"
+                        action="ownersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>
