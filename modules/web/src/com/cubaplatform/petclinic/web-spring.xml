@@ -10,6 +10,8 @@
                   ref="cuba_ServerSelector"/>
         <property name="remoteServices">
             <map>
+                <entry key="petclinic_DiseaseWarningMailingService"
+                       value="com.cubaplatform.petclinic.service.visit.DiseaseWarningMailingService"/>
             </map>
         </property>
     </bean>

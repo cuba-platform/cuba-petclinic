@@ -1,0 +1,9 @@
+Hello ${owner.firstName} ${owner.lastName},
+
+In the Area of ${city} the following disease have been reported: ${disease}.
+In case your Pet ${pet.name} shows any unusual behavior, please approach CUBAs Petclinic.
+
+
+Yours sincerly,
+
+CUBA Petclinic Inc.

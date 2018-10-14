@@ -26,4 +26,7 @@
             template="com/cubaplatform/petclinic/web/pet/pet/pet-edit.xml"/>
     <screen id="mainWindow"
             template="com/cubaplatform/petclinic/web/screens/main/ext-mainwindow.xml"/>
+
+    <screen id="create-disease-warning-mailing"
+            template="com/cubaplatform/petclinic/web/pet/pet/create-disease-warning-mailing.xml"/>
 </screen-config>

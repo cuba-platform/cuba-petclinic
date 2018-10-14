@@ -29,6 +29,10 @@
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
+                <action id="createDiseaseWarningMailing"
+                        caption="msg://createDiseaseWarningMailing"
+                        icon="font-icon:BULLHORN"
+                        invoke="createDiseaseWarningMailing"/>
             </actions>
             <columns>
                 <column id="name"/>
@@ -47,6 +51,8 @@
                         action="petsTable.edit"/>
                 <button id="removeBtn"
                         action="petsTable.remove"/>
+                <button id="createDiseaseWarningMailingBtn"
+                        action="petsTable.createDiseaseWarningMailing"/>
             </buttonsPanel>
         </groupTable>
     </layout>
