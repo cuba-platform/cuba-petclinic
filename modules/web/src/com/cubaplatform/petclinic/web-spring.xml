@@ -12,6 +12,8 @@
             <map>
                 <entry key="petclinic_DiseaseWarningMailingService"
                        value="com.cubaplatform.petclinic.service.visit.DiseaseWarningMailingService"/>
+                <entry key="petclinic_VisitService"
+                       value="com.cubaplatform.petclinic.service.visit.VisitService"/>
             </map>
         </property>
     </bean>

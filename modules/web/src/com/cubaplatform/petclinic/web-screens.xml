@@ -29,4 +29,7 @@
 
     <screen id="create-disease-warning-mailing"
             template="com/cubaplatform/petclinic/web/pet/pet/create-disease-warning-mailing.xml"/>
+
+    <screen id="create-visit-for-pet"
+            template="com/cubaplatform/petclinic/web/visit/visit/create-visit-for-pet.xml"/>
 </screen-config>

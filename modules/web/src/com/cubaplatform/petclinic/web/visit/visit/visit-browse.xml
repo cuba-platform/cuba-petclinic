@@ -26,6 +26,11 @@
         <groupTable id="visitsTable"
                     width="100%">
             <actions>
+                <action id="createForPet"
+                        caption="msg://createForPet"
+                        icon="font-icon:BRIEFCASE"
+                        invoke="createForPet"
+                />
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
@@ -39,6 +44,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
+                <button id="createForPetBtn"
+                        action="visitsTable.createForPet"/>
                 <button id="createBtn"
                         action="visitsTable.create"/>
                 <button id="editBtn"
