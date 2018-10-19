@@ -25,12 +25,10 @@ public class Owner extends Person {
     protected String city;
 
     @Email
-    @NotNull
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL")
     protected String email;
 
-    @NotNull
-    @Column(name = "TELEPHONE", nullable = false)
+    @Column(name = "TELEPHONE")
     protected String telephone;
 
     @OneToMany(mappedBy = "owner")

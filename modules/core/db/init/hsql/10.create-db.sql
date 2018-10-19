@@ -48,8 +48,8 @@ create table PETCLINIC_OWNER (
     --
     ADDRESS varchar(255) not null,
     CITY varchar(255) not null,
-    EMAIL varchar(255) not null,
-    TELEPHONE varchar(255) not null,
+    EMAIL varchar(255),
+    TELEPHONE varchar(255),
     --
     primary key (ID)
 )^
