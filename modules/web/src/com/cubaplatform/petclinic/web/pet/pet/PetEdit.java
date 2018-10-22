@@ -1,7 +1,15 @@
 package com.cubaplatform.petclinic.web.pet.pet;
 
-import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.cubaplatform.petclinic.entity.pet.Pet;
+import com.haulmont.cuba.gui.screen.*;
 
-public class PetEdit extends AbstractEditor<Pet> {
+@UiController("sad_Pet.edit")
+@UiDescriptor("pet-edit.xml")
+@EditedEntityContainer("petCt")
+public class PetEdit extends StandardEditor<Pet> {
+
+    @Subscribe
+    protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
+        getScreenData().loadAll();
+    }
 }

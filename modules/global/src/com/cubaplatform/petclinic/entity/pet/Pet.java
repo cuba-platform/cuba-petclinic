@@ -19,7 +19,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 @Table(name = "PETCLINIC_PET", uniqueConstraints = {
     @UniqueConstraint(name = "IDX_PETCLINIC_PET_ID_UNQ", columnNames = {"IDENTIFICATION_NUMBER", "DELETE_TS"})
 })
-@Entity(name = "petclinic$Pet")
+@Entity(name = "petclinic_Pet")
 public class Pet extends NamedEntity {
     private static final long serialVersionUID = -3431453457784831240L;
 

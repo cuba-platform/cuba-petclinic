@@ -3,7 +3,7 @@
     <menu id="application-petclinic"
           insertBefore="administration">
         <item screen="petclinic$Owner.browse"/>
-        <item screen="petclinic$Pet.browse"/>
+        <item screen="petclinic_Pet.browse"/>
         <separator/>
         <item screen="petclinic$Vet.browse"/>
         <separator/>
