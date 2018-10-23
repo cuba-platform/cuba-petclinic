@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
-    <screen id="petclinic$PetType.browse"
-            template="com/cubaplatform/petclinic/web/pet/pettype/pet-type-browse.xml"/>
-    <screen id="petclinic$PetType.edit"
-            template="com/cubaplatform/petclinic/web/pet/pettype/pet-type-edit.xml"/>
+
     <screen id="petclinic$Specialty.browse"
             template="com/cubaplatform/petclinic/web/vet/specialty/specialty-browse.xml"/>
     <screen id="petclinic$Specialty.edit"

@@ -11,7 +11,7 @@
     </menu>
     <menu id="application-masterdata"
           insertBefore="administration">
-        <item screen="petclinic$PetType.browse"/>
+        <item screen="petclinic_PetType.browse"/>
         <item screen="petclinic$Specialty.browse"/>
     </menu>
 </menu-config>

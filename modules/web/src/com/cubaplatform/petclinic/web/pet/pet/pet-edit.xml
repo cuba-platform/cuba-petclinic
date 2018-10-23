@@ -21,7 +21,7 @@
     <collection id="typesCt" class="com.cubaplatform.petclinic.entity.pet.PetType" view="_base">
       <loader>
         <query>
-          select e from petclinic$PetType e order by e.name
+          select e from petclinic_PetType e order by e.name
         </query>
       </loader>
     </collection>
