@@ -1,79 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="com.cubaplatform.petclinic.web.pet.pet.PetEdit"
-        datasource="petDs"
-        focusComponent="fieldGroup"
-        messagesPack="com.cubaplatform.petclinic.web.pet.pet">
-    <dsContext>
-        <datasource id="petDs"
-                    class="com.cubaplatform.petclinic.entity.pet.Pet"
-                    view="pet-with-owner-and-type"/>
-    </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="petDs">
-            <column width="250px">
-                <field property="name"/>
-                <field property="identificationNumber"/>
-                <field property="birthDate"/>
-                <field property="type"/>
-                <field property="owner"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
-    </layout>
-</window>
-
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://editorCaption"
-        focusComponent="fieldGroup"
-        messagesPack="com.cubaplatform.petclinic.web.pet">
-<data>
+  caption="msg://editorCaption"
+  focusComponent="fieldGroup"
+  messagesPack="com.cubaplatform.petclinic.web.pet.pet">
+  <data>
     <instance id="petCt"
-              class="com.cubaplatform.petclinic.entity.pet.Pet"
-              view="pet-with-owner-and-type">
-        <loader/>
+      class="com.cubaplatform.petclinic.entity.pet.Pet"
+      view="pet-with-owner-and-type">
+      <loader/>
     </instance>
 
     <collection id="ownersCt" class="com.cubaplatform.petclinic.entity.owner.Owner" view="_base">
-        <loader>
-            <query>
-                select e from petclinic_Owner e order by e.name
-            </query>
-        </loader>
+      <loader>
+        <query>
+          select e from petclinic$Owner e
+        </query>
+      </loader>
     </collection>
 
     <collection id="typesCt" class="com.cubaplatform.petclinic.entity.pet.PetType" view="_base">
-        <loader>
-            <query>
-                select e from petclinic_Type e order by e.name
-            </query>
-        </loader>
+      <loader>
+        <query>
+          select e from petclinic$PetType e order by e.name
+        </query>
+      </loader>
     </collection>
-</data>
+  </data>
 
-<dialogMode height="600"
-            width="800"/>
+  <dialogMode height="600"
+    width="800"/>
 
-<layout expand="editorActions" spacing="true">
-    <form id="fieldGroup" dataContainer="orderCt">
-        <column width="250px">
-            <textField property="name"/>
-            <textField property="identificationNumber"/>
-            <dateField property="birthDate"/>
-            <lookupPickerField property="type"  optionsContainer="typesCt"/>
-            <lookupPickerField property="owner" optionsContainer="ownersCt"/>
-        </column>
+  <layout expand="editorActions" spacing="true">
+    <form id="fieldGroup" dataContainer="petCt">
+      <column width="250px">
+        <textField property="name"/>
+        <textField property="identificationNumber"/>
+        <dateField property="birthDate"/>
+        <lookupPickerField property="type" optionsContainer="typesCt"/>
+        <lookupPickerField property="owner" optionsContainer="ownersCt"/>
+      </column>
     </form>
 
 
     <fragment id="editorActions"
-              screen="editorActions"/>
-</layout>
+      screen="editorActions"/>
+  </layout>
 </window>
