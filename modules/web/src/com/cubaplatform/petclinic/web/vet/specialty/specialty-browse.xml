@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-caption="msg://browseCaption"
-class="com.cubaplatform.petclinic.web.vet.specialty.SpecialtyBrowse"
-focusComponent="specialtiesTable"
-lookupComponent="specialtiesTable"
-messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
-<data>
+  caption="msg://browseCaption"
+  class="com.cubaplatform.petclinic.web.vet.specialty.SpecialtyBrowse"
+  focusComponent="specialtiesTable"
+  lookupComponent="specialtiesTable"
+  messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
+  <data>
     <collection id="specialtiesCt"
       class="com.cubaplatform.petclinic.entity.vet.Specialty"
       view="_local">
-        <loader id="specialtiesLd">
-            <query>
-                <![CDATA[select e from petclinic_Specialty e]]>
-            </query>
-        </loader>
+      <loader id="specialtiesLd">
+        <query>
+          <![CDATA[select e from petclinic_Specialty e]]>
+        </query>
+      </loader>
     </collection>
-</data>
-<dialogMode height="600"
-  width="800"/>
-<layout expand="specialtiesTable"
-  spacing="true">
+  </data>
+  <dialogMode height="600"
+    width="800"/>
+  <layout expand="specialtiesTable"
+    spacing="true">
     <filter id="filter"
       applyTo="specialtiesTable"
       dataLoader="specialtiesLd">
-        <properties include=".*"/>
+      <properties include=".*"/>
     </filter>
     <groupTable id="specialtiesTable"
       dataContainer="specialtiesCt"
       width="100%">
-        <actions>
-            <action id="create" type="create" openType="DIALOG"/>
-            <action id="edit" type="edit"
-              openType="DIALOG"/>
-            <action id="remove" type="remove"/>
-        </actions>
-        <columns>
-            <column id="name"/>
-        </columns>
-        <rowsCount/>
-        <buttonsPanel id="buttonsPanel"
-          alwaysVisible="true">
-            <button id="createBtn" action="specialtiesTable.create"/>
-            <button id="editBtn" action="specialtiesTable.edit"/>
-            <button id="removeBtn" action="specialtiesTable.remove"/>
-        </buttonsPanel>
+      <actions>
+        <action id="create" type="create" openType="DIALOG"/>
+        <action id="edit" type="edit"
+          openType="DIALOG"/>
+        <action id="remove" type="remove"/>
+      </actions>
+      <columns>
+        <column id="name"/>
+      </columns>
+      <rowsCount/>
+      <buttonsPanel id="buttonsPanel"
+        alwaysVisible="true">
+        <button id="createBtn" action="specialtiesTable.create"/>
+        <button id="editBtn" action="specialtiesTable.edit"/>
+        <button id="removeBtn" action="specialtiesTable.remove"/>
+      </buttonsPanel>
     </groupTable>
-</layout>
+  </layout>
 </window>

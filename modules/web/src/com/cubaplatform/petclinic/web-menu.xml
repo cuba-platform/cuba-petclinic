@@ -5,7 +5,7 @@
         <item screen="petclinic$Owner.browse"/>
         <item screen="petclinic_Pet.browse"/>
         <separator/>
-        <item screen="petclinic$Vet.browse"/>
+        <item screen="petclinic_Vet.browse"/>
         <separator/>
         <item screen="petclinic$Visit.browse"/>
     </menu>

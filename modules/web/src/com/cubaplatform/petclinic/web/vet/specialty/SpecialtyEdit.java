@@ -1,7 +1,5 @@
 package com.cubaplatform.petclinic.web.vet.specialty;
 
-import com.cubaplatform.petclinic.entity.pet.PetType;
-import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.cubaplatform.petclinic.entity.vet.Specialty;
 import com.haulmont.cuba.gui.screen.EditedEntityContainer;
 import com.haulmont.cuba.gui.screen.StandardEditor;
