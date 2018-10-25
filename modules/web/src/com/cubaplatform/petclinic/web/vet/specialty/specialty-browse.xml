@@ -5,7 +5,7 @@
   focusComponent="specialtiesTable"
   lookupComponent="specialtiesTable"
   messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
-  <data>
+  <data readOnly="true">
     <collection id="specialtiesCt"
       class="com.cubaplatform.petclinic.entity.vet.Specialty"
       view="_local">

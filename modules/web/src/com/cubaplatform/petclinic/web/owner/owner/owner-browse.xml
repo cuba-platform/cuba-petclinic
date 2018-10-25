@@ -5,7 +5,7 @@ class="com.cubaplatform.petclinic.web.owner.owner.OwnerBrowse"
 focusComponent="ownersTable"
 lookupComponent="ownersTable"
 messagesPack="com.cubaplatform.petclinic.web.owner.owner">
-<data>
+<data readOnly="true">
     <collection id="ownersCt"
       class="com.cubaplatform.petclinic.entity.owner.Owner"
       view="owner-with-pets">

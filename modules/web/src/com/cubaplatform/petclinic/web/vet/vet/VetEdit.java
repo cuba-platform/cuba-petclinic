@@ -12,8 +12,4 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 @EditedEntityContainer("vetCt")
 public class VetEdit extends StandardEditor<Vet> {
 
-  @Subscribe
-  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-    getScreenData().loadAll();
-  }
 }

@@ -3,7 +3,6 @@ package com.cubaplatform.petclinic.web.pet.pettype;
 import com.cubaplatform.petclinic.entity.pet.PetType;
 import com.haulmont.cuba.gui.screen.EditedEntityContainer;
 import com.haulmont.cuba.gui.screen.StandardEditor;
-import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.cuba.gui.screen.UiController;
 import com.haulmont.cuba.gui.screen.UiDescriptor;
 
@@ -12,8 +11,4 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 @EditedEntityContainer("petTypeCt")
 public class PetTypeEdit extends StandardEditor<PetType> {
 
-  @Subscribe
-  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-    getScreenData().loadAll();
-  }
 }

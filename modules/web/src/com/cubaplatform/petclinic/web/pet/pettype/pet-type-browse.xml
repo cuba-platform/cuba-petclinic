@@ -5,7 +5,7 @@
   focusComponent="petTypesTable"
   lookupComponent="petTypesTable"
   messagesPack="com.cubaplatform.petclinic.web.pet.pet">
-  <data>
+  <data readOnly="true">
     <collection id="petTypesCt"
       class="com.cubaplatform.petclinic.entity.pet.PetType"
       view="_local">

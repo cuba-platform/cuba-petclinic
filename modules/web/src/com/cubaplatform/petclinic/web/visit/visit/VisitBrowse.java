@@ -3,7 +3,6 @@ package com.cubaplatform.petclinic.web.visit.visit;
 import com.cubaplatform.petclinic.entity.visit.Visit;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.cuba.gui.screen.StandardLookup;
-import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.cuba.gui.screen.UiController;
 import com.haulmont.cuba.gui.screen.UiDescriptor;
 
@@ -11,10 +10,5 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 @UiDescriptor("visit-browse.xml")
 @LookupComponent("visitsTable")
 public class VisitBrowse extends StandardLookup<Visit> {
-
-  @Subscribe
-  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-    getScreenData().loadAll();
-  }
 
 }

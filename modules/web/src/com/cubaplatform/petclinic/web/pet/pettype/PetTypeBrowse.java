@@ -3,7 +3,6 @@ package com.cubaplatform.petclinic.web.pet.pettype;
 import com.cubaplatform.petclinic.entity.pet.PetType;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.cuba.gui.screen.StandardLookup;
-import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.cuba.gui.screen.UiController;
 import com.haulmont.cuba.gui.screen.UiDescriptor;
 
@@ -11,10 +10,4 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 @UiDescriptor("pet-type-browse.xml")
 @LookupComponent("petTypesTable")
 public class PetTypeBrowse extends StandardLookup<PetType> {
-
-  @Subscribe
-  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-    getScreenData().loadAll();
-  }
-
 }

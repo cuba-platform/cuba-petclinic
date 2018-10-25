@@ -11,9 +11,4 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 @UiDescriptor("specialty-edit.xml")
 @EditedEntityContainer("specialtyCt")
 public class SpecialtyEdit extends StandardEditor<Specialty> {
-
-  @Subscribe
-  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-    getScreenData().loadAll();
-  }
 }

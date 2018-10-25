@@ -13,8 +13,4 @@ import com.haulmont.cuba.gui.screen.UiDescriptor;
 @EditedEntityContainer("visitCt")
 public class VisitEdit extends StandardEditor<Visit> {
 
-  @Subscribe
-  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-    getScreenData().loadAll();
-  }
 }
