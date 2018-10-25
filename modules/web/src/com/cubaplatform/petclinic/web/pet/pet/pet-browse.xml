@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://browseCaption"
-        class="com.cubaplatform.petclinic.web.pet.pet.PetBrowse"
         focusComponent="petsTable"
-        lookupComponent="petsTable"
         messagesPack="com.cubaplatform.petclinic.web.pet.pet">
-    <data>
+    <data readOnly="true">
         <collection id="petsCt"
                     class="com.cubaplatform.petclinic.entity.pet.Pet"
                     view="pet-with-owner-and-type">

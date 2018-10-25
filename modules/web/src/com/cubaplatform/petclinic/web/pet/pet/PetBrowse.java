@@ -7,10 +7,4 @@ import com.haulmont.cuba.gui.screen.*;
 @UiDescriptor("pet-browse.xml")
 @LookupComponent("petsTable")
 public class PetBrowse extends StandardLookup<Pet> {
-
-    @Subscribe
-    protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
-        getScreenData().loadAll();
-    }
-
 }
