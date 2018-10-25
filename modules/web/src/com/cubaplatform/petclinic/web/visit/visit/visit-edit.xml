@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="com.cubaplatform.petclinic.web.visit.visit.VisitEdit"
-        datasource="visitDs"
-        focusComponent="fieldGroup"
-        messagesPack="com.cubaplatform.petclinic.web.visit.visit">
-    <dsContext>
-        <datasource id="visitDs"
-                    class="com.cubaplatform.petclinic.entity.visit.Visit"
-                    view="visit-with-pet"/>
-    </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="visitDs">
-            <column width="250px">
-                <field property="visitDate"/>
-                <field property="description"/>
-                <field property="pet"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
-    </layout>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+  caption="msg://editorCaption"
+  focusComponent="fieldGroup"
+  messagesPack="com.cubaplatform.petclinic.web.visit.visit">
+  <data>
+    <instance id="petCt"
+      class="com.cubaplatform.petclinic.entity.visit.Visit"
+      view="visit-with-pet">
+      <loader/>
+    </instance>
+
+    <collection id="petsCt" class="com.cubaplatform.petclinic.entity.pet.Pet" view="_base">
+      <loader>
+        <query>
+          select e from petclinic_Pet e
+        </query>
+      </loader>
+    </collection>
+  </data>
+
+  <dialogMode height="600"
+    width="800"/>
+
+  <layout expand="editorActions" spacing="true">
+    <form id="fieldGroup" dataContainer="petCt">
+      <column width="250px">
+        <textField property="visitDate"/>
+        <textField property="description"/>
+        <lookupPickerField property="pet" optionsContainer="petsCt"/>
+      </column>
+    </form>
+
+
+    <fragment id="editorActions"
+      screen="editorActions"/>
+  </layout>
 </window>

@@ -7,7 +7,7 @@
         <separator/>
         <item screen="petclinic_Vet.browse"/>
         <separator/>
-        <item screen="petclinic$Visit.browse"/>
+        <item screen="petclinic_Visit.browse"/>
     </menu>
     <menu id="application-masterdata"
           insertBefore="administration">

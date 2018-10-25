@@ -1,7 +1,20 @@
 package com.cubaplatform.petclinic.web.visit.visit;
 
-import com.haulmont.cuba.gui.components.AbstractLookup;
+import com.cubaplatform.petclinic.entity.visit.Visit;
+import com.haulmont.cuba.gui.screen.LookupComponent;
+import com.haulmont.cuba.gui.screen.StandardLookup;
+import com.haulmont.cuba.gui.screen.Subscribe;
+import com.haulmont.cuba.gui.screen.UiController;
+import com.haulmont.cuba.gui.screen.UiDescriptor;
 
-public class VisitBrowse extends AbstractLookup {
+@UiController("petclinic_Visit.browse")
+@UiDescriptor("visit-browse.xml")
+@LookupComponent("visitsTable")
+public class VisitBrowse extends StandardLookup<Visit> {
+
+  @Subscribe
+  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
+    getScreenData().loadAll();
+  }
 
 }

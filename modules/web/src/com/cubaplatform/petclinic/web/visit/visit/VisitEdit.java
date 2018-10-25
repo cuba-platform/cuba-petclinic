@@ -1,7 +1,20 @@
 package com.cubaplatform.petclinic.web.visit.visit;
 
-import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.cubaplatform.petclinic.entity.visit.Visit;
+import com.haulmont.cuba.gui.screen.EditedEntityContainer;
+import com.haulmont.cuba.gui.screen.StandardEditor;
+import com.haulmont.cuba.gui.screen.Subscribe;
+import com.haulmont.cuba.gui.screen.UiController;
+import com.haulmont.cuba.gui.screen.UiDescriptor;
 
-public class VisitEdit extends AbstractEditor<Visit> {
+
+@UiController("petclinic_Visit.edit")
+@UiDescriptor("visit-edit.xml")
+@EditedEntityContainer("visitCt")
+public class VisitEdit extends StandardEditor<Visit> {
+
+  @Subscribe
+  protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
+    getScreenData().loadAll();
+  }
 }
