@@ -4,7 +4,7 @@
   focusComponent="fieldGroup"
   messagesPack="com.cubaplatform.petclinic.web.visit.visit">
   <data>
-    <instance id="petCt"
+    <instance id="visitCt"
       class="com.cubaplatform.petclinic.entity.visit.Visit"
       view="visit-with-pet">
       <loader/>
@@ -23,9 +23,9 @@
     width="800"/>
 
   <layout expand="editorActions" spacing="true">
-    <form id="fieldGroup" dataContainer="petCt">
+    <form id="fieldGroup" dataContainer="visitCt">
       <column width="250px">
-        <textField property="visitDate"/>
+        <dateField property="visitDate"/>
         <textField property="description"/>
         <lookupPickerField property="pet" optionsContainer="petsCt"/>
       </column>

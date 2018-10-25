@@ -21,11 +21,9 @@ messagesPack="com.cubaplatform.petclinic.web.pet.pet">
             <textField property="firstName"/>
             <textField property="lastName"/>
             <textField property="address"/>
-            <textField property="address"/>
             <textField property="city"/>
             <textField property="telephone"/>
             <textField property="email"/>
-            <dateField property="birthDate"/>
         </column>
     </form>
 
