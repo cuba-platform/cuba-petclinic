@@ -2,7 +2,7 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-petclinic"
           insertBefore="administration">
-        <item screen="petclinic$Owner.browse"/>
+        <item screen="petclinic_Owner.browse"/>
         <item screen="petclinic_Pet.browse"/>
         <separator/>
         <item screen="petclinic_Vet.browse"/>

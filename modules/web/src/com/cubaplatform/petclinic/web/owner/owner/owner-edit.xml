@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="com.cubaplatform.petclinic.web.owner.owner.OwnerEdit"
-        datasource="ownerDs"
-        focusComponent="fieldGroup"
-        messagesPack="com.cubaplatform.petclinic.web.owner.owner">
-    <dsContext>
-        <datasource id="ownerDs"
-                    class="com.cubaplatform.petclinic.entity.owner.Owner"
-                    view="owner-with-pets"/>
-    </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="ownerDs">
-            <column width="250px">
-                <field property="firstName"/>
-                <field property="lastName"/>
-                <field property="address"/>
-                <field property="city"/>
-                <field property="telephone"/>
-                <field property="email"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
-    </layout>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+caption="msg://editorCaption"
+focusComponent="fieldGroup"
+messagesPack="com.cubaplatform.petclinic.web.pet.pet">
+<data>
+    <instance id="ownerCt"
+      class="com.cubaplatform.petclinic.entity.owner.Owner"
+      view="_base">
+        <loader/>
+    </instance>
+
+</data>
+
+<dialogMode height="600"
+  width="800"/>
+
+<layout expand="editorActions" spacing="true">
+    <form id="fieldGroup" dataContainer="ownerCt">
+        <column width="250px">
+            <textField property="firstName"/>
+            <textField property="lastName"/>
+            <textField property="address"/>
+            <textField property="address"/>
+            <textField property="city"/>
+            <textField property="telephone"/>
+            <textField property="email"/>
+            <dateField property="birthDate"/>
+        </column>
+    </form>
+
+
+    <fragment id="editorActions"
+      screen="editorActions"/>
+</layout>
 </window>

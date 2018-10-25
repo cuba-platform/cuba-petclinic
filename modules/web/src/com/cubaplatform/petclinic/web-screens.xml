@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
 
-    <screen id="petclinic$Owner.browse"
-            template="com/cubaplatform/petclinic/web/owner/owner/owner-browse.xml"/>
-    <screen id="petclinic$Owner.edit"
-            template="com/cubaplatform/petclinic/web/owner/owner/owner-edit.xml"/>
     <screen id="mainWindow"
             template="com/cubaplatform/petclinic/web/screens/main/ext-mainwindow.xml"/>
 </screen-config>

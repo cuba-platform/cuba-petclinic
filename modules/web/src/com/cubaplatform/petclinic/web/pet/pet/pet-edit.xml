@@ -13,7 +13,7 @@
     <collection id="ownersCt" class="com.cubaplatform.petclinic.entity.owner.Owner" view="_base">
       <loader>
         <query>
-          select e from petclinic$Owner e
+          select e from petclinic_Owner e
         </query>
       </loader>
     </collection>
