@@ -18,8 +18,8 @@ public class ExtAppMainWindow extends AbstractMainWindow {
     public void init(Map<String, Object> params) {
         super.init(params);
 
-        initLayoutAnalyzerContextMenu(logoImage);
-        initLogoImage(logoImage);
-        initFtsField(ftsField);
+//        initLayoutAnalyzerContextMenu(logoImage);
+//        initLogoImage(logoImage);
+//        initFtsField(ftsField);
     }
 }

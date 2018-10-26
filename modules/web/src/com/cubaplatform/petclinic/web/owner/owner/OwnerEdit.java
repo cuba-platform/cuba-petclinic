@@ -1,7 +1,13 @@
 package com.cubaplatform.petclinic.web.owner.owner;
 
-import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.cubaplatform.petclinic.entity.owner.Owner;
+import com.haulmont.cuba.gui.screen.EditedEntityContainer;
+import com.haulmont.cuba.gui.screen.StandardEditor;
+import com.haulmont.cuba.gui.screen.UiController;
+import com.haulmont.cuba.gui.screen.UiDescriptor;
 
-public class OwnerEdit extends AbstractEditor<Owner> {
+@UiController("petclinic_Owner.edit")
+@UiDescriptor("owner-edit.xml")
+@EditedEntityContainer("ownerCt")
+public class OwnerEdit extends StandardEditor<Owner> {
 }

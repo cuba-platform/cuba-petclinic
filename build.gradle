@@ -1,16 +1,16 @@
 
 buildscript {
-    ext.cubaVersion = '6.10.0'
+    ext.cubaVersion = '7.0-SNAPSHOT'
     repositories {
-        
+        mavenLocal()
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
             credentials {
-                username(rootProject.hasProperty('repoUser') ? rootProject['repoUser'] : 'cuba')
-                password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
+                username(rootProject.hasProperty('cubaRepoUser') ? rootProject['cubaRepoUser'] : 'cuba')
+                password(rootProject.hasProperty('cubaRepoPass') ? rootProject['cubaRepoPass'] : 'cuba123')
             }
         }
-        
+
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
@@ -77,8 +77,6 @@ configure(globalModule) {
             enabled = true
         }
     }
-
-    
 }
 
 configure(coreModule) {
@@ -90,10 +88,9 @@ configure(coreModule) {
 
     dependencies {
         compile(globalModule)
-        provided(servletApi)
+        compileOnly(servletApi)
         jdbc(hsql)
         testRuntime(hsql)
-
     }
 
     task cleanConf(description: 'Cleans up conf directory') {
@@ -112,6 +109,10 @@ configure(coreModule) {
         appJars(modulePrefix + '-global', modulePrefix + '-core')
     }
 
+    task startDb(type: CubaHsqlStart) {
+        dbName = 'petclinic'
+    }
+
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
         dbms = 'hsql'
         host = 'localhost'
@@ -128,18 +129,17 @@ configure(coreModule) {
         dbPassword = ''
     }
 }
-    
+
 configure(webModule) {
     configurations {
         webcontent
     }
 
     dependencies {
-        provided(servletApi)
+        compileOnly(servletApi)
         compile(globalModule)
-
     }
-    
+
     task webArchive(type: Zip) {
         from file("$buildDir/web")
         from file('web')
@@ -224,5 +224,5 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.3.1'
+    gradleVersion = '4.10.1'
 }

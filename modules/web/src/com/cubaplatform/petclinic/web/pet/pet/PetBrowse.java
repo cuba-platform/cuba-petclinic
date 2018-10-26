@@ -1,10 +1,13 @@
 package com.cubaplatform.petclinic.web.pet.pet;
 
+import com.cubaplatform.petclinic.entity.pet.Pet;
 import com.haulmont.cuba.gui.WindowManager;
-import com.haulmont.cuba.gui.components.AbstractLookup;
+import com.haulmont.cuba.gui.screen.*;
 
-public class PetBrowse extends AbstractLookup {
-
+@UiController("petclinic_Pet.browse")
+@UiDescriptor("pet-browse.xml")
+@LookupComponent("petsTable")
+public class PetBrowse extends StandardLookup<Pet> {
     public void createDiseaseWarningMailing() {
         openWindow("create-disease-warning-mailing", WindowManager.OpenType.DIALOG);
     }

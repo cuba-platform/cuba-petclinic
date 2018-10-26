@@ -18,7 +18,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 
 @NamePattern("%s (%s)|pet,visitDate")
 @Table(name = "PETCLINIC_VISIT")
-@Entity(name = "petclinic$Visit")
+@Entity(name = "petclinic_Visit")
 public class Visit extends StandardEntity {
     private static final long serialVersionUID = 6351202390461847589L;
 

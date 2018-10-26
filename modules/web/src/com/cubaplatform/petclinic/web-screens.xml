@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
-    <screen id="petclinic$PetType.browse"
-            template="com/cubaplatform/petclinic/web/pet/pettype/pet-type-browse.xml"/>
-    <screen id="petclinic$PetType.edit"
-            template="com/cubaplatform/petclinic/web/pet/pettype/pet-type-edit.xml"/>
-    <screen id="petclinic$Specialty.browse"
-            template="com/cubaplatform/petclinic/web/vet/specialty/specialty-browse.xml"/>
-    <screen id="petclinic$Specialty.edit"
-            template="com/cubaplatform/petclinic/web/vet/specialty/specialty-edit.xml"/>
-    <screen id="petclinic$Vet.browse"
-            template="com/cubaplatform/petclinic/web/vet/vet/vet-browse.xml"/>
-    <screen id="petclinic$Vet.edit"
-            template="com/cubaplatform/petclinic/web/vet/vet/vet-edit.xml"/>
-    <screen id="petclinic$Visit.browse"
-            template="com/cubaplatform/petclinic/web/visit/visit/visit-browse.xml"/>
-    <screen id="petclinic$Visit.edit"
-            template="com/cubaplatform/petclinic/web/visit/visit/visit-edit.xml"/>
-    <screen id="petclinic$Owner.browse"
-            template="com/cubaplatform/petclinic/web/owner/owner/owner-browse.xml"/>
-    <screen id="petclinic$Owner.edit"
-            template="com/cubaplatform/petclinic/web/owner/owner/owner-edit.xml"/>
-    <screen id="petclinic$Pet.browse"
-            template="com/cubaplatform/petclinic/web/pet/pet/pet-browse.xml"/>
-    <screen id="petclinic$Pet.edit"
-            template="com/cubaplatform/petclinic/web/pet/pet/pet-edit.xml"/>
+
     <screen id="mainWindow"
             template="com/cubaplatform/petclinic/web/screens/main/ext-mainwindow.xml"/>
 

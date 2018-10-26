@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.Email;
 
 @Table(name = "PETCLINIC_OWNER")
-@Entity(name = "petclinic$Owner")
+@Entity(name = "petclinic_Owner")
 public class Owner extends Person {
     private static final long serialVersionUID = 901690119511259222L;
 
@@ -25,12 +25,10 @@ public class Owner extends Person {
     protected String city;
 
     @Email
-    @NotNull
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL")
     protected String email;
 
-    @NotNull
-    @Column(name = "TELEPHONE", nullable = false)
+    @Column(name = "TELEPHONE")
     protected String telephone;
 
     @OneToMany(mappedBy = "owner")
