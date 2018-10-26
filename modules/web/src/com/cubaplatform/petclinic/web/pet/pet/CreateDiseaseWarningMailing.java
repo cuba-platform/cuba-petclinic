@@ -1,5 +1,6 @@
 package com.cubaplatform.petclinic.web.pet.pet;
 
+import com.cubaplatform.petclinic.entity.pet.PetType;
 import com.cubaplatform.petclinic.service.visit.DiseaseWarningMailingService;
 import com.haulmont.cuba.gui.components.AbstractWindow;
 import com.haulmont.cuba.gui.components.LookupField;
@@ -23,7 +24,12 @@ public class CreateDiseaseWarningMailing extends AbstractWindow {
 
     public void createDiseaseWarningMailing() {
 
-        int endangeredPets = diseaseWarningMailingService.warnAboutDisease(petType.getValue(), disease.getValue(), city.getValue());
+        PetType petTypeValue = (PetType) petType.getValue();
+        String diseaseValue = (String) disease.getValue();
+        String cityValue = (String) city.getValue();
+
+        int endangeredPets = diseaseWarningMailingService.warnAboutDisease(petTypeValue,
+            diseaseValue, cityValue);
 
         closeAndRun(COMMIT_ACTION_ID, () -> showNotification(endangeredPets + " Owner(s) of endangered Pets have been notified", NotificationType.TRAY));
 

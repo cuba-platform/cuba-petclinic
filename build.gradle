@@ -110,7 +110,7 @@ configure(coreModule) {
     }
 
     task startDb(type: CubaHsqlStart) {
-        dbName = 'petclinic'
+        dbName = 'petclinic-intro-to-datamanager'
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
