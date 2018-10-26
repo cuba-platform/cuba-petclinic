@@ -4,3 +4,16 @@ CUBA Petclinic is a CUBA platform example application dealing with the domain of
 
 The CUBA Petclinic application deals with the domain of a Pet clinic and the associated business workflows to manage a pet clinic.
 
+## starting the application
+
+#### start database
+```
+./start-db.sh
+```
+
+#### start server
+```
+./restart-server.sh
+```
+
+

@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://browseCaption"
-        class="com.cubaplatform.petclinic.web.vet.vet.VetBrowse"
-        focusComponent="vetsTable"
-        lookupComponent="vetsTable"
-        messagesPack="com.cubaplatform.petclinic.web.vet.vet">
-    <dsContext>
-        <groupDatasource id="vetsDs"
-                         class="com.cubaplatform.petclinic.entity.vet.Vet"
-                         view="vet-with-specialties">
-            <query>
-                <![CDATA[select e from petclinic$Vet e]]>
-            </query>
-        </groupDatasource>
-    </dsContext>
+  caption="msg://browseCaption"
+  class="com.cubaplatform.petclinic.web.vet.vet.VetBrowse"
+  focusComponent="vetsTable"
+  lookupComponent="vetsTable"
+  messagesPack="com.cubaplatform.petclinic.web.vet.vet">
+    <data readOnly="true">
+        <collection id="vetsCt"
+          class="com.cubaplatform.petclinic.entity.vet.Vet"
+          view="vet-with-specialties">
+            <loader id="vetsLd">
+                <query>
+                    <![CDATA[select e from petclinic_Vet e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
-                width="800"/>
+      width="800"/>
     <layout expand="vetsTable"
-            spacing="true">
+      spacing="true">
         <filter id="filter"
-                applyTo="vetsTable"
-                datasource="vetsDs">
+          applyTo="vetsTable"
+          dataLoader="vetsLd">
             <properties include=".*"/>
         </filter>
         <groupTable id="vetsTable"
-                    width="100%">
+          dataContainer="vetsCt"
+          width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="create" type="create" openType="DIALOG"/>
+                <action id="edit" type="edit"
+                  openType="DIALOG"/>
+                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="firstName"/>
                 <column id="lastName"/>
             </columns>
-            <rows datasource="vetsDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="createBtn"
-                        action="vetsTable.create"/>
-                <button id="editBtn"
-                        action="vetsTable.edit"/>
-                <button id="removeBtn"
-                        action="vetsTable.remove"/>
+              alwaysVisible="true">
+                <button id="createBtn" action="vetsTable.create"/>
+                <button id="editBtn" action="vetsTable.edit"/>
+                <button id="removeBtn" action="vetsTable.remove"/>
             </buttonsPanel>
         </groupTable>
     </layout>

@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="com.cubaplatform.petclinic.web.vet.vet.VetEdit"
-        datasource="vetDs"
-        focusComponent="fieldGroup"
-        messagesPack="com.cubaplatform.petclinic.web.vet.vet">
-    <dsContext>
-        <datasource id="vetDs"
-                    class="com.cubaplatform.petclinic.entity.vet.Vet"
-                    view="vet-with-specialties">
-            <collectionDatasource id="specialtiesDs"
-                                  property="specialties"/>
-        </datasource>
-    </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="vetDs">
-            <column width="250px">
-                <field property="firstName"/>
-                <field property="lastName"/>
-            </column>
-        </fieldGroup>
-        <groupBox id="specialtiesBox"
-                  caption="msg://com.cubaplatform.petclinic.entity.vet/Vet.specialties">
-            <table id="specialtiesTable"
-                   height="200px"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="name"/>
-                </columns>
-                <rows datasource="specialtiesDs"/>
-                <buttonsPanel>
-                    <button action="specialtiesTable.add"/>
-                    <button action="specialtiesTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
-    </layout>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+caption="msg://editorCaption"
+focusComponent="fieldGroup"
+messagesPack="com.cubaplatform.petclinic.web.vet.vet">
+<data>
+    <instance id="vetCt"
+      class="com.cubaplatform.petclinic.entity.vet.Vet"
+      view="vet-with-specialties">
+        <loader/>
+
+        <collection id="specialtiesCt" property="specialties"/>
+    </instance>
+
+</data>
+
+<dialogMode height="600"
+  width="800"/>
+
+<layout expand="editorActions" spacing="true">
+    <form id="fieldGroup" dataContainer="vetCt">
+        <column width="250px">
+            <textField property="firstName"/>
+            <textField property="lastName"/>
+        </column>
+    </form>
+
+    <groupBox id="specialtiesBox" caption="msg://specialties" stylename="light">
+        <table id="specialtiesTable" dataContainer="specialtiesCt" height="100%" width="100%">
+            <buttonsPanel>
+                <button action="specialtiesTable.create"/>
+                <button action="specialtiesTable.edit"/>
+                <button action="specialtiesTable.remove"/>
+            </buttonsPanel>
+            <actions>
+                <action id="create" type="create" openType="DIALOG"/>
+                <action id="edit" type="edit" openType="DIALOG"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+        </table>
+    </groupBox>
+
+    <fragment id="editorActions"
+      screen="editorActions"/>
+</layout>
 </window>

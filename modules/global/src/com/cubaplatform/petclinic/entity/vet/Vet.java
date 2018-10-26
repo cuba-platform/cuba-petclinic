@@ -9,7 +9,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Table(name = "PETCLINIC_VET")
-@Entity(name = "petclinic$Vet")
+@Entity(name = "petclinic_Vet")
 public class Vet extends Person {
     private static final long serialVersionUID = 8571203926820669424L;
 

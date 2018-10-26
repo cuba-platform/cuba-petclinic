@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://browseCaption"
-        class="com.cubaplatform.petclinic.web.pet.pet.PetBrowse"
         focusComponent="petsTable"
-        lookupComponent="petsTable"
         messagesPack="com.cubaplatform.petclinic.web.pet.pet">
-    <dsContext>
-        <groupDatasource id="petsDs"
-                         class="com.cubaplatform.petclinic.entity.pet.Pet"
-                         view="pet-with-owner-and-type">
-            <query>
-                <![CDATA[select e from petclinic$Pet e]]>
-            </query>
-        </groupDatasource>
-    </dsContext>
+    <data readOnly="true">
+        <collection id="petsCt"
+                    class="com.cubaplatform.petclinic.entity.pet.Pet"
+                    view="pet-with-owner-and-type">
+            <loader id="petsLd">
+                <query>
+                    <![CDATA[select e from petclinic_Pet e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="petsTable"
             spacing="true">
         <filter id="filter"
                 applyTo="petsTable"
-                datasource="petsDs">
+                dataLoader="petsLd">
             <properties include=".*"/>
         </filter>
         <groupTable id="petsTable"
+                    dataContainer="petsCt"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="name"/>
@@ -37,16 +38,12 @@
                 <column id="owner"/>
                 <column id="type"/>
             </columns>
-            <rows datasource="petsDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn"
-                        action="petsTable.create"/>
-                <button id="editBtn"
-                        action="petsTable.edit"/>
-                <button id="removeBtn"
-                        action="petsTable.remove"/>
+                <button id="createBtn" action="petsTable.create"/>
+                <button id="editBtn" action="petsTable.edit"/>
+                <button id="removeBtn" action="petsTable.remove"/>
             </buttonsPanel>
         </groupTable>
     </layout>

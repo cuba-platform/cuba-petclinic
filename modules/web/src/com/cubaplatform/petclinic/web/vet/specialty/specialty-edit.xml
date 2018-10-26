@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="com.cubaplatform.petclinic.web.vet.specialty.SpecialtyEdit"
-        datasource="specialtyDs"
-        focusComponent="fieldGroup"
-        messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
-    <dsContext>
-        <datasource id="specialtyDs"
-                    class="com.cubaplatform.petclinic.entity.vet.Specialty"
-                    view="_local"/>
-    </dsContext>
-    <dialogMode forceDialog="true"
-                height="AUTO"
-                width="600"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="specialtyDs">
-            <column width="250px">
-                <field property="name"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
-    </layout>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+caption="msg://editorCaption"
+focusComponent="fieldGroup"
+messagesPack="com.cubaplatform.petclinic.web.vet.specialty">
+<data>
+    <instance id="specialtyCt"
+      class="com.cubaplatform.petclinic.entity.vet.Specialty"
+      view="_local">
+        <loader/>
+    </instance>
+
+</data>
+
+<dialogMode height="600"
+  width="800"/>
+
+<layout expand="editorActions" spacing="true">
+    <form id="fieldGroup" dataContainer="specialtyCt">
+        <column width="250px">
+            <textField property="name"/>
+        </column>
+    </form>
+
+    <fragment id="editorActions"
+      screen="editorActions"/>
+</layout>
 </window>
