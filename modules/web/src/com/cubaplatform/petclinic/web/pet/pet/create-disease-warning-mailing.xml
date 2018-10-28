@@ -8,7 +8,7 @@
                          view="_local">
             <loader>
                 <query>
-                    <![CDATA[select e from petclinic$PetType e]]>
+                    <![CDATA[select e from petclinic_PetType e]]>
                 </query>
             </loader>
         </collection>

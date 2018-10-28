@@ -15,7 +15,7 @@ public class PetBrowse extends StandardLookup<Pet> {
     @Inject
     private Screens screens;
 
-    @Subscribe("createDiseaseWarningMailing")
+    @Subscribe("petsTable.createDiseaseWarningMailing")
     public void createDiseaseWarningMailing(Action.ActionPerformedEvent actionPerformedEvent) {
         screens.create(CreateDiseaseWarningMailing.class, OpenMode.DIALOG).show();
     }

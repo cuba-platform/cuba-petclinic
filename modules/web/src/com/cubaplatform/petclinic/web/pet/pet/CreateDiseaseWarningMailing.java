@@ -18,6 +18,13 @@ import javax.inject.Inject;
 @UiDescriptor("create-disease-warning-mailing.xml")
 public class CreateDiseaseWarningMailing extends Screen {
 
+
+    @Subscribe
+    protected void onBeforeShow(BeforeShowEvent beforeShowEvent) {
+        getScreenData().loadAll();
+    }
+
+
     @Inject
     protected DiseaseWarningMailingService diseaseWarningMailingService;
 

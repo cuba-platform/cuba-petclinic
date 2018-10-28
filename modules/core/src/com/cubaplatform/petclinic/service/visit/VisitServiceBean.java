@@ -46,7 +46,7 @@ public class VisitServiceBean implements VisitService {
      */
     private Pet loadPetByIdentificationNumber(String identificationNumber) {
         return dataManager.load(Pet.class)
-                .query("select e from petclinic$Pet e where e.identificationNumber = :identificationNumber")
+                .query("select e from petclinic_Pet e where e.identificationNumber = :identificationNumber")
                 .parameter("identificationNumber", identificationNumber)
                 .one();
     }

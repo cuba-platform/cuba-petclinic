@@ -36,7 +36,7 @@ public class DiseaseWarningMailingServiceBean implements DiseaseWarningMailingSe
 
     private List<Pet> findEndangeredPets(PetType petType, String city) {
         return dataManager.load(Pet.class)
-                .query("select e from petclinic$Pet e where e.owner.city = :ownerCity and e.type.id = :petType")
+                .query("select e from petclinic_Pet e where e.owner.city = :ownerCity and e.type = :petType")
                 .parameter("ownerCity", city)
                 .parameter("petType", petType)
                 .view("pet-with-owner-and-type")

@@ -2,25 +2,69 @@ package com.cubaplatform.petclinic.web.visit.visit;
 
 import com.cubaplatform.petclinic.entity.visit.Visit;
 import com.cubaplatform.petclinic.service.visit.VisitService;
-import com.haulmont.cuba.gui.WindowManager;
-import com.haulmont.cuba.gui.components.AbstractWindow;
+import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.cuba.gui.EditorScreens;
+import com.haulmont.cuba.gui.Notifications;
+import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.TextField;
-
+import com.haulmont.cuba.gui.screen.OpenMode;
+import com.haulmont.cuba.gui.screen.Screen;
+import com.haulmont.cuba.gui.screen.Subscribe;
+import com.haulmont.cuba.gui.screen.UiController;
+import com.haulmont.cuba.gui.screen.UiDescriptor;
 import javax.inject.Inject;
 
-public class CreateVisitForPet extends AbstractWindow {
+@UiController
+@UiDescriptor("create-visit-for-pet.xml")
+public class CreateVisitForPet extends Screen {
 
     @Inject
     protected VisitService visitService;
 
     @Inject
-    protected TextField identificationNumber;
+    protected TextField<String> identificationNumber;
 
-    public void createVisit() {
-        Visit visit = visitService.createVisitForToday(identificationNumber.getValue());
+    @Inject
+    protected Metadata metadata;
 
-        showNotification("Visit created for " + visit.getPet().getInstanceName(), NotificationType.TRAY);
+    @Inject
+    protected Notifications notifications;
 
-        closeAndRun(COMMIT_ACTION_ID, () -> openEditor(visit, WindowManager.OpenType.NEW_TAB));
+    @Inject
+    private EditorScreens screens;
+
+    @Subscribe(id = "createVisit")
+    public void createVisit(Action.ActionPerformedEvent event) {
+        Visit visit = createVisitForToday();
+
+        closeWithCommit()
+            .then(() -> showVisitCreatedNotification(visit))
+            .then(() -> openVisitDetails(visit));
+    }
+
+    private Visit createVisitForToday() {
+        String petIdentificationNumber = identificationNumber.getValue();
+        return visitService.createVisitForToday(petIdentificationNumber);
+    }
+
+    private void openVisitDetails(Visit visit) {
+        screens
+            .builder(Visit.class, this)
+            .editEntity(visit)
+            .withLaunchMode(OpenMode.NEW_TAB)
+            .create()
+            .show();
+    }
+
+    private void showVisitCreatedNotification(Visit visit) {
+
+        String petName = metadata.getTools().getInstanceName(visit.getPet());
+
+        String notificationMessage = "Visit created for " + petName;
+
+        notifications.create()
+            .setCaption(notificationMessage)
+            .setType(Notifications.NotificationType.TRAY)
+            .show();
     }
 }

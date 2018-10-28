@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
   caption="msg://browseCaption"
-  class="com.cubaplatform.petclinic.web.visit.visit.VisitBrowse"
   focusComponent="visitsTable"
   lookupComponent="visitsTable"
   messagesPack="com.cubaplatform.petclinic.web.visit.visit">
@@ -32,11 +31,9 @@
         <action id="createForPet"
           caption="msg://createForPet"
           icon="font-icon:BRIEFCASE"
-          invoke="createForPet"
         />
         <action id="create" type="create" openType="DIALOG"/>
-        <action id="edit" type="edit"
-          openType="DIALOG"/>
+        <action id="edit" type="edit" openType="DIALOG"/>
         <action id="remove" type="remove"/>
       </actions>
       <columns>
@@ -48,8 +45,7 @@
       <buttonsPanel id="buttonsPanel"
         alwaysVisible="true">
 
-        <button id="createForPetBtn"
-          action="visitsTable.createForPet"/>
+        <button id="createForPetBtn" action="visitsTable.createForPet"/>
         <button id="createBtn" action="visitsTable.create"/>
         <button id="editBtn" action="visitsTable.edit"/>
         <button id="removeBtn" action="visitsTable.remove"/>
