@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="cuba-petclinic" transaction-type="RESOURCE_LOCAL">
+        <class>com.haulmont.sample.petclinic.entity.NamedEntity</class>
+        <class>com.haulmont.sample.petclinic.entity.pet.Pet</class>
+        <class>com.haulmont.sample.petclinic.entity.pet.PetType</class>
+        <class>com.haulmont.sample.petclinic.entity.owner.Owner</class>
+        <class>com.haulmont.sample.petclinic.entity.Person</class>
+        <class>com.haulmont.sample.petclinic.entity.vet.Vet</class>
+        <class>com.haulmont.sample.petclinic.entity.vet.Specialty</class>
+        <class>com.haulmont.sample.petclinic.entity.visit.Visit</class>
+    </persistence-unit>
+</persistence>
