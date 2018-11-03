@@ -1,10 +1,10 @@
 package com.haulmont.sample.petclinic.entity;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.StandardEntity;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 @NamePattern("%s, %s|lastName,firstName")
 @MappedSuperclass
