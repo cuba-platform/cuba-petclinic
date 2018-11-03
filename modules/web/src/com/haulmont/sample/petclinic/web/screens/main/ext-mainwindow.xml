@@ -1,75 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="mainMsg://application.caption"
-        class="com.haulmont.sample.petclinic.web.screens.main.ExtAppMainWindow"
-        xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
-    <layout responsive="true"
-            stylename="c-sidemenu-responsive">
-        <hbox id="horizontalWrap"
-              expand="workArea"
-              height="100%"
-              stylename="c-sidemenu-layout"
-              width="100%">
-            <cssLayout id="sideMenuPanel"
-                       height="100%"
-                       stylename="c-sidemenu-panel">
-                <button id="mobileMenuButton"
-                        caption="mainMsg://app.menu"
-                        icon="icons/mobile-menu.png"
-                        stylename="primary c-sidemenu-toggle"/>
-                <hbox id="mobileButtonsBox"
-                      stylename="c-sidemenu-mobile-buttons">
-                    <main:newWindowButton id="mobileNewWindowButton"
-                                          description="mainMsg://newWindowBtnDescription"
-                                          icon="app/images/new-window.png"/>
-                    <main:logoutButton id="mobileLogoutButton"
-                                       description="mainMsg://logoutBtnDescription"
-                                       icon="app/images/exit.png"/>
-                </hbox>
-                <hbox id="appTitleBox"
-                      spacing="true"
-                      stylename="c-sidemenu-title"
-                      width="100%">
-                    <label id="appTitleLabel"
-                           value="mainMsg://application.logoLabel"/>
-                </hbox>
-                <cssLayout id="sideMenuWrap"
-                           stylename="c-sidemenu-wrap">
-                    <embedded id="logoImage"
-                              align="MIDDLE_CENTER"
-                              stylename="c-app-icon"
-                              type="IMAGE"/>
-                    <main:userIndicator id="userIndicator"
-                                        width="100%"/>
-                    <hbox id="mainButtonsBox"
-                          stylename="c-main-buttons">
-                        <main:newWindowButton id="newWindowButton"
-                                              description="mainMsg://newWindowBtnDescription"
-                                              icon="app/images/new-window.png"/>
-                        <main:logoutButton id="logoutButton"
-                                           description="mainMsg://logoutBtnDescription"
-                                           icon="app/images/exit.png"/>
-                    </hbox>
-                    <main:timeZoneIndicator id="timeZoneIndicator"
-                                            width="100%"/>
-                    <main:sideMenu id="sideMenu"
-                                   sidePanel="sideMenuPanel"
-                                   sidePanelToggleButton="mobileMenuButton"/>
-                    <main:ftsField id="ftsField"
-                                   width="100%"/>
-                </cssLayout>
-            </cssLayout>
-            <main:workArea id="workArea"
-                           height="100%">
-                <main:initialLayout margin="true"
-                                    spacing="true">
-                    <label id="welcomeLabel"
-                           align="MIDDLE_CENTER"
-                           stylename="c-welcome-text"
-                           value="mainMsg://application.welcomeText"
-                           width="100%"/>
-                </main:initialLayout>
-            </main:workArea>
+  caption="mainMsg://application.caption"
+  class="com.haulmont.sample.petclinic.web.screens.main.ExtAppMainWindow"
+  messagesPack="com.haulmont.sample.petclinic.web"
+  xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
+  <layout>
+    <hbox id="horizontalWrap"
+      expand="workArea"
+      height="100%"
+      stylename="c-sidemenu-layout"
+      width="100%">
+      <vbox id="sideMenuPanel"
+        expand="sideMenu"
+        height="100%"
+        margin="false,false,true,false"
+        spacing="true"
+        stylename="c-sidemenu-panel"
+        width="250px">
+        <hbox id="appTitleBox"
+          spacing="true"
+          stylename="c-sidemenu-title"
+          width="100%">
+          <label id="appTitleLabel"
+            align="MIDDLE_CENTER"
+            value="mainMsg://application.logoLabel"/>
         </hbox>
-    </layout>
+        <embedded id="logoImage"
+          align="MIDDLE_CENTER"
+          stylename="c-app-icon"
+          type="IMAGE"/>
+        <hbox id="userInfoBox"
+          align="MIDDLE_CENTER"
+          expand="userIndicator"
+          margin="true"
+          spacing="true"
+          width="100%">
+          <main:userIndicator id="userIndicator"
+            align="MIDDLE_CENTER"/>
+          <main:newWindowButton id="newWindowButton"
+            description="mainMsg://newWindowBtnDescription"
+            icon="app/images/new-window.png"/>
+          <main:logoutButton id="logoutButton"
+            description="mainMsg://logoutBtnDescription"
+            icon="app/images/exit.png"/>
+        </hbox>
+        <main:timeZoneIndicator id="timeZoneIndicator"
+          align="MIDDLE_CENTER"/>
+        <main:sideMenu id="sideMenu"
+          width="100%"/>
+        <main:ftsField id="ftsField"
+          width="100%"/>
+      </vbox>
+      <main:workArea id="workArea"
+        height="100%">
+        <main:initialLayout margin="true"
+          spacing="true">
+          <image align="MIDDLE_CENTER">
+            <theme path="branding/petclinic_logo_full.png"/>
+          </image>
+        </main:initialLayout>
+      </main:workArea>
+    </hbox>
+  </layout>
 </window>
