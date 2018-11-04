@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://caption"
-        class="com.cubaplatform.petclinic.web.pet.pet.CreateDiseaseWarningMailing"
         messagesPack="com.cubaplatform.petclinic.web.pet.pet">
-    <dsContext>
-        <collectionDatasource id="petTypesDs"
+    <data>
+        <collection id="petTypesDc"
                          class="com.cubaplatform.petclinic.entity.pet.PetType"
                          view="_local">
-            <query>
-                <![CDATA[select e from petclinic$PetType e]]>
-            </query>
-        </collectionDatasource>
-    </dsContext>
+            <loader>
+                <query>
+                    <![CDATA[select e from petclinic_PetType e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <actions>
         <action id="createDiseaseWarningMailing"
-                invoke="createDiseaseWarningMailing"
                 caption="msg://create"
                 primary="true"
         />
@@ -26,7 +26,7 @@
                      width="100%"
                      required="true"
                      requiredMessage="msg://petTypeRequired"
-                     optionsDatasource="petTypesDs" />
+                     optionsContainer="petTypesDc" />
         <textField
                 id="city"
                 required="true"

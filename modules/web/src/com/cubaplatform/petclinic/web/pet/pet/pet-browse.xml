@@ -33,8 +33,7 @@
 
               <action id="createDiseaseWarningMailing"
                 caption="msg://createDiseaseWarningMailing"
-                icon="font-icon:BULLHORN"
-                invoke="createDiseaseWarningMailing"/>
+                icon="font-icon:BULLHORN"/>
 
             </actions>
             <columns>

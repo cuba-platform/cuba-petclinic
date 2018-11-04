@@ -21,9 +21,9 @@ public class VisitServiceBean implements VisitService {
     protected TimeSource timeSource;
 
     @Override
-    public Visit createVisitForToday(String petId) {
+    public Visit createVisitForToday(String identificationNumber) {
 
-        Pet pet = loadPetByIdentificationNumber(petId);
+        Pet pet = loadPetByIdentificationNumber(identificationNumber);
 
         return createVisitForPet(pet);
     }
@@ -46,7 +46,7 @@ public class VisitServiceBean implements VisitService {
      */
     private Pet loadPetByIdentificationNumber(String identificationNumber) {
         return dataManager.load(Pet.class)
-                .query("select e from petclinic$Pet e where e.identificationNumber = :identificationNumber")
+                .query("select e from petclinic_Pet e where e.identificationNumber = :identificationNumber")
                 .parameter("identificationNumber", identificationNumber)
                 .one();
     }

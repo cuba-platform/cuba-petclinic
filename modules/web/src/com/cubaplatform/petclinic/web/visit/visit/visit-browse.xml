@@ -32,7 +32,6 @@
         <action id="createForPet"
           caption="msg://createForPet"
           icon="font-icon:BRIEFCASE"
-          invoke="createForPet"
         />
         <action id="create" type="create" openType="DIALOG"/>
         <action id="edit" type="edit"
