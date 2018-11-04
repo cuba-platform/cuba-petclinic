@@ -9,7 +9,8 @@
         <item screen="petclinic_Visit.browse"/>
     </menu>
     <menu id="application-masterdata" insertBefore="administration">
-    </menu>
         <item screen="petclinic_PetType.browse"/>
         <item screen="petclinic_Specialty.browse"/>
+    </menu>
+
 </menu-config>
