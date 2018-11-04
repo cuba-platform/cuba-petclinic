@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-@Service(DiseaseWarningMailingService.NAME)
-public class DiseaseWarningMailingServiceBean implements DiseaseWarningMailingService
-     {
+@Service(DiseaseWarningMailingService.NAME)public class DiseaseWarningMailingServiceBean implements DiseaseWarningMailingService {
 
     @Inject
     protected DataManager dataManager;
@@ -27,42 +27,58 @@ public class DiseaseWarningMailingServiceBean implements DiseaseWarningMailingSe
     @Override
     public int warnAboutDisease(PetType petType, String disease, String city) {
 
-        List<Pet> petsInDiseaseCity = findEndangeredPets(petType, city);
+        List<Pet> petsInDiseaseCity = findPetsInDiseaseCity(petType, city);
 
-        petsInDiseaseCity.forEach(pet -> sendWarningForPet(pet, disease, city));
+        List<Pet> petsWithEmail = filterPetsWithValidOwnersEmail(petsInDiseaseCity);
 
-        return petsInDiseaseCity.size();
+        petsWithEmail.forEach(pet -> sendEmailToPetsOwner(pet, disease, city));
+
+        return petsWithEmail.size();
     }
 
-    private List<Pet> findEndangeredPets(PetType petType, String city) {
-        return dataManager.load(Pet.class)
-                .query("select e from petclinic_Pet e where e.owner.city = :ownerCity and e.type = :petType")
-                .parameter("ownerCity", city)
-                .parameter("petType", petType)
-                .view("pet-with-owner-and-type")
-                .list();
+    private List<Pet> filterPetsWithValidOwnersEmail(List<Pet> petsInDiseaseCity) {
+        return petsInDiseaseCity
+            .stream()
+            .filter(pet -> !StringUtils.isEmpty(pet.getOwner().getEmail()))
+            .collect(Collectors.toList());
     }
 
-    private void sendWarningForPet(Pet pet, String disease, String city) {
-
+    private void sendEmailToPetsOwner(Pet pet, String disease, String city) {
         String emailSubject = "Warning about " + disease + " in the Area of " + city;
 
+        Map<String, Serializable> templateParameters = getTemplateParams(disease, city, pet);
+
+        String ownerEmail = pet.getOwner().getEmail();
+
+        EmailInfo email = new EmailInfo(
+            ownerEmail,
+            emailSubject,
+            null,
+            "com/haulmont/sample/petclinic/templates/disease-warning-mailing.txt",
+            templateParameters
+        );
+
+        emailerAPI.sendEmailAsync(email);
+    }
+
+    private List<Pet> findPetsInDiseaseCity(PetType petType, String city) {
+        return dataManager.load(Pet.class)
+            .query(
+                "select e from petclinic_Pet e where e.owner.city = :ownerCity and e.type = :petType")
+            .parameter("ownerCity", city)
+            .parameter("petType", petType)
+            .view("pet-with-owner-and-type")
+            .list();
+    }
+
+    private Map<String, Serializable> getTemplateParams(String disease, String city, Pet pet) {
         Map<String, Serializable> templateParameters = new HashMap<>();
 
         templateParameters.put("owner", pet.getOwner());
         templateParameters.put("pet", pet);
         templateParameters.put("disease", disease);
         templateParameters.put("city", city);
-
-
-        EmailInfo email = new EmailInfo(
-                pet.getOwner().getEmail(),
-                emailSubject,
-                null,
-                "com/haulmont/sample/petclinic/templates/disease-warning-mailing.txt",
-                templateParameters
-        );
-
-        emailerAPI.sendEmailAsync(email);
+        return templateParameters;
     }
+
 }

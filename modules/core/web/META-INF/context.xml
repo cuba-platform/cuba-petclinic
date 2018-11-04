@@ -7,7 +7,7 @@
               name="jdbc/CubaDS"
               password=""
               type="javax.sql.DataSource"
-              url="jdbc:hsqldb:hsql://localhost/petclinic-intro-to-datamanager"
+              url="jdbc:hsqldb:hsql://localhost/petclinic"
               username="sa"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>
