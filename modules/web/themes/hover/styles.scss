@@ -1,13 +1,13 @@
 @import "hover-defaults";
-@import "com.cubaplatform.petclinic/hover-ext-defaults";
+@import "com.haulmont.sample.petclinic/hover-ext-defaults";
 @import "app-components";
-@import "com.cubaplatform.petclinic/hover-ext";
+@import "com.haulmont.sample.petclinic/hover-ext";
 
 .hover {
   // include auto-generated app components SCSS
   @include app_components;
   
-  @include com_cubaplatform_petclinic-hover-ext;
+  @include com_haulmont_sample_petclinic-hover-ext;
 
 
   .c-groupbox-caption {
