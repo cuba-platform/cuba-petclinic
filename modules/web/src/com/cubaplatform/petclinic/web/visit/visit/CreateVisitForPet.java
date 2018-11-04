@@ -7,7 +7,6 @@ import com.haulmont.cuba.gui.EditorScreens;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.TextField;
-import com.haulmont.cuba.gui.screen.CloseAction;
 import com.haulmont.cuba.gui.screen.EditorScreen;
 import com.haulmont.cuba.gui.screen.OpenMode;
 import com.haulmont.cuba.gui.screen.Screen;
