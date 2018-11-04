@@ -2,8 +2,15 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd" caption="msg://browseCaption"
   focusComponent="petsTable" messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
   <data readOnly="true">
-    <collection id="petsCt" class="com.haulmont.sample.petclinic.entity.pet.Pet"
-      view="pet-with-owner-and-type"/>
+    <collection id="petsCt"
+      class="com.haulmont.sample.petclinic.entity.pet.Pet"
+      view="pet-with-owner-and-type">
+      <loader id="petsLd">
+        <query>
+          <![CDATA[select e from petclinic_Pet e]]>
+        </query>
+      </loader>
+    </collection>
   </data>
   <dialogMode height="600" width="800"/>
   <layout expand="petsTable" spacing="true">
