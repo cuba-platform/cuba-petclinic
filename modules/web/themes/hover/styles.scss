@@ -21,7 +21,6 @@
 
   .v-slot-c-sidemenu-panel {
     border:none;
-    border-right: 2px solid $petclinic-light-color;
     background-color: $petclinic-light-color;
 
   }
@@ -44,8 +43,6 @@
     .c-sidemenu-item-action.c-sidemenu-item-focused {
       border-right: 5px solid $petclinic-main-color;
     }
-
-    // Side menu item header
     .c-sidemenu-item-header, .c-sidemenu-item-header :hover {
       color: $petclinic-main-color;
       margin:0px 0;
@@ -55,7 +52,6 @@
       background-color: $petclinic-main-color;
       color:#ffffff;
     }
-
     .c-sidemenu-submenu-open {
       background-color: $petclinic-light-color;
       color:$petclinic-main-color;

@@ -25,10 +25,10 @@
             align="MIDDLE_CENTER"
             value="mainMsg://application.logoLabel"/>
         </hbox>
-        <embedded id="logoImage"
+        <image id="logoImage"
           align="MIDDLE_CENTER"
           stylename="c-app-icon"
-          type="IMAGE"/>
+          />
         <hbox id="userInfoBox"
           align="MIDDLE_CENTER"
           expand="userIndicator"
