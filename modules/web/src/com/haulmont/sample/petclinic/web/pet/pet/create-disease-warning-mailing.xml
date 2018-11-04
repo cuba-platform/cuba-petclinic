@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
+    <data>
+        <collection id="petTypesDc"
+                         class="com.haulmont.sample.petclinic.entity.pet.PetType"
+                         view="_local">
+            <loader>
+                <query>
+                    <![CDATA[select e from petclinic_PetType e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <actions>
+        <action id="createDiseaseWarningMailing"
+                caption="msg://create"
+                primary="true"
+        />
+    </actions>
+    <layout spacing="true">
+
+        <lookupField id="petType"
+                     caption="msg://petType"
+                     width="100%"
+                     required="true"
+                     requiredMessage="msg://petTypeRequired"
+                     optionsContainer="petTypesDc" />
+        <textField
+                id="city"
+                required="true"
+                width="100%"
+                requiredMessage="msg://cityRequired"
+                caption="msg://city"/>
+        <textField
+                id="disease"
+                required="true"
+                width="100%"
+                requiredMessage="msg://diseaseRequired"
+                caption="msg://disease"/>
+
+        <buttonsPanel>
+            <button
+                    id="createDiseaseWarningMailingBtn"
+                    action="createDiseaseWarningMailing"
+                />
+        </buttonsPanel>
+    </layout>
+</window>

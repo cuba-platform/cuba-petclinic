@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd" caption="msg://browseCaption"
+  focusComponent="petsTable" messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
+  <data readOnly="true">
+    <collection id="petsCt"
+      class="com.haulmont.sample.petclinic.entity.pet.Pet"
+      view="pet-with-owner-and-type">
+      <loader id="petsLd">
+        <query>
+          <![CDATA[select e from petclinic_Pet e]]>
+        </query>
+      </loader>
+    </collection>
+  </data>
+  <dialogMode height="600" width="800"/>
+  <layout expand="petsTable" spacing="true">
+    <filter id="filter" applyTo="petsTable" dataLoader="petsLd">
+      <properties include=".*"/>
+    </filter>
+    <groupTable id="petsTable" dataContainer="petsCt" width="100%">
+      <actions>
+        <action id="create" type="create"/>
+        <action id="edit" type="edit"/>
+        <action id="remove" type="remove"/>
+        <action id="createDiseaseWarningMailing"
+          caption="msg://createDiseaseWarningMailing"
+          icon="font-icon:BULLHORN"/>
+      </actions>
+      <columns>
+        <column id="name"/>
+        <column id="identificationNumber"/>
+        <column id="birthDate"/>
+        <column id="owner"/>
+        <column id="type"/>
+      </columns>
+      <rowsCount/>
+      <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+        <button id="createBtn" action="petsTable.create"/>
+        <button id="editBtn" action="petsTable.edit"/>
+        <button id="removeBtn" action="petsTable.remove"/>
+        <button id="createDiseaseWarningMailingBtn"
+          action="petsTable.createDiseaseWarningMailing"/>
+      </buttonsPanel>
+      <rows/>
+    </groupTable>
+  </layout>
+</window>

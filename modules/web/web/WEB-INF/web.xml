@@ -11,7 +11,7 @@
     <!-- Application properties config files -->
     <context-param>
         <param-name>appPropertiesConfig</param-name>
-        <param-value>classpath:com/cubaplatform/petclinic/web-app.properties
+        <param-value>classpath:com/haulmont/sample/petclinic/web-app.properties
             /WEB-INF/local.app.properties
             "file:${catalina.base}/conf/petclinic/local.app.properties"</param-value>
     </context-param>

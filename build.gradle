@@ -32,7 +32,7 @@ apply(plugin: 'cuba')
 
 cuba {
     artifact {
-        group = 'com.cubaplatform.petclinic'
+        group = 'com.haulmont.sample.petclinic'
         version = '0.1'
         isSnapshot = true
     }
@@ -152,7 +152,7 @@ configure(webModule) {
 
     task deployConf(type: Copy) {
         from file('src')
-        include "com/cubaplatform/petclinic/**"
+        include "com/haulmont/sample/petclinic/**"
         into "$cuba.tomcat.dir/conf/${modulePrefix}"
     }
 
