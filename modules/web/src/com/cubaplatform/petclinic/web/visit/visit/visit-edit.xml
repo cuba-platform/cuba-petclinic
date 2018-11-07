@@ -26,7 +26,7 @@
     <form id="fieldGroup" dataContainer="visitCt">
       <column width="250px">
         <dateField property="visitDate"/>
-        <textField property="description"/>
+        <textField colspan="5" property="description"/>
         <lookupPickerField property="pet" optionsContainer="petsCt"/>
       </column>
     </form>

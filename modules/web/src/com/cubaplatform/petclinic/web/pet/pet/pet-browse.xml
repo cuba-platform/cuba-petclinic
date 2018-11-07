@@ -32,8 +32,8 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
                 <column id="identificationNumber"/>
+                <column id="name"/>
                 <column id="birthDate"/>
                 <column id="owner"/>
                 <column id="type"/>
