@@ -44,7 +44,7 @@ create table PETCLINIC_OWNER (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     FIRST_NAME varchar(255) not null,
-    LAST_NAME varchar(255) not null,
+    LAST_NAME varchar(255),
     --
     ADDRESS varchar(255) not null,
     CITY varchar(255) not null,
@@ -65,7 +65,7 @@ create table PETCLINIC_VET (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     FIRST_NAME varchar(255) not null,
-    LAST_NAME varchar(255) not null,
+    LAST_NAME varchar(255),
     --
     primary key (ID)
 )^

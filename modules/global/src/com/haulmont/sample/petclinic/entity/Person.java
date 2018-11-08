@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-@NamePattern("%s, %s|lastName,firstName")
+@NamePattern("%s %s|firstName,lastName")
 @MappedSuperclass
 public class Person extends StandardEntity {
     private static final long serialVersionUID = -2777766826323269523L;
@@ -15,8 +15,7 @@ public class Person extends StandardEntity {
     @Column(name = "FIRST_NAME", nullable = false)
     protected String firstName;
 
-    @NotNull
-    @Column(name = "LAST_NAME", nullable = false)
+    @Column(name = "LAST_NAME")
     protected String lastName;
 
     public void setFirstName(String firstName) {
