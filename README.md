@@ -9,6 +9,15 @@ The CUBA Petclinic application deals with the domain of a Pet clinic and the ass
 ![CUBA Petclinic Overview screencast](https://github.com/cuba-platform/cuba-petclinic/blob/master/img/cuba-petclinic-overview.gif)
 
 
+## 1540
+
+![CUBA Petclinic Overview screencast](https://github.com/cuba-platform/cuba-petclinic/blob/master/img/petclinic-1540.gif)
+
+## 770
+
+![CUBA Petclinic Overview screencast](https://github.com/cuba-platform/cuba-petclinic/blob/master/img/petclinic-770.gif)
+
+
 ## Domain model
 
 
