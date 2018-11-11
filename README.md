@@ -6,8 +6,6 @@ The CUBA Petclinic application deals with the domain of a Pet clinic and the ass
 
 ## Application overview
 
-![CUBA Petclinic Overview screencast](https://github.com/cuba-platform/cuba-petclinic/blob/master/img/cuba-petclinic-overview.gif)
-
 <a href="https://raw.githubusercontent.com/cuba-platform/cuba-petclinic/master/img/cuba-petclinic-overview.gif"><img src="https://raw.githubusercontent.com/cuba-platform/cuba-petclinic/master/img/login-screen.png"/></a>
 
 
