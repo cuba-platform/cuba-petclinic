@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-caption="msg://editorCaption"
-focusComponent="fieldGroup"
-messagesPack="com.haulmont.sample.petclinic.web.vet.vet">
-<data>
-    <instance id="vetCt"
-      class="com.haulmont.sample.petclinic.entity.vet.Vet"
-      view="vet-with-specialties">
-        <loader/>
+        caption="msg://editorCaption"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.sample.petclinic.web.vet.vet">
+    <data>
+        <instance id="vetCt"
+                  class="com.haulmont.sample.petclinic.entity.vet.Vet"
+                  view="vet-with-specialties">
+            <loader/>
 
-        <collection id="specialtiesCt" property="specialties"/>
-    </instance>
+            <collection id="specialtiesCt" property="specialties"/>
+        </instance>
 
-</data>
+    </data>
 
-<dialogMode height="600"
-  width="800"/>
+    <dialogMode height="600"
+                width="800"/>
 
-<layout expand="editorActions" spacing="true">
-    <form id="fieldGroup" dataContainer="vetCt">
-        <column width="250px">
-            <textField property="firstName"/>
-            <textField property="lastName"/>
-        </column>
-    </form>
+    <layout expand="editActions" spacing="true">
+        <form id="fieldGroup" dataContainer="vetCt">
+            <column width="250px">
+                <textField property="firstName"/>
+                <textField property="lastName"/>
+            </column>
+        </form>
 
-    <groupBox id="specialtiesBox" caption="msg://specialties" stylename="light">
-        <table id="specialtiesTable" dataContainer="specialtiesCt" height="100%" width="100%">
-            <buttonsPanel>
-                <button action="specialtiesTable.create"/>
-                <button action="specialtiesTable.edit"/>
-                <button action="specialtiesTable.remove"/>
-            </buttonsPanel>
-            <actions>
-                <action id="create" type="create" openType="DIALOG"/>
-                <action id="edit" type="edit" openType="DIALOG"/>
-                <action id="remove" type="remove"/>
-            </actions>
-            <columns>
-                <column id="name"/>
-            </columns>
-        </table>
-    </groupBox>
+        <groupBox id="specialtiesBox" caption="msg://specialties" stylename="light">
+            <table id="specialtiesTable" dataContainer="specialtiesCt" height="100%" width="100%">
+                <buttonsPanel>
+                    <button action="specialtiesTable.create"/>
+                    <button action="specialtiesTable.edit"/>
+                    <button action="specialtiesTable.remove"/>
+                </buttonsPanel>
+                <actions>
+                    <action id="create" type="create" openType="DIALOG"/>
+                    <action id="edit" type="edit" openType="DIALOG"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                </columns>
+            </table>
+        </groupBox>
 
-    <fragment id="editorActions"
-      screen="editorActions"/>
-</layout>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
 </window>

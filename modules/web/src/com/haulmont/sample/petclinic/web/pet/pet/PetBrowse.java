@@ -6,5 +6,6 @@ import com.haulmont.cuba.gui.screen.*;
 @UiController("petclinic_Pet.browse")
 @UiDescriptor("pet-browse.xml")
 @LookupComponent("petsTable")
+@LoadDataBeforeShow
 public class PetBrowse extends StandardLookup<Pet> {
 }

@@ -15,14 +15,16 @@
   <dialogMode height="600"
     width="800"/>
 
-  <layout expand="editorActions" spacing="true">
+  <layout expand="editActions" spacing="true">
     <form id="fieldGroup" dataContainer="petTypeCt">
       <column width="250px">
         <textField property="name"/>
       </column>
     </form>
 
-    <fragment id="editorActions"
-      screen="editorActions"/>
+<hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
   </layout>
 </window>
