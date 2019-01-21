@@ -5,7 +5,7 @@ import com.haulmont.sample.petclinic.entity.vet.Vet;
 
 @UiController("petclinic_Vet.edit")
 @UiDescriptor("vet-edit.xml")
-@EditedEntityContainer("vetCt")
+@EditedEntityContainer("vetDc")
 @LoadDataBeforeShow
 public class VetEdit extends StandardEditor<Vet> {
 

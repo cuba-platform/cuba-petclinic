@@ -4,12 +4,12 @@
         focusComponent="fieldGroup"
         messagesPack="com.haulmont.sample.petclinic.web.vet.vet">
     <data>
-        <instance id="vetCt"
+        <instance id="vetDc"
                   class="com.haulmont.sample.petclinic.entity.vet.Vet"
                   view="vet-with-specialties">
             <loader/>
 
-            <collection id="specialtiesCt" property="specialties"/>
+            <collection id="specialtiesDc" property="specialties"/>
         </instance>
 
     </data>
@@ -18,7 +18,7 @@
                 width="800"/>
 
     <layout expand="editActions" spacing="true">
-        <form id="fieldGroup" dataContainer="vetCt">
+        <form id="fieldGroup" dataContainer="vetDc">
             <column width="250px">
                 <textField property="firstName"/>
                 <textField property="lastName"/>
@@ -26,7 +26,7 @@
         </form>
 
         <groupBox id="specialtiesBox" caption="msg://specialties" stylename="light">
-            <table id="specialtiesTable" dataContainer="specialtiesCt" height="100%" width="100%">
+            <table id="specialtiesTable" dataContainer="specialtiesDc" height="100%" width="100%">
                 <buttonsPanel>
                     <button action="specialtiesTable.create"/>
                     <button action="specialtiesTable.edit"/>

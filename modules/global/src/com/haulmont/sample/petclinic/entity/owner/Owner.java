@@ -3,12 +3,12 @@ package com.haulmont.sample.petclinic.entity.owner;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import com.haulmont.sample.petclinic.entity.Person;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import java.util.List;
 import javax.persistence.OneToMany;
-import org.hibernate.validator.constraints.Email;
 
 @Table(name = "PETCLINIC_OWNER")
 @Entity(name = "petclinic_Owner")
