@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-caption="msg://editorCaption"
-focusComponent="fieldGroup"
-messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
-<data>
-    <instance id="ownerCt"
-      class="com.haulmont.sample.petclinic.entity.owner.Owner"
-      view="_base">
-        <loader/>
-    </instance>
+        caption="msg://editorCaption"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
+    <data>
+        <instance id="ownerDc"
+                  class="com.haulmont.sample.petclinic.entity.owner.Owner"
+                  view="_base">
+            <loader/>
+        </instance>
 
-</data>
+    </data>
 
-<dialogMode height="600"
-  width="800"/>
+    <dialogMode height="600"
+                width="800"/>
 
-<layout expand="editActions" spacing="true">
-    <form id="fieldGroup" dataContainer="ownerCt">
-        <column width="250px">
-            <textField property="firstName"/>
-            <textField property="lastName"/>
-            <textField property="address"/>
-            <textField property="city"/>
-            <textField property="telephone"/>
-            <textField property="email"/>
-        </column>
-    </form>
+    <layout expand="editActions" spacing="true">
+        <form id="fieldGroup" dataContainer="ownerDc">
+            <column width="250px">
+                <textField property="firstName"/>
+                <textField property="lastName"/>
+                <textField property="address"/>
+                <textField property="city"/>
+                <textField property="telephone"/>
+                <textField property="email"/>
+            </column>
+        </form>
 
 
-<hbox id="editActions" spacing="true">
+        <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
         </hbox>
-</layout>
+    </layout>
 </window>

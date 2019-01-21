@@ -4,13 +4,13 @@
         focusComponent="fieldGroup"
         messagesPack="com.haulmont.sample.petclinic.web.visit.visit">
     <data>
-        <instance id="visitCt"
+        <instance id="visitDc"
                   class="com.haulmont.sample.petclinic.entity.visit.Visit"
                   view="visit-with-pet">
             <loader/>
         </instance>
 
-        <collection id="petsCt" class="com.haulmont.sample.petclinic.entity.pet.Pet" view="_base">
+        <collection id="petsDc" class="com.haulmont.sample.petclinic.entity.pet.Pet" view="_base">
             <loader>
                 <query>
                     select e from petclinic_Pet e
@@ -23,11 +23,11 @@
                 width="800"/>
 
     <layout expand="editActions" spacing="true">
-        <form id="fieldGroup" dataContainer="visitCt">
+        <form id="fieldGroup" dataContainer="visitDc">
             <column width="250px">
                 <dateField property="visitDate"/>
                 <textField colspan="5" property="description"/>
-                <lookupPickerField property="pet" optionsContainer="petsCt"/>
+                <lookupPickerField property="pet" optionsContainer="petsDc"/>
             </column>
         </form>
 

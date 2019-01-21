@@ -5,7 +5,7 @@ import com.haulmont.sample.petclinic.entity.owner.Owner;
 
 @UiController("petclinic_Owner.edit")
 @UiDescriptor("owner-edit.xml")
-@EditedEntityContainer("ownerCt")
+@EditedEntityContainer("ownerDc")
 @LoadDataBeforeShow
 public class OwnerEdit extends StandardEditor<Owner> {
 }
