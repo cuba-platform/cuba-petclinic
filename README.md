@@ -9,6 +9,11 @@ CUBA Petclinic is a CUBA platform example application dealing with the domain of
 
 The CUBA Petclinic application deals with the domain of a Pet clinic and the associated business workflows to manage a pet clinic.
 
+## Online Demo
+
+You can find the CUBA Petclinic as an online hosted example here: [CUBA Petclinic Online Demo](https://demo4.cuba-platform.com/petclinic)
+
+
 ## Application overview
 
 <a href="https://raw.githubusercontent.com/cuba-platform/cuba-petclinic/master/img/cuba-petclinic-overview.gif"><img src="https://raw.githubusercontent.com/cuba-platform/cuba-petclinic/master/img/login-screen.png"/></a>
