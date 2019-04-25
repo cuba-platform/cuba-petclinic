@@ -59,6 +59,4 @@ public class Visit extends StandardEntity {
     public Pet getPet() {
         return pet;
     }
-
-
 }

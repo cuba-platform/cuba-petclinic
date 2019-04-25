@@ -39,7 +39,6 @@ public class Pet extends NamedEntity {
     @JoinColumn(name = "OWNER_ID")
     protected Owner owner;
 
-
     public void setIdentificationNumber(String identificationNumber) {
         this.identificationNumber = identificationNumber;
     }
@@ -47,7 +46,6 @@ public class Pet extends NamedEntity {
     public String getIdentificationNumber() {
         return identificationNumber;
     }
-
 
     public void setOwner(Owner owner) {
         this.owner = owner;
@@ -57,7 +55,6 @@ public class Pet extends NamedEntity {
         return owner;
     }
 
-
     public void setType(PetType type) {
         this.type = type;
     }
@@ -66,7 +63,6 @@ public class Pet extends NamedEntity {
         return type;
     }
 
-
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
@@ -74,6 +70,4 @@ public class Pet extends NamedEntity {
     public Date getBirthDate() {
         return birthDate;
     }
-
-
 }

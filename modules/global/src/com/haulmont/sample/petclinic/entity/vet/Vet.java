@@ -26,6 +26,4 @@ public class Vet extends Person {
     public Set<Specialty> getSpecialties() {
         return specialties;
     }
-
-
 }

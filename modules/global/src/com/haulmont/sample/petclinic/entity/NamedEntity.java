@@ -20,6 +20,4 @@ public class NamedEntity extends StandardEntity {
     public String getName() {
         return name;
     }
-
-
 }

@@ -36,7 +36,6 @@ public class Person extends StandardEntity {
         return lastName;
     }
 
-
     @Transient
     @MetaProperty(related = "firstName,lastName")
     public String getName() {
