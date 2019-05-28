@@ -26,11 +26,10 @@
         <form id="fieldGroup" dataContainer="visitDc">
             <column width="250px">
                 <dateField property="visitDate"/>
-                <textField colspan="5" property="description"/>
+                <textArea rows="5" property="description"/>
                 <lookupPickerField property="pet" optionsContainer="petsDc"/>
             </column>
         </form>
-
 
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>

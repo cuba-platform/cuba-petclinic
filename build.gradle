@@ -1,8 +1,7 @@
 
 buildscript {
-    ext.cubaVersion = '7.0.2'
+    ext.cubaVersion = '7.0.6'
     repositories {
-//        mavenLocal()
         maven {
             url 'https://dl.bintray.com/cuba-platform/main'
         }
@@ -18,7 +17,6 @@ def modulePrefix = 'petclinic'
 def globalModule = project(":${modulePrefix}-global")
 def coreModule = project(":${modulePrefix}-core")
 def webModule = project(":${modulePrefix}-web")
-def webThemesModule = project(":${modulePrefix}-web-themes")
 
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
@@ -66,6 +64,13 @@ configure([globalModule, coreModule, webModule]) {
 }
 
 configure(globalModule) {
+    dependencies {
+        if (!JavaVersion.current().isJava8()) {
+            runtime('javax.xml.bind:jaxb-api:2.3.1')
+            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+        }
+    }
+
     entitiesEnhancing {
         main {
             enabled = true
@@ -170,29 +175,20 @@ configure(webModule) {
         appName = "${modulePrefix}"
         appJars(modulePrefix + '-global', modulePrefix + '-web')
     }
+
     task buildScssThemes(type: CubaWebScssThemeCreation)
+
     task deployThemes(type: CubaDeployThemeTask, dependsOn: buildScssThemes)
+
     assemble.dependsOn buildScssThemes
-}
 
-configure(webThemesModule) {
-    apply(plugin: 'java')
-    apply(plugin: 'maven')
-    apply(plugin: 'cuba')
+    task themesJar(type: Jar) {
+        from file('themes')
+        classifier = 'themes'
+    }
 
-    appModuleType = 'web-themes'
-
-    buildDir = file('../build/scss-themes')
-
-    sourceSets {
-        main {
-            java {
-                srcDir '.'
-            }
-            resources {
-                srcDir '.'
-            }
-        }
+    artifacts {
+        archives themesJar
     }
 }
 
@@ -202,7 +198,8 @@ task undeploy(type: Delete, dependsOn: ":${modulePrefix}-web:cleanConf") {
     delete("$cuba.tomcat.dir/webapps/${modulePrefix}")
 }
 
-task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy"], description: 'Redeploys applications and restarts local Tomcat') {
+task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy"],
+        description: 'Redeploys applications and restarts local Tomcat') {
     doLast {
         ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
             not {
@@ -211,8 +208,4 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
         }
         start.execute()
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.1'
 }
