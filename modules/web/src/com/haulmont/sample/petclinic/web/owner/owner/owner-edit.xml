@@ -2,7 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://editorCaption"
         focusComponent="fieldGroup"
-        messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
+        messagesPack="com.haulmont.sample.petclinic.web.owner.owner">
     <data>
         <instance id="ownerDc"
                   class="com.haulmont.sample.petclinic.entity.owner.Owner"
