@@ -1,0 +1,89 @@
+@import "hover-defaults";
+@import "com.haulmont.sample.petclinic/hover-ext-defaults";
+@import "app-components";
+@import "com.haulmont.sample.petclinic/hover-ext";
+
+.hover {
+  // include auto-generated app components SCSS
+  @include app_components;
+  
+  @include com_haulmont_sample_petclinic-hover-ext;
+
+
+  .c-groupbox-caption {
+    color: $petclinic-main-color;
+  }
+
+
+  .c-login-submit-button {
+    background-color: $petclinic-login-btn;
+  }
+
+  .v-slot-c-sidemenu-panel {
+    border:none;
+    background-color: $petclinic-light-color;
+
+  }
+
+  .v-textfield-focus, .v-textfield:focus {
+    border-color: $petclinic-main-color;
+  }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  // Side menu
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  .c-sidemenu-panel {
+
+    background: #ffffff none;
+    border-right: none;
+    color: $petclinic-main-color;
+
+
+    .c-sidemenu-item-action.c-sidemenu-item-focused {
+      border-right: 5px solid $petclinic-main-color;
+    }
+    .c-sidemenu-item-header, .c-sidemenu-item-header :hover {
+      color: $petclinic-main-color;
+      margin: 0;
+    }
+
+    .c-sidemenu-item-header-open {
+      background-color: $petclinic-main-color;
+      color:#ffffff;
+    }
+    .c-sidemenu-submenu-open {
+      background-color: $petclinic-light-color;
+      color:$petclinic-main-color;
+    }
+
+    .c-sidemenu-item :focus, .c-sidemenu-item :hover, .c-sidemenu-item-focused {
+      color: #ffffff;
+    }
+
+    .c-sidemenu-item-header.c-sidemenu-item-focused, .c-sidemenu-item-selected {
+      background-color: $petclinic-main-color;
+      color: #ffffff;
+    }
+
+    .c-sidemenu {
+      color: $petclinic-main-color;
+    }
+
+    .c-sidemenu-title {
+      color: #ffffff;
+      background-color: $petclinic-main-color;
+
+    }
+
+    .c-ftsfield-button, .c-newwindow-button, .c-logout-button {
+      color: $petclinic-main-color;
+    }
+
+    .c-ftsfield-button:hover, .c-newwindow-button:hover, .c-logout-button:hover {
+      color: $petclinic-main-color;
+      background: transparent;
+    }
+
+  }
+}

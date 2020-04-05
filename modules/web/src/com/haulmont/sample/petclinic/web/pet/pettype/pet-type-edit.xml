@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
+    <data>
+        <instance id="petTypeCt"
+                  class="com.haulmont.sample.petclinic.entity.pet.PetType"
+                  view="_local">
+            <loader/>
+        </instance>
+
+    </data>
+
+    <dialogMode height="600"
+                width="800"/>
+
+    <layout expand="editActions" spacing="true">
+        <form id="fieldGroup" dataContainer="petTypeCt">
+            <column width="250px">
+                <textField property="name"/>
+            </column>
+        </form>
+
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

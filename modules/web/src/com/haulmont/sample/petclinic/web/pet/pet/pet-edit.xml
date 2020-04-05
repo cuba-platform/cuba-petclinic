@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
+    <data>
+        <instance id="petDc"
+                  class="com.haulmont.sample.petclinic.entity.pet.Pet"
+                  view="pet-with-owner-and-type">
+            <loader/>
+        </instance>
+
+        <collection id="ownersDc" class="com.haulmont.sample.petclinic.entity.owner.Owner" view="_base">
+            <loader>
+                <query>
+                    select e from petclinic_Owner e
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="typesDc" class="com.haulmont.sample.petclinic.entity.pet.PetType" view="_base">
+            <loader>
+                <query>
+                    select e from petclinic_PetType e order by e.name
+                </query>
+            </loader>
+        </collection>
+    </data>
+
+    <dialogMode height="600"
+                width="800"/>
+
+    <layout expand="editActions" spacing="true">
+        <form id="fieldGroup" dataContainer="petDc">
+            <column width="250px">
+                <textField property="name"/>
+                <textField property="identificationNumber"/>
+                <dateField property="birthDate"/>
+                <lookupPickerField property="type" optionsContainer="typesDc"/>
+                <lookupPickerField property="owner" optionsContainer="ownersDc"/>
+            </column>
+        </form>
+
+
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
