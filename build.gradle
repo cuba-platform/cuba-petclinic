@@ -197,7 +197,7 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 restart.finalizedBy start
 
 
-task stage(dependsOn: ['setupTomcat', ':app-core:deploy', ':app-web:deploy']) {
+task stage(dependsOn: ['setupTomcat', ':petclinic-core:deploy', ':petclinic-web:deploy']) {
     doLast {
         // change port from 8080 to heroku $PORT
         def file = new File('deploy/tomcat/conf/server.xml')
