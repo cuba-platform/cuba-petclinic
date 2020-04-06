@@ -198,7 +198,7 @@ task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy", ":${module
             rootFolder.deleteDir()
         }
 
-        def webAppDir = new File('deploy/tomcat/webapps/app')
+        def webAppDir = new File("deploy/tomcat/webapps/${modulePrefix}")
         webAppDir.renameTo(new File(rootFolder.path))
 
         // add local.app.properties for web application
