@@ -201,3 +201,5 @@ Alternatively if you have installed and logged in with the Heroku CLI, you can j
 
 ![13 - Petclinic Owner Editor](img/13-owner-editor.png)
 
+
+Have fun with the Example!
