@@ -202,9 +202,9 @@ task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy", ":${module
         webAppDir.renameTo(new File(rootFolder.path))
 
         // add local.app.properties for web application
-//        def webConfDir = new File('deploy/tomcat/conf/ROOT/')
-//        webConfDir.mkdirs()
-//        def webProperties = new File(webConfDir, 'local.app.properties')
-//        webProperties.text = ''' cuba.webContextName = / '''
+        def webConfDir = new File('deploy/tomcat/conf/ROOT/')
+        webConfDir.mkdirs()
+        def webProperties = new File(webConfDir, 'local.app.properties')
+        webProperties.text = ''' cuba.webContextName = / '''
     }
 }
