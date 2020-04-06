@@ -1,4 +1,3 @@
-
 buildscript {
     ext.cubaVersion = '7.2.2'
     repositories {
@@ -42,7 +41,7 @@ dependencies {
 
 }
 
-def hsql = 'org.hsqldb:hsqldb:2.4.1'
+def postgres = 'org.postgresql:postgresql:42.2.9'
 
 configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
@@ -88,8 +87,8 @@ configure(coreModule) {
     dependencies {
         compile(globalModule)
         compileOnly(servletApi)
-        jdbc(hsql)
-        testRuntime(hsql)
+        jdbc(postgres)
+        testRuntime(postgres)
     }
 
     task cleanConf(description: 'Cleans up conf directory', type: Delete) {
@@ -106,19 +105,9 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'hsql'
-        host = 'localhost'
-        dbName = 'petclinic'
-        dbUser = 'sa'
-        dbPassword = ''
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        dbms = 'hsql'
-        host = 'localhost'
-        dbName = 'petclinic'
-        dbUser = 'sa'
-        dbPassword = ''
     }
 }
 
@@ -210,7 +199,7 @@ task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy", ":${module
         }
 
         def webAppDir = new File('deploy/tomcat/webapps/app')
-        webAppDir.renameTo( new File(rootFolder.path) )
+        webAppDir.renameTo(new File(rootFolder.path))
 
         // add local.app.properties for web application
         def webConfDir = new File('deploy/tomcat/conf/ROOT/')
