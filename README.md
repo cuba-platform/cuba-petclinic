@@ -19,7 +19,7 @@ operations side.
 
 In this example I will guide you through the Steps that are necessary to deploy the Petclinic project to Heroku.
 
-### Step 0: Heroku and Github Account
+### Step 1: Heroku and Github Account
 
 The first step is that you have both a Heroku and a Github Account. Luckily both of them are free, so there is no problem here.
 Also running the application on Heroku for demo purposes is free, which gives you the ability to play around with it.
@@ -35,7 +35,7 @@ After creating the accounts in both services, you will see the Heroku dashboard,
 
 ![0 - Heroku Dasboard](img/0-heroku-empty-dashboard.png)
 
-### Step 1: Create Github repository and push application
+### Step 2: Create Github repository and push application
 
 The first step is to put your CUBA application source code into Github source control. If you want to have a quick start
 you can use the fork button on this repository, which will create a copy of this example app under you own name that
@@ -43,13 +43,13 @@ you can use for the tutorial.
 
 ![1 - Fork github repository](img/1-fork-github-repository.png)
 
-### Step 2: Create App in Heroku
+### Step 3: Create App in Heroku
 
 The next step is to create the app in Heroku. It needs a unique name and a region where it should run.
 
 ![2 - Create App](img/2-create-app.png)
 
-### Step 3: Connect App to Github
+### Step 4: Connect App to Github
 
 In order to run the Petclinic app, Heroku needs to know where to get the application source code from. This we achieve
 by connecting the Heroku app to a particular Github repository.
@@ -58,7 +58,7 @@ by connecting the Heroku app to a particular Github repository.
 
 ![4 - Connect to Github repo](img/4-connect-to-github-search-repo.png)
 
-### Step 4: Automatic Deployments
+### Step 5: Automatic Deployments
 
 After the App is connected to the Github Repository, it is now possible to configure an automatic deploy, once
 a push to the Github repository is performed by the developer.
@@ -68,7 +68,7 @@ a push to the Github repository is performed by the developer.
 We also activate the option to let Heroku wait for the CI server to finish. Only for a successful CI build, the deployment
 is performed.
 
-### Step 5: Create Postgres DB
+### Step 6: Create Postgres DB
 
 In order to run a CUBA app, it needs a Database. Heroku has tight integration for Postgres databases. What you need to do
 is to create an add-on in the "Resources" Tab. Just search for "Postgres" and select the "Hobby" plan, which is free as well.
@@ -76,7 +76,7 @@ is to create an add-on in the "Resources" Tab. Just search for "Postgres" and se
 ![6 - Attached Postgres DB add-on](img/6-attached-postgres-db-addon.png)
   
 
-### Step 6: Configure the CUBA application
+### Step 7: Configure the CUBA application
 
 Now everything is setup on the Heroku and Github side. What needs to be done is some small adjustments on the source code
 of the CUBA app itself, in order to run nicely in the Heroku environment. 
@@ -86,7 +86,7 @@ In particular we will use a production Spring profile, to configure the Database
 Also we will use the ability to let CUBA read in the database credentials from an environment variable, which Heroku automatically
 creates for us. 
 
-#### Step 6.1: Help Heroku to Build the CUBA app
+#### Step 7.1: Help Heroku to Build the CUBA app
 
 Heroku will build our CUBA application on our behalf. Heroku knows about the fact that the app is a gradle application since
 the CUBA app has a gradle wrapper configured within the application code.
@@ -124,7 +124,7 @@ task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy", ":${module
 This task does the setup of the tomcat, builds the app and performs two additional actions that are written there as
 groovy snippets.
 
-#### Step 6.2: Tell CUBA how to connect to the Heroku DB
+#### Step 7.2: Tell CUBA how to connect to the Heroku DB
 
 The next part is to explain CUBA how to connect to the newly created Heroku DB.
 
@@ -155,7 +155,7 @@ cuba.dataSource.jdbcUrl = ${JDBC_DATABASE_URL}
 ```
 
 
-#### Step 6.3: Help Heroku run the CUBA app
+#### Step 7.3: Help Heroku run the CUBA app
 
 In order for Heroku to know what it needs to do when it comes to running the application, the source code can define
 the action it should do. For that, we create a file with the name `Procfile` in the root directory of the application 
@@ -166,3 +166,38 @@ web: cd ./deploy/tomcat/bin && export 'JAVA_OPTS=-Dport.http=$PORT -Dspring.prof
 ```
 Here we tell heroku how to start the tomcat. Additionally with `-Dspring.profiles.active=prod` we define which Spring
 profile should be used. This way CUBA will pick up the profile specific configuration file `prod-app.properties` from 6.2.
+
+### Step 8: Deploy the Petclinic
+
+Now everything is setup so that Heroku will deploy the application once a Github push occurs.
+
+To trigger that you can change anything in the Repository, like creating an Entity or just fix a typo in the README.
+After you have pushed your changes to the Repository, Heroku will be informed:
+
+![7 - deploy activity](img/7-deploy-activity.png)
+
+
+![8 - deploy logs](img/8-deploy-logs.png)
+
+### Step 9: Looking at the Application Logs
+
+Once the Deployment is performed the Logs of the CUBA application are accessible either directly in the UI of Heroku,
+or alternatively via the Heroku CLI. The command `heroku logs --tail` will give you direct access to the logs inside your
+terminal / IDE.
+
+![10 - Heroku CLI app logs](img/10-heroku-cli-app-logs.png)
+
+### Step 10: Using the Petclinic App
+
+Now the Petclinic app is up and running. You can open the app via the URL `https://<<app_name>>.herokuapp.com` where the <<app_name>> is the
+name you defined at step 3.
+
+Alternatively if you have installed and logged in with the Heroku CLI, you can just use `heroku open`, which will open the browser:
+
+
+![11 - Running Petclinic App](img/11-running-petclinic-app.png)
+
+![12 - Petclinic Owner List](img/12-owner-list.png)
+
+![13 - Petclinic Owner Editor](img/13-owner-editor.png)
+
