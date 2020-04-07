@@ -16,7 +16,7 @@ You can either follow the tutorial in the written form here in the README or alt
 in a video tutorial, that you can also take a look at:
 
 <a href="https://youtu.be/RBMItA-_tBw">
-    <img src="raw.githubusercontent.com/mariodavid/cuba-petclinic-heroku/master/img/video-overview.png"/>
+    <img src="https://raw.githubusercontent.com/mariodavid/cuba-petclinic-heroku/master/img/video-overview.png"/>
 </a>
 
 
