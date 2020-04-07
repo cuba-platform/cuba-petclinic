@@ -9,6 +9,18 @@ CUBA Petclinic is a CUBA platform example application dealing with the domain of
 
 The CUBA Petclinic application deals with the domain of a Pet clinic and the associated business workflows to manage a pet clinic.
 
+
+## Video Tutorial
+
+You can either follow the tutorial in the written form here in the README or alternatively I have captured the same steps
+in a video tutorial, that you can also take a look at:
+
+<a href="https://youtu.be/RBMItA-_tBw">
+    <img src="raw.githubusercontent.com/mariodavid/cuba-petclinic-heroku/master/img/video-overview.png"/>
+</a>
+
+
+
 ## Heroku Deployment
 
 This example shows how to easily deploy the Petclinic application to Heroku. Heroku is a PaaS offering, that allows to
