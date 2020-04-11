@@ -6,7 +6,7 @@
     <data readOnly="true">
         <collection id="petsDc"
                     class="com.haulmont.sample.petclinic.entity.pet.Pet"
-                    view="pet-with-owner-and-type">
+                    view="pet-with-owner-and-type-and-visits">
             <loader id="petsDl">
                 <query>
                     <![CDATA[select e from petclinic_Pet e]]>
@@ -24,6 +24,11 @@
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
+                <action id="calculateDiscount"
+                        trackSelection="true"
+                        caption="msg://calculateDiscount"
+                        icon="MONEY"
+                />
             </actions>
             <columns>
                 <column id="name"/>
@@ -37,6 +42,9 @@
                 <button id="createBtn" action="petsTable.create"/>
                 <button id="editBtn" action="petsTable.edit"/>
                 <button id="removeBtn" action="petsTable.remove"/>
+                <button id="calculateDiscountBtn"
+                        action="petsTable.calculateDiscount"
+                />
             </buttonsPanel>
             <rows/>
         </groupTable>
