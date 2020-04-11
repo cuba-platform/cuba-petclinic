@@ -1,0 +1,48 @@
+name: Run CI pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  run-ci:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: petclinic-heroku
+        ports:
+          - 5432/tcp
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v1
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Setup Test Database Structure
+        run: ./gradlew createIntegrationtestDb
+        env:
+          # DATABASE_* ENV variables are used for the gradle task 'createIntegrationtestDb' to set up the database (see build.gradle)
+          DATABASE_USERNAME: postgres
+          DATABASE_PASSWORD: postgres
+          DATABASE_DB_NAME: petclinic-heroku-test
+          DATABASE_HOST: localhost
+          DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}
+
+
+      - name: Run Integration Tests
+        run: ./gradlew test
+        env:
+          # The application uses this ENV variable for the 'integrationtest' spring profile (see integrationtest-app.properties)
+          JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku-test?user=postgres&password=postgres
