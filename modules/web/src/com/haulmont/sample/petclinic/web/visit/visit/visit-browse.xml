@@ -13,38 +13,76 @@
                 </query>
             </loader>
         </collection>
+        <collection id="visitsCalendarDc"
+                    class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                    view="visit-with-pet">
+            <loader id="visitsCalendarDl">
+                <query>
+                    <![CDATA[select e from petclinic_Visit e where e.visitStart >= :visitStart and e.visitEnd <= :visitEnd]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="visitsTable"
+    <layout expand="contentTabSheet"
             spacing="true">
-        <filter id="filter"
-                applyTo="visitsTable"
-                dataLoader="visitsDl">
-            <properties include=".*"/>
-        </filter>
-        <groupTable id="visitsTable"
-                    dataContainer="visitsDc"
-                    width="100%">
-            <actions>
-                <action id="create" type="create" openType="DIALOG"/>
-                <action id="edit" type="edit"
-                        openType="DIALOG"/>
-                <action id="remove" type="remove"/>
-            </actions>
-            <columns>
-                <column id="visitDate"/>
-                <column id="description"/>
-                <column id="pet"/>
-            </columns>
-            <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="createBtn" action="visitsTable.create"/>
-                <button id="editBtn" action="visitsTable.edit"/>
-                <button id="removeBtn" action="visitsTable.remove"/>
-            </buttonsPanel>
-        </groupTable>
+        <tabSheet id="contentTabSheet">
+            <tab
+                    id="calenderTab"
+                    spacing="true"
+                    margin="true"
+                    caption="msg://calender"
+            >
+                <calendar id="calendar"
+                          dataContainer="visitsCalendarDc"
+                          width="100%"
+                          height="100%"
+                          captionProperty="description"
+                          descriptionProperty="description"
+                          startDateProperty="visitStart"
+                          endDateProperty="visitEnd"
+                          firstVisibleHourOfDay="5"
+                          lastVisibleHourOfDay="20"
+                          navigationButtonsVisible="true"/>
+            </tab>
+            <tab
+                    id="tableTab"
+                    spacing="true"
+                    margin="true"
+                    caption="msg://table"
+                    expand="visitsTable"
+                    lazy="true"
+            >
+                <filter id="filter"
+                        applyTo="visitsTable"
+                        dataLoader="visitsDl">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="visitsTable"
+                            dataContainer="visitsDc"
+                            width="100%">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="pet"/>
+                        <column id="visitStart"/>
+                        <column id="visitEnd"/>
+                        <column id="description"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="visitsTable.create"/>
+                        <button id="editBtn" action="visitsTable.edit"/>
+                        <button id="removeBtn" action="visitsTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </tab>
+        </tabSheet>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

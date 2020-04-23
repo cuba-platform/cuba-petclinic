@@ -96,9 +96,10 @@ create table PETCLINIC_VISIT (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    VISIT_DATE date not null,
     DESCRIPTION varchar(4000),
     PET_ID varchar(36) not null,
+    VISIT_START timestamp not null,
+    VISIT_END timestamp not null,
     --
     primary key (ID)
 )^

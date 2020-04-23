@@ -25,7 +25,8 @@
     <layout expand="editActions" spacing="true">
         <form id="fieldGroup" dataContainer="visitDc">
             <column width="250px">
-                <dateField property="visitDate"/>
+                <dateField property="visitStart"/>
+                <dateField property="visitEnd"/>
                 <textArea rows="5" property="description"/>
                 <lookupPickerField property="pet" optionsContainer="petsDc"/>
             </column>

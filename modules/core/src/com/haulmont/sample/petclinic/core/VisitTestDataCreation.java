@@ -3,6 +3,7 @@ package com.haulmont.sample.petclinic.core;
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.EntitySet;
+import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.sample.petclinic.config.PetclinicTestdataConfig;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
@@ -11,25 +12,34 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Component
 public class VisitTestDataCreation {
 
     @Inject
-    protected PetclinicTestdataConfig petclinicTestdataConfig;
-
-    @Inject
     private Logger log;
 
-    @Inject
-    protected DataManager dataManager;
+    protected final PetclinicTestdataConfig petclinicTestdataConfig;
+    protected final TimeSource timeSource;
+
+    protected final DataManager dataManager;
+    protected final RandomVisitDateTime randomVisitDateTime;
+
+    public VisitTestDataCreation(
+            PetclinicTestdataConfig petclinicTestdataConfig,
+            TimeSource timeSource,
+            DataManager dataManager,
+            RandomVisitDateTime randomVisitDateTime
+    ) {
+        this.petclinicTestdataConfig = petclinicTestdataConfig;
+        this.timeSource = timeSource;
+        this.dataManager = dataManager;
+        this.randomVisitDateTime = randomVisitDateTime;
+    }
 
     protected void createData() {
 
@@ -46,9 +56,46 @@ public class VisitTestDataCreation {
 
     }
 
-    private List<Visit> createVisits() {
-        return IntStream.range(0, petclinicTestdataConfig.getTestdataVisitAmount())
-                .mapToObj(i -> createVisit())
+    List<Visit> createVisits() {
+        return Stream.concat(
+                createPastVisits(),
+                createFutureVisits()
+        )
+                .collect(Collectors.toList());
+    }
+
+    private Stream<Visit> createPastVisits() {
+        return IntStream.range(0, petclinicTestdataConfig.getTestdataVisitStartAmountPastDays())
+                .mapToObj(value -> timeSource.now().minusDays(value).toLocalDate())
+                .map(this::createVisitsForDate)
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull);
+    }
+
+    private Stream<Visit> createFutureVisits() {
+        return IntStream.range(1, petclinicTestdataConfig.getTestdataVisitStartAmountFutureDays() + 1)
+                .mapToObj(i -> createVisitsForDate(
+                        timeSource.now().plusDays(i).toLocalDate(),
+                        amountForFutureDate(i)
+                ))
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull);
+    }
+
+    private int amountForFutureDate(int i) {
+        int max = petclinicTestdataConfig.getTestdataVisitStartAmountFutureDays() + 1;
+        return (int) ((double) (max - i) / max * petclinicTestdataConfig.getTestdataVisitAmountPerDay());
+    }
+
+    private List<Visit> createVisitsForDate(LocalDate localDate) {
+        return IntStream.range(0, petclinicTestdataConfig.getTestdataVisitAmountPerDay())
+                .mapToObj(i -> createVisit(localDate))
+                .collect(Collectors.toList());
+    }
+
+    private List<Visit> createVisitsForDate(LocalDate localDate, int amount) {
+        return IntStream.range(0, amount)
+                .mapToObj(i -> createVisit(localDate))
                 .collect(Collectors.toList());
     }
 
@@ -57,21 +104,31 @@ public class VisitTestDataCreation {
     }
 
     private EntitySet commit(List<Visit> visits) {
-        return dataManager.commit(toArray(visits));
+
+        Visit[] visitsToBePersisted = toArray(visits);
+        return dataManager.commit(visitsToBePersisted);
     }
 
     private Visit[] toArray(List<Visit> visits) {
         return visits.toArray(new Visit[visits.size()]);
     }
 
-    private Visit createVisit() {
+    private Visit createVisit(LocalDate date) {
+
+        VisitEventRange visitEventRange = randomVisitDateTime.randomVisitEventRange(date);
+
+        if (visitEventRange.isEmpty()) {
+            return null;
+        }
+
+
         Visit visit = dataManager.create(Visit.class);
 
-        List<Pet> pets = list(Pet.class);
-
-        visit.setPet(randomPet(pets));
-        visit.setVisitDate(randomDate());
+        visit.setPet(randomPet());
         visit.setDescription(randomDescription());
+
+        visit.setVisitStart(visitEventRange.getVisitStart());
+        visit.setVisitEnd(visitEventRange.getVisitEnd());
 
         return visit;
     }
@@ -82,28 +139,8 @@ public class VisitTestDataCreation {
         );
     }
 
-    private Date randomDate() {
-        return toDate(between(
-                LocalDate.now().minusYears(petclinicTestdataConfig.getTestdataVisitVisitDateRangeYears()),
-                LocalDate.now()
-        ));
-    }
-
-    public Date toDate(LocalDate dateToConvert) {
-        return java.sql.Date.valueOf(dateToConvert);
-    }
-
-    public static LocalDate between(LocalDate startInclusive, LocalDate endExclusive) {
-        long startEpochDay = startInclusive.toEpochDay();
-        long endEpochDay = endExclusive.toEpochDay();
-        long randomDay = ThreadLocalRandom
-                .current()
-                .nextLong(startEpochDay, endEpochDay);
-
-        return LocalDate.ofEpochDay(randomDay);
-    }
-
-    private Pet randomPet(List<Pet> pets) {
+    private Pet randomPet() {
+        List<Pet> pets = list(Pet.class);
         return randomOfList(pets);
     }
 

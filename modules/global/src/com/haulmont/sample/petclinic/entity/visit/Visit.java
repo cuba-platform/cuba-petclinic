@@ -1,31 +1,20 @@
 package com.haulmont.sample.petclinic.entity.visit;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import com.haulmont.sample.petclinic.entity.pet.Pet;
+import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.sample.petclinic.entity.pet.Pet;
 
-@NamePattern("%s (%s)|pet,visitDate")
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+
+@NamePattern("%s ()|pet")
 @Table(name = "PETCLINIC_VISIT")
 @Entity(name = "petclinic_Visit")
 public class Visit extends StandardEntity {
     private static final long serialVersionUID = 6351202390461847589L;
-
-    @Temporal(TemporalType.DATE)
-    @NotNull
-    @Column(name = "VISIT_DATE", nullable = false)
-    protected Date visitDate;
 
     @Column(name = "DESCRIPTION", length = 4000)
     protected String description;
@@ -36,12 +25,28 @@ public class Visit extends StandardEntity {
     @JoinColumn(name = "PET_ID")
     protected Pet pet;
 
-    public void setVisitDate(Date visitDate) {
-        this.visitDate = visitDate;
+    @NotNull
+    @Column(name = "VISIT_START", nullable = false)
+    protected LocalDateTime visitStart;
+
+    @NotNull
+    @Column(name = "VISIT_END", nullable = false)
+    protected LocalDateTime visitEnd;
+
+    public LocalDateTime getVisitEnd() {
+        return visitEnd;
     }
 
-    public Date getVisitDate() {
-        return visitDate;
+    public void setVisitEnd(LocalDateTime visitEnd) {
+        this.visitEnd = visitEnd;
+    }
+
+    public LocalDateTime getVisitStart() {
+        return visitStart;
+    }
+
+    public void setVisitStart(LocalDateTime visitStart) {
+        this.visitStart = visitStart;
     }
 
     public void setDescription(String description) {
