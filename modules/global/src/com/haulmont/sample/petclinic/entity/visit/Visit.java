@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.entity.visit;
 
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
@@ -16,8 +17,9 @@ import java.time.LocalDateTime;
 public class Visit extends StandardEntity {
     private static final long serialVersionUID = 6351202390461847589L;
 
-    @Column(name = "DESCRIPTION", length = 4000)
-    protected String description;
+    @NotNull
+    @Column(name = "TYPE_", nullable = false)
+    protected String type;
 
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
     @NotNull
@@ -32,6 +34,29 @@ public class Visit extends StandardEntity {
     @NotNull
     @Column(name = "VISIT_END", nullable = false)
     protected LocalDateTime visitEnd;
+
+    @Column(name = "DESCRIPTION", length = 4000)
+    protected String description;
+
+    @Transient
+    @MetaProperty(related = "pet")
+    public String getPetName() {
+        return getPet().getName();
+    }
+
+    @Transient
+    @MetaProperty(related = "type")
+    public String getTypeStyle() {
+        return getType().getStyleName();
+    }
+
+    public VisitType getType() {
+        return type == null ? null : VisitType.fromId(type);
+    }
+
+    public void setType(VisitType type) {
+        this.type = type == null ? null : type.getId();
+    }
 
     public LocalDateTime getVisitEnd() {
         return visitEnd;

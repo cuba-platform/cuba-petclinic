@@ -9,7 +9,6 @@
                   view="visit-with-pet">
             <loader/>
         </instance>
-
         <collection id="petsDc" class="com.haulmont.sample.petclinic.entity.pet.Pet" view="_base">
             <loader>
                 <query>
@@ -18,10 +17,8 @@
             </loader>
         </collection>
     </data>
-
     <dialogMode height="600"
                 width="800"/>
-
     <layout expand="editActions" spacing="true">
         <form id="fieldGroup" dataContainer="visitDc">
             <column width="250px">
@@ -29,9 +26,9 @@
                 <dateField property="visitEnd"/>
                 <textArea rows="5" property="description"/>
                 <lookupPickerField property="pet" optionsContainer="petsDc"/>
+                <lookupField id="typeField" property="type"/>
             </column>
         </form>
-
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

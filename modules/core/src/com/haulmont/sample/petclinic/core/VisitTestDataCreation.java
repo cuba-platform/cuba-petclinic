@@ -7,6 +7,7 @@ import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.sample.petclinic.config.PetclinicTestdataConfig;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
+import com.haulmont.sample.petclinic.entity.visit.VisitType;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -113,7 +114,7 @@ public class VisitTestDataCreation {
         return visits.toArray(new Visit[visits.size()]);
     }
 
-    private Visit createVisit(LocalDate date) {
+    Visit createVisit(LocalDate date) {
 
         VisitEventRange visitEventRange = randomVisitDateTime.randomVisitEventRange(date);
 
@@ -125,6 +126,7 @@ public class VisitTestDataCreation {
         Visit visit = dataManager.create(Visit.class);
 
         visit.setPet(randomPet());
+        visit.setType(randomVisitType());
         visit.setDescription(randomDescription());
 
         visit.setVisitStart(visitEventRange.getVisitStart());
@@ -133,10 +135,15 @@ public class VisitTestDataCreation {
         return visit;
     }
 
+    private VisitType randomVisitType() {
+        int pick = random().nextInt(VisitType.values().length);
+        return VisitType.values()[pick];
+    }
+
     private String randomDescription() {
         return randomOfList(
                 Arrays.asList(petclinicTestdataConfig.getTestdataVisitDescriptionOptions().split(","))
-        );
+        ).trim();
     }
 
     private Pet randomPet() {
@@ -145,8 +152,11 @@ public class VisitTestDataCreation {
     }
 
     private <T> T randomOfList(List<T> list) {
-        Random rand = new Random();
-        return list.get(rand.nextInt(list.size()));
+        return list.get(random().nextInt(list.size()));
+    }
+
+    private Random random() {
+        return new Random();
     }
 
     private <T extends Entity> List<T> list(Class<T> entityClass) {

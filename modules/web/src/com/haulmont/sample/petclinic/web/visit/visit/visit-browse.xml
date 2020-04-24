@@ -32,18 +32,18 @@
                     id="calenderTab"
                     spacing="true"
                     margin="true"
-                    caption="msg://calender"
-            >
+                    caption="msg://calender">
                 <calendar id="calendar"
                           dataContainer="visitsCalendarDc"
                           width="100%"
                           height="100%"
-                          captionProperty="description"
+                          captionProperty="petName"
                           descriptionProperty="description"
                           startDateProperty="visitStart"
                           endDateProperty="visitEnd"
                           firstVisibleHourOfDay="5"
                           lastVisibleHourOfDay="20"
+                          stylenameProperty="typeStyle"
                           navigationButtonsVisible="true"/>
             </tab>
             <tab
@@ -52,8 +52,7 @@
                     margin="true"
                     caption="msg://table"
                     expand="visitsTable"
-                    lazy="true"
-            >
+                    lazy="true">
                 <filter id="filter"
                         applyTo="visitsTable"
                         dataLoader="visitsDl">
@@ -72,6 +71,7 @@
                         <column id="visitStart"/>
                         <column id="visitEnd"/>
                         <column id="description"/>
+                        <column id="type"/>
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
