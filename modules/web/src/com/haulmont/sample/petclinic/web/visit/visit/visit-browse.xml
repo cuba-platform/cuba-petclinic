@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://browseCaption"
         focusComponent="visitsTable"
         messagesPack="com.haulmont.sample.petclinic.web.visit.visit">
-    <data readOnly="true">
+    <data>
         <collection id="visitsDc"
                     class="com.haulmont.sample.petclinic.entity.visit.Visit"
                     view="visit-with-pet">
@@ -19,6 +20,11 @@
             <loader id="visitsCalendarDl">
                 <query>
                     <![CDATA[select e from petclinic_Visit e where e.visitStart >= :visitStart and e.visitEnd <= :visitEnd]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.type like :type</c:where>
+                        </c:jpql>
+                    </condition>
                 </query>
             </loader>
         </collection>
@@ -32,12 +38,24 @@
                     id="calenderTab"
                     spacing="true"
                     margin="true"
-                    caption="msg://calender">
+                    caption="msg://calender"
+                    expand="calendar"
+            >
+                <hbox spacing="true" id="calendarFilter">
+                <lookupField id="typeFilter"
+                             caption="msg://type"
+                             optionsEnum="com.haulmont.sample.petclinic.entity.visit.VisitType" />
+
+                <checkBoxGroup id="typeMultiFilter"
+                              orientation="horizontal"
+                              caption="msg://type"/>
+                </hbox>
                 <calendar id="calendar"
                           dataContainer="visitsCalendarDc"
                           width="100%"
                           height="100%"
                           captionProperty="petName"
+
                           descriptionProperty="description"
                           startDateProperty="visitStart"
                           endDateProperty="visitEnd"
