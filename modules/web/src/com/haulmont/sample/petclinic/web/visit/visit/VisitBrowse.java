@@ -12,10 +12,11 @@ import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.entity.visit.VisitType;
+import org.springframework.util.CollectionUtils;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.*;
 
 @UiController("petclinic_Visit.browse")
 @UiDescriptor("visit-browse.xml")
@@ -45,15 +46,13 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected void onInit(InitEvent event) {
         typeMultiFilter.setOptionsEnum(VisitType.class);
         typeMultiFilter.setOptionIconProvider(o -> VisitTypeIcon.valueOf(o.getIcon()).source());
-        typeMultiFilter.setValue(Arrays.asList(VisitType.values()));
+
     }
-
-
 
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
-        loadEvents();
+        typeMultiFilter.setValue(EnumSet.allOf(VisitType.class));
     }
 
     @Subscribe("calendar")
@@ -93,24 +92,18 @@ public class VisitBrowse extends StandardLookup<Visit> {
         visitEditor.show();
     }
 
-    @Subscribe("typeFilter")
-    protected void onTypeFilterValueChange(HasValue.ValueChangeEvent<VisitType> event) {
-        if (event.getValue() != null) {
-            visitsCalendarDl.setParameter("type", event.getValue());
-        } else {
-            visitsCalendarDl.removeParameter("type");
-        }
-        visitsCalendarDl.load();
-    }
-
     @Subscribe("typeMultiFilter")
     protected void onTypeMultiFilterValueChange(HasValue.ValueChangeEvent event) {
-        /*if (event.getValue() != null) {
-            visitsCalendarDl.setParameter("type", event.getValue());
-        } else {
+
+        if (event.getValue() == null) {
             visitsCalendarDl.removeParameter("type");
         }
-        visitsCalendarDl.load();*/
+        else if (CollectionUtils.isEmpty((Set<VisitType>) event.getValue())) {
+            visitsCalendarDl.setParameter("type", Collections.singleton(""));
+        } else {
+            visitsCalendarDl.setParameter("type", event.getValue());
+        }
+        loadEvents();
     }
 
 

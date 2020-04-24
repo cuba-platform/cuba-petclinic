@@ -22,7 +22,7 @@
                     <![CDATA[select e from petclinic_Visit e where e.visitStart >= :visitStart and e.visitEnd <= :visitEnd]]>
                     <condition>
                         <c:jpql>
-                            <c:where>e.type like :type</c:where>
+                            <c:where>e.type in :type</c:where>
                         </c:jpql>
                     </condition>
                 </query>
@@ -39,30 +39,30 @@
                     spacing="true"
                     margin="true"
                     caption="msg://calender"
-                    expand="calendar"
+                    expand="calendarFilter"
             >
-                <hbox spacing="true" id="calendarFilter">
-                <lookupField id="typeFilter"
-                             caption="msg://type"
-                             optionsEnum="com.haulmont.sample.petclinic.entity.visit.VisitType" />
-
-                <checkBoxGroup id="typeMultiFilter"
-                              orientation="horizontal"
-                              caption="msg://type"/>
+                <hbox spacing="true" id="calendarFilter" expand="calendar">
+                    <vbox id="filterBox" width="300px">
+                        <label value="msg://filter" stylename="h2" icon="font-icon:FILTER"/>
+                        <hbox stylename="card" margin="true">
+                            <checkBoxGroup id="typeMultiFilter"
+                                           orientation="vertical"
+                                           caption="msg://type"/>
+                        </hbox>
+                    </vbox>
+                    <calendar id="calendar"
+                              dataContainer="visitsCalendarDc"
+                              height="100%"
+                              captionProperty="petName"
+                              descriptionProperty="description"
+                              startDateProperty="visitStart"
+                              endDateProperty="visitEnd"
+                              firstVisibleDayOfWeek="2"
+                              firstVisibleHourOfDay="5"
+                              lastVisibleHourOfDay="20"
+                              stylenameProperty="typeStyle"
+                              navigationButtonsVisible="true"/>
                 </hbox>
-                <calendar id="calendar"
-                          dataContainer="visitsCalendarDc"
-                          width="100%"
-                          height="100%"
-                          captionProperty="petName"
-
-                          descriptionProperty="description"
-                          startDateProperty="visitStart"
-                          endDateProperty="visitEnd"
-                          firstVisibleHourOfDay="5"
-                          lastVisibleHourOfDay="20"
-                          stylenameProperty="typeStyle"
-                          navigationButtonsVisible="true"/>
             </tab>
             <tab
                     id="tableTab"
