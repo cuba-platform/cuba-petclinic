@@ -41,27 +41,84 @@
                     caption="msg://calender"
                     expand="calendarFilter"
             >
-                <hbox spacing="true" id="calendarFilter" expand="calendar">
-                    <vbox id="filterBox" width="300px">
-                        <label value="msg://filter" stylename="h2" icon="font-icon:FILTER"/>
-                        <hbox stylename="card" margin="true">
-                            <checkBoxGroup id="typeMultiFilter"
-                                           orientation="vertical"
-                                           caption="msg://type"/>
-                        </hbox>
-                    </vbox>
-                    <calendar id="calendar"
-                              dataContainer="visitsCalendarDc"
+                <hbox spacing="true" id="calendarFilter" expand="split" width="100%">
+                    <split
+                            orientation="horizontal"
+                            id="split"
+                            pos="30"
+                            height="100%"
+                            dockable="true"
+                            dockMode="LEFT"
+
+                    >
+                        <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="100%">
+                            <groupBox stylename="light"
+                                      width="100%"
+                                      caption="msg://overview">
+                                <datePicker id="calendarRangePicker"
+                                            datatype="localDate"
+                                            width="100%"
+                                />
+                            </groupBox>
+                            <groupBox stylename="light"
+                                      width="100%"
+                                      caption="msg://calendarRange">
+                                <radioButtonGroup
+                                        width="100%"
+                                        stylename="button-switcher"
+                                        id="calendarRange"
+                                />
+                            </groupBox>
+                            <groupBox stylename="light"
+                                      width="100%"
+                                      caption="msg://type">
+                                <checkBoxGroup id="typeMultiFilter"
+                                               orientation="vertical"/>
+                            </groupBox>
+                        </vbox>
+                        <vbox id="calendarBox"
+                              spacing="true"
+                              margin="true"
+                              width="100%"
                               height="100%"
-                              captionProperty="petName"
-                              descriptionProperty="description"
-                              startDateProperty="visitStart"
-                              endDateProperty="visitEnd"
-                              firstVisibleDayOfWeek="2"
-                              firstVisibleHourOfDay="5"
-                              lastVisibleHourOfDay="20"
-                              stylenameProperty="typeStyle"
-                              navigationButtonsVisible="true"/>
+                              expand="calendar"
+                        >
+                            <hbox expand="navigator" spacing="true" margin="true">
+                                <buttonsPanel id="navigator" align="MIDDLE_RIGHT" margin="false" spacing="false">
+
+                                    <button id="navigatorCurrent"
+                                            stylename="borderless-colored"
+                                            icon="HOME"/>
+
+                                    <button id="navigatorPrevious"
+                                            stylename="borderless-colored"
+                                            icon="CARET_LEFT"/>
+                                    <button id="navigatorNext"
+                                            stylename="borderless-colored"
+                                            icon="CARET_RIGHT"/>
+                                </buttonsPanel>
+                                <label id="calendarRangeDescription"
+                                       stylename="h3"
+                                       icon="font-icon:CALENDAR"
+                                       width="200px"/>
+                            </hbox>
+                            <calendar id="calendar"
+                                      dataContainer="visitsCalendarDc"
+                                      height="100%"
+                                      width="100%"
+                                      captionProperty="petName"
+                                      descriptionProperty="description"
+                                      startDateProperty="visitStart"
+                                      endDateProperty="visitEnd"
+                                      firstVisibleDayOfWeek="2"
+                                      firstVisibleHourOfDay="5"
+                                      lastVisibleHourOfDay="20"
+                                      stylenameProperty="typeStyle"
+                                      navigationButtonsVisible="false"/>
+                        </vbox>
+
+                    </split>
+
                 </hbox>
             </tab>
             <tab
