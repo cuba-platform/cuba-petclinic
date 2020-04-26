@@ -12,20 +12,20 @@ import java.time.temporal.ChronoUnit;
 public class MonthCalendarNavigation implements CalendarNavigation<LocalDateTime, LocalDate> {
 
 
-    public String previous(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker) {
+    public String previous(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
 
         YearMonth previousMonth = YearMonth.from(
-                calendar.getStartDate().minus(1, ChronoUnit.MONTHS).toLocalDate()
+                referenceDate.minus(1, ChronoUnit.MONTHS)
         );
         setMonth(calendar,calendarRangePicker, previousMonth);
         return previousMonth.toString();
     }
 
 
-    public String next(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker) {
+    public String next(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
 
         YearMonth nextMonth = YearMonth.from(
-                calendar.getStartDate().plus(1, ChronoUnit.MONTHS).toLocalDate()
+                referenceDate.plus(1, ChronoUnit.MONTHS)
         );
         setMonth(calendar,calendarRangePicker, nextMonth);
 
@@ -33,12 +33,12 @@ public class MonthCalendarNavigation implements CalendarNavigation<LocalDateTime
     }
 
     @Override
-    public String atDate(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate date) {
+    public String atDate(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
         YearMonth atDateMonth = YearMonth.from(
-                date
+                referenceDate
         );
         setMonth(calendar, calendarRangePicker, atDateMonth);
-        calendarRangePicker.setValue(date);
+        calendarRangePicker.setValue(referenceDate);
         return atDateMonth.toString();
     }
 

@@ -1,14 +1,17 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar;
 
-import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.gui.components.Calendar;
+import com.haulmont.cuba.gui.components.DatePicker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.YearMonth;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,20 +36,18 @@ class MonthCalendarNavigationTest {
     @Mock
     Calendar<LocalDateTime> calendar;
     @Mock
-    TimeSource timeSource;
+    DatePicker<LocalDate> calendarRangePicker;
 
     @BeforeEach
     void setUp() {
-        sut = new MonthCalendarNavigation(timeSource);
+        sut = new MonthCalendarNavigation();
     }
 
     @Test
     void given_March1IsStartDate_when_previousMonth_then_calendarRangeIsFebruary() {
 
-        calenderIsCurrently(MARCH_1.atStartOfDay());
-
         // when:
-        sut.previous(calendar);
+        sut.previous(calendar, calendarRangePicker, MARCH_1);
 
         calendarStartIs(FEB_1.atStartOfDay());
         calendarEndIs(FEB_29.atTime(LocalTime.MAX));
@@ -55,10 +56,8 @@ class MonthCalendarNavigationTest {
     @Test
     void given_currentDateIsApr30_when_currentMonth_then_calendarRangeIsJune() {
 
-        todayIs(APR_30.atStartOfDay());
-
         // when:
-        sut.atDate(calendar);
+        sut.atDate(calendar, calendarRangePicker, APR_30);
 
         calendarStartIs(APR_1.atStartOfDay());
         calendarEndIs(APR_30.atTime(LocalTime.MAX));
@@ -67,10 +66,8 @@ class MonthCalendarNavigationTest {
     @Test
     void given_March1IsStartDate_when_nextMonth_then_calendarRangeIsApril() {
 
-        calenderIsCurrently(MARCH_1.atStartOfDay());
-
         // when:
-        sut.next(calendar);
+        sut.next(calendar, calendarRangePicker, MARCH_1);
 
         calendarStartIs(APR_1.atStartOfDay());
         calendarEndIs(APR_30.atTime(LocalTime.MAX));
@@ -87,7 +84,5 @@ class MonthCalendarNavigationTest {
     private void calenderIsCurrently(LocalDateTime current) {
         when(calendar.getStartDate()).thenReturn(current);
     }
-    private void todayIs(LocalDateTime current) {
-        when(timeSource.now()).thenReturn(current.atZone(ZoneId.systemDefault()));
-    }
+
 }

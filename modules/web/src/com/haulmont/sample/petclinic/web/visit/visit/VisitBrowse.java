@@ -3,7 +3,6 @@ package com.haulmont.sample.petclinic.web.visit.visit;
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.core.global.UserSessionSource;
-import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.Calendar;
@@ -14,6 +13,8 @@ import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.entity.visit.VisitType;
+import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigation;
+import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigators;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
 import com.vaadin.v7.ui.components.calendar.CalendarComponentEvents;
@@ -62,33 +63,24 @@ public class VisitBrowse extends StandardLookup<Visit> {
     @Inject
     protected DatePicker<LocalDate> calendarRangePicker;
     @Inject
-    protected Notifications notifications;
-    @Inject
     protected UserSessionSource userSessionSource;
 
     @Subscribe
     protected void onInit(InitEvent event) {
         typeMultiFilter.setOptionsEnum(VisitType.class);
+        typeMultiFilter.setValue(EnumSet.allOf(VisitType.class));
         typeMultiFilter.setOptionIconProvider(o -> VisitTypeIcon.valueOf(o.getIcon()).source());
 
         calendarRange.setOptionsEnum(CalendarMode.class);
-
         calendarRangePicker.setValue(timeSource.now().toLocalDate());
 
-        com.vaadin.v7.ui.Calendar vaadinCalendar = calendar.unwrap(com.vaadin.v7.ui.Calendar.class);
+        registerDateClickEventHandler();
+    }
 
-        vaadinCalendar.setHandler(new CalendarComponentEvents.DateClickHandler() {
-            @Override
-            public void dateClick(CalendarComponentEvents.DateClickEvent event) {
-//                calendarRange.setValue(CalendarMode.DAY);
-//                atDate(CalendarMode.DAY, toLocalDate(event.getDate()));
-//                loadEvents();
-
-                notifications.create(Notifications.NotificationType.TRAY)
-                        .withCaption("Vaadins CalendarComponentEvents.DateClickEvent fired")
-                        .show();
-            }
-        });
+    @SuppressWarnings("deprecation")
+    private void registerDateClickEventHandler() {
+        calendar.unwrap(com.vaadin.v7.ui.Calendar.class)
+                .setHandler((CalendarComponentEvents.DateClickHandler) event -> atDate(CalendarMode.DAY, toLocalDate(event.getDate())));
     }
 
 
@@ -100,83 +92,80 @@ public class VisitBrowse extends StandardLookup<Visit> {
 
     @Subscribe("calendar")
     protected void onCalendarCalendarDayClick(Calendar.CalendarDayClickEvent<LocalDateTime> event) {
-//        calendarRange.setValue(CalendarMode.DAY);
+        // TODO: switch from direct Vaadin handler to this method
 //        atDate(CalendarMode.DAY, event.getDate().toLocalDate());
-//        loadEvents();
-        notifications.create(Notifications.NotificationType.TRAY)
-                .withCaption("CUBAs Calendar.CalendarDayClickEvent fired")
-                .show();
     }
 
     @Subscribe("calendar")
     protected void onCalendarCalendarWeekClick(Calendar.CalendarWeekClickEvent<LocalDateTime> event) {
-//        WeekFields weekFields = WeekFields.of(userSessionSource.getLocale());
-//        LocalDateTime firstDayOfWeek = timeSource.now().toLocalDateTime()
-//                .withYear(event.getYear())
-//                .with(weekFields.weekOfYear(), event.getWeek())
-//                .with(weekFields.dayOfWeek(), 1);
-//
-//        calendarRange.setValue(CalendarMode.WEEK);
-//        atDate(CalendarMode.WEEK, firstDayOfWeek.toLocalDate());
-//        loadEvents();
-
-        notifications.create(Notifications.NotificationType.TRAY)
-                .withCaption("CUBAs Calendar.CalendarWeekClickEvent fired")
-                .show();
-
+        atDate(CalendarMode.WEEK, firstDayOfWeek(event));
     }
 
-
+    private LocalDate firstDayOfWeek(Calendar.CalendarWeekClickEvent<LocalDateTime> event) {
+        WeekFields weekFields = WeekFields.of(userSessionSource.getLocale());
+        return timeSource.now().toLocalDateTime()
+                .withYear(event.getYear())
+                .with(weekFields.weekOfYear(), event.getWeek())
+                .with(weekFields.dayOfWeek(), 1)
+                .toLocalDate();
+    }
 
 
     @Subscribe("navigatorPrevious")
     protected void onNavigatorPreviousClick(Button.ClickEvent event) {
-        CalendarMode calendarMode = calendarRange.getValue();
-        previous(calendarMode);
-        loadEvents();
+        previous(calendarRange.getValue());
     }
 
     @Subscribe("navigatorNext")
     protected void onNavigatorNextClick(Button.ClickEvent event) {
-        CalendarMode calendarMode = calendarRange.getValue();
-        next(calendarMode);
-        loadEvents();
+        next(calendarRange.getValue());
     }
 
     @Subscribe("navigatorCurrent")
     protected void onNavigatorCurrentClick(Button.ClickEvent event) {
-        CalendarMode calendarMode = calendarRange.getValue();
-        current(calendarMode);
-        loadEvents();
+        current(calendarRange.getValue());
     }
 
     @Subscribe("calendarRangePicker")
     protected void onCalendarRangePickerValueChange(HasValue.ValueChangeEvent<LocalDate> event) {
         if (event.isUserOriginated()) {
-            CalendarMode calendarMode = calendarRange.getValue();
-            atDate(calendarMode, event.getValue());
-            loadEvents();
+            atDate(calendarRange.getValue(), event.getValue());
         }
     }
 
     private void current(CalendarMode calendarMode) {
-        String description = calendarNavigators.forMode(calendarMode).atDate(calendar, calendarRangePicker, timeSource.now().toLocalDate());
-        calendarRangeDescription.setValue(description);
+        change(calendarMode, CalendarNavigationMode.PREVIOUS, timeSource.now().toLocalDate());
     }
 
     private void atDate(CalendarMode calendarMode, LocalDate date) {
-        String description = calendarNavigators.forMode(calendarMode).atDate(calendar, calendarRangePicker, date);
-        calendarRangeDescription.setValue(description);
+        change(calendarMode, CalendarNavigationMode.AT_DATE, date);
     }
 
     private void next(CalendarMode calendarMode) {
-        String description = calendarNavigators.forMode(calendarMode).next(calendar, calendarRangePicker);
-        calendarRangeDescription.setValue(description);
+        change(calendarMode, CalendarNavigationMode.NEXT, calendarRangePicker.getValue());
     }
 
     private void previous(CalendarMode calendarMode) {
-        String description = calendarNavigators.forMode(calendarMode).previous(calendar, calendarRangePicker);
+        change(calendarMode, CalendarNavigationMode.PREVIOUS, calendarRangePicker.getValue());
+    }
+
+    private void change(CalendarMode calendarMode, CalendarNavigationMode navigationMode, LocalDate referenceDate) {
+        calendarRange.setValue(calendarMode);
+        String description = performChange(calendarMode, navigationMode, referenceDate);
         calendarRangeDescription.setValue(description);
+        loadEvents();
+    }
+
+    private String performChange(CalendarMode calendarMode, CalendarNavigationMode navigationMode, LocalDate referenceDate) {
+        CalendarNavigation navigator = calendarNavigators.forMode(calendarMode);
+
+        switch (navigationMode) {
+            case NEXT: return navigator.next(calendar, calendarRangePicker, referenceDate);
+            case PREVIOUS: return navigator.previous(calendar, calendarRangePicker, referenceDate);
+            case CURRENT:
+            case AT_DATE: return navigator.atDate(calendar, calendarRangePicker, referenceDate);
+        }
+        return null;
     }
 
 
@@ -184,24 +173,25 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected void onCalendarRangeValueChange(HasValue.ValueChangeEvent event) {
         if (event.isUserOriginated()) {
             atDate((CalendarMode) event.getValue(), calendarRangePicker.getValue());
-            loadEvents();
         }
     }
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
-        typeMultiFilter.setValue(EnumSet.allOf(VisitType.class));
-        calendarRange.setValue(CalendarMode.WEEK);
+        current(CalendarMode.WEEK);
     }
-
 
     private void loadEvents() {
         visitsCalendarDl.setParameter("visitStart", calendar.getStartDate());
         visitsCalendarDl.setParameter("visitEnd", calendar.getEndDate());
-
         visitsCalendarDl.load();
     }
 
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Calendar Visit Event Click
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Subscribe("calendar")
     protected void onCalendarCalendarEventClick(Calendar.CalendarEventClickEvent<LocalDateTime> event) {
 
@@ -219,6 +209,10 @@ public class VisitBrowse extends StandardLookup<Visit> {
         visitEditor.show();
     }
 
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Filter for Visit Types
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Subscribe("typeMultiFilter")
     protected void onTypeMultiFilterValueChange(HasValue.ValueChangeEvent event) {
 
@@ -232,6 +226,11 @@ public class VisitBrowse extends StandardLookup<Visit> {
         loadEvents();
     }
 
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Visit Changes through Calendar Event Adjustments
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Subscribe("calendar")
     protected void onCalendarCalendarEventResize(Calendar.CalendarEventResizeEvent<LocalDateTime> event) {

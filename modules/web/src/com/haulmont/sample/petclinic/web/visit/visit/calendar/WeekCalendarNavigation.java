@@ -21,29 +21,29 @@ public class WeekCalendarNavigation implements CalendarNavigation<LocalDateTime,
         this.locale = locale;
     }
 
-    public String previous(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker) {
-        LocalDate previousWeek = startOfWeek(calendar.getStartDate()).minus(1, ChronoUnit.WEEKS);
+    public String previous(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
+        LocalDate previousWeek = startOfWeek(referenceDate).minus(1, ChronoUnit.WEEKS);
         setWeek(calendar, calendarRangePicker, previousWeek);
         return previousWeek.toString();
     }
 
-    public String next(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker) {
-        LocalDate nextWeek = startOfWeek(calendar.getStartDate()).plus(1, ChronoUnit.WEEKS);
+    public String next(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
+        LocalDate nextWeek = startOfWeek(referenceDate).plus(1, ChronoUnit.WEEKS);
         setWeek(calendar, calendarRangePicker, nextWeek);
         return nextWeek.toString();
     }
 
     @Override
-    public String atDate(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate date) {
-        LocalDate atDateWeek = startOfWeek(date.atTime(LocalTime.MIDNIGHT));
+    public String atDate(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
+        LocalDate atDateWeek = startOfWeek(referenceDate);
         setWeek(calendar, calendarRangePicker, atDateWeek);
-        calendarRangePicker.setValue(date);
+        calendarRangePicker.setValue(referenceDate);
         return atDateWeek.toString();
     }
 
-    private LocalDate startOfWeek(LocalDateTime date) {
+    private LocalDate startOfWeek(LocalDate date) {
         final DayOfWeek firstDayOfWeek = WeekFields.of(locale).getFirstDayOfWeek();
-        return date.with(TemporalAdjusters.previousOrSame(firstDayOfWeek)).toLocalDate();
+        return date.with(TemporalAdjusters.previousOrSame(firstDayOfWeek));
     }
 
     private LocalDate endOfWeek(LocalDateTime date) {

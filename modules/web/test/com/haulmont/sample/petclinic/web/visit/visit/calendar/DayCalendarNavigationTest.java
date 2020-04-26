@@ -1,7 +1,7 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar;
 
-import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.gui.components.Calendar;
+import com.haulmont.cuba.gui.components.DatePicker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,10 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DayCalendarNavigationTest {
@@ -27,7 +25,6 @@ class DayCalendarNavigationTest {
     private static final LocalDate SUN = SAT.plusDays(1);
 
 
-    private static final LocalDateTime WED_NOON = LocalDateTime.of(WED, LocalTime.NOON);
     private static final LocalDateTime TUE_MIDNIGHT = LocalDateTime.of(TUE, LocalTime.MIDNIGHT);
     private static final LocalDateTime TUE_MAX = LocalDateTime.of(TUE, LocalTime.MAX);
     private static final LocalDateTime THU_MIDNIGHT = LocalDateTime.of(THU, LocalTime.MIDNIGHT);
@@ -36,22 +33,19 @@ class DayCalendarNavigationTest {
 
     @Mock
     Calendar<LocalDateTime> calendar;
-
     @Mock
-    TimeSource timeSource;
+    DatePicker<LocalDate> calendarRangePicker;
 
     @BeforeEach
     void setUp() {
-        sut = new DayCalendarNavigation(timeSource);
+        sut = new DayCalendarNavigation();
     }
 
     @Test
     void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_PreviousDay_then_calendarRangeIsTuesday() {
 
-        calenderIsCurrently(WED_NOON);
-
         // when:
-        sut.previous(calendar);
+        sut.previous(calendar, calendarRangePicker, WED);
 
         calendarStartIs(TUE_MIDNIGHT);
         calendarEndIs(TUE_MAX);
@@ -60,10 +54,8 @@ class DayCalendarNavigationTest {
     @Test
     void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_NextDay_then_calendarRangeIsThursday() {
 
-        calenderIsCurrently(WED_NOON);
-
         // when:
-        sut.next(calendar);
+        sut.next(calendar, calendarRangePicker, WED);
 
         calendarStartIs(THU_MIDNIGHT);
         calendarEndIs(THU_MAX);
@@ -73,10 +65,8 @@ class DayCalendarNavigationTest {
     @Test
     void given_currentDateIsThursday_when_currentDay_then_calendarRangeIsThursday() {
 
-        todayIs(THU.atStartOfDay());
-
         // when:
-        sut.atDate(calendar);
+        sut.atDate(calendar, calendarRangePicker, THU);
 
         calendarStartIs(THU.atStartOfDay());
         calendarEndIs(THU.atTime(LocalTime.MAX));
@@ -88,12 +78,5 @@ class DayCalendarNavigationTest {
 
     private void calendarStartIs(LocalDateTime expectedStart) {
         verify(calendar).setStartDate(expectedStart);
-    }
-
-    private void calenderIsCurrently(LocalDateTime current) {
-        when(calendar.getStartDate()).thenReturn(current);
-    }
-    private void todayIs(LocalDateTime current) {
-        when(timeSource.now()).thenReturn(current.atZone(ZoneId.systemDefault()));
     }
 }
