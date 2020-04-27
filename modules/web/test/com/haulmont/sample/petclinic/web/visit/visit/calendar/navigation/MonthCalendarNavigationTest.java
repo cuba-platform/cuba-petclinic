@@ -48,7 +48,10 @@ class MonthCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new MonthCalendarNavigation(calendar, calendarRangePicker, calendarTitle, Locale.GERMANY);
+        sut = new MonthCalendarNavigation(
+                CalendarScreenAdjustment.of(calendar, calendarRangePicker, calendarTitle),
+                Locale.GERMANY
+        );
     }
 
     @Test

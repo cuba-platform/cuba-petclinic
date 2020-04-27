@@ -1,37 +1,24 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 
-import com.haulmont.cuba.gui.components.Calendar;
-import com.haulmont.cuba.gui.components.DatePicker;
-import com.haulmont.cuba.gui.components.Label;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.MonthFormatter.*;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.MonthFormatter.fullMonthYear;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.MonthFormatter.shortMonthYear;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.*;
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.endOfWeek;
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.startOfWeek;
 
 public class WeekCalendarNavigation implements CalendarNavigation {
 
-    private final Label<String> calendarTitle;
     private final Locale locale;
-    private final Calendar<LocalDateTime> calendar;
-    private final DatePicker<LocalDate> calendarNavigator;
+    private final CalendarScreenAdjustment screenAdjustment;
 
     public WeekCalendarNavigation(
-            Calendar<LocalDateTime> calendar,
-            DatePicker<LocalDate> calendarNavigator,
-            Label<String> calendarTitle,
+            CalendarScreenAdjustment screenAdjustment,
             Locale locale
     ) {
-        this.calendar = calendar;
-        this.calendarNavigator = calendarNavigator;
-        this.calendarTitle = calendarTitle;
+        this.screenAdjustment = screenAdjustment;
         this.locale = locale;
     }
 
@@ -39,11 +26,14 @@ public class WeekCalendarNavigation implements CalendarNavigation {
     public void navigate(CalendarNavigationMode navigationMode, LocalDate referenceDate) {
         LocalDate newWeek = navigationMode.calculate(ChronoUnit.WEEKS, referenceDate);
         LocalDate startOfWeek = startOfWeek(newWeek, locale);
-        calendar.setStartDate(startOfWeek.atStartOfDay());
-        LocalDate endOfWeek = endOfWeek(newWeek.atStartOfDay(), locale);
-        calendar.setEndDate(endOfWeek.atTime(LocalTime.MAX));
-        calendarNavigator.setValue(newWeek);
-        calendarTitle.setValue(formatTitle(startOfWeek, endOfWeek));
+        LocalDate endOfWeek = endOfWeek(newWeek, locale);
+
+        screenAdjustment.adjust(
+                startOfWeek,
+                endOfWeek,
+                newWeek,
+                formatTitle(startOfWeek, endOfWeek)
+        );
     }
 
     private String formatTitle(LocalDate startOfWeek, LocalDate endOfWeek) {

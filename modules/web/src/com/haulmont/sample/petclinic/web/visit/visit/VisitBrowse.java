@@ -2,6 +2,7 @@ package com.haulmont.sample.petclinic.web.visit.visit;
 
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DatatypeFormatter;
+import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.Notifications;
@@ -18,8 +19,8 @@ import com.haulmont.sample.petclinic.entity.visit.VisitType;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigators;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
+import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarScreenAdjustment;
 import com.vaadin.v7.shared.ui.calendar.CalendarState;
-import com.vaadin.v7.ui.components.calendar.CalendarComponentEvents;
 import org.springframework.util.CollectionUtils;
 
 import javax.inject.Inject;
@@ -73,6 +74,10 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected DatatypeFormatter datatypeFormatter;
     @Inject
     protected Notifications notifications;
+    @Inject
+    protected MessageBundle messageBundle;
+    @Inject
+    protected Messages messages;
 
     @Subscribe
     protected void onInit(InitEvent event) {
@@ -152,9 +157,7 @@ public class VisitBrowse extends StandardLookup<Visit> {
 
         calendarNavigators
                 .forMode(
-                        calendar,
-                        calendarNavigator,
-                        calendarTitle,
+                        CalendarScreenAdjustment.of(calendar, calendarNavigator, calendarTitle),
                         datatypeFormatter,
                         calendarMode
                 )
@@ -259,6 +262,15 @@ public class VisitBrowse extends StandardLookup<Visit> {
         visit.setVisitStart(newStart);
         visit.setVisitEnd(newEnd);
         dataContext.commit();
+        notifications.create(Notifications.NotificationType.TRAY)
+                .withCaption(
+                        messageBundle.formatMessage(
+                                "visitUpdated",
+                                messages.getMessage(visit.getType()),
+                                visit.getPetName()
+                        )
+                )
+                .show();
     }
 
 

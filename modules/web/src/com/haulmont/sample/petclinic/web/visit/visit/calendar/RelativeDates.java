@@ -22,17 +22,17 @@ public class RelativeDates {
         return referenceDate.with(TemporalAdjusters.previousOrSame(firstDayOfWeek));
     }
 
-    public static LocalDate endOfWeek(LocalDateTime referenceDate, Locale locale) {
+    public static LocalDate endOfWeek(LocalDate referenceDate, Locale locale) {
         final DayOfWeek firstDayOfWeek = WeekFields.of(locale).getFirstDayOfWeek();
         final DayOfWeek lastDayOfWeek = DayOfWeek.of(((firstDayOfWeek.getValue() + 5) % DayOfWeek.values().length) + 1);
-        return referenceDate.with(TemporalAdjusters.nextOrSame(lastDayOfWeek)).toLocalDate();
+        return referenceDate.with(TemporalAdjusters.nextOrSame(lastDayOfWeek));
     }
 
-    public static LocalDateTime endOfMonth(YearMonth newMonth) {
-        return newMonth.atEndOfMonth().atTime(LocalTime.MAX);
+    public static LocalDate endOfMonth(YearMonth newMonth) {
+        return newMonth.atEndOfMonth();
     }
 
-    public static LocalDateTime beginningOfMonth(YearMonth newMonth) {
-        return newMonth.atDay(1).atStartOfDay();
+    public static LocalDate beginningOfMonth(YearMonth newMonth) {
+        return newMonth.atDay(1);
     }
 }

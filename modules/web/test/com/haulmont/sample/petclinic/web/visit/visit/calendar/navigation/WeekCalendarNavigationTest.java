@@ -47,7 +47,10 @@ class WeekCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new WeekCalendarNavigation(calendar, calendarRangePicker, calendarTitle, Locale.GERMANY);
+        sut = new WeekCalendarNavigation(
+                CalendarScreenAdjustment.of(calendar, calendarRangePicker, calendarTitle),
+                Locale.GERMANY
+        );
     }
 
     @Test

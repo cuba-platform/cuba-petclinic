@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Locale;
 
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,7 +49,10 @@ class DayCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new DayCalendarNavigation(calendar, calendarRangePicker, calendarTitle, datatypeFormatter);
+        sut = new DayCalendarNavigation(
+                CalendarScreenAdjustment.of(calendar, calendarRangePicker, calendarTitle),
+                datatypeFormatter
+        );
     }
 
     @Test
