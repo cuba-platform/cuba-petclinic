@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
 
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,10 +43,10 @@ class WeekCalendarNavigationTest {
     }
 
     @Test
-    void given_week1MondayIsStartDate_when_nextMonth_then_calendarRangeIsW2MondayTillSundayMax_and_calendarPickerIsW2Mon() {
+    void given_week1MondayIsStartDate_when_next_then_calendarRangeIsW2MondayTillSundayMax_and_calendarPickerIsW2Mon() {
 
         // when:
-        sut.next(W1_MON);
+        sut.navigate(NEXT, W1_MON);
 
         // then:
         calendarStartIs(W2_MONDAY_MIDNIGHT);
@@ -56,10 +57,10 @@ class WeekCalendarNavigationTest {
     }
 
     @Test
-    void given_week2MondayIsStartDate_when_nextMonth_then_calendarRangeIsW1MondayTillSundayMax_and_calendarPickerIsW1Mon() {
+    void given_week2MondayIsStartDate_when_previous_then_calendarRangeIsW1MondayTillSundayMax_and_calendarPickerIsW1Mon() {
 
         // when:
-        sut.previous(W2_MON);
+        sut.navigate(PREVIOUS, W2_MON);
 
         // then:
         calendarStartIs(W1_MONDAY_MIDNIGHT);
@@ -70,10 +71,10 @@ class WeekCalendarNavigationTest {
     }
 
     @Test
-    void given_week1WedNoonIsStartDate_when_nextMonth_then_calendarRangeIsW2MondayTillSundayMax_and_calendarPickerIsW2Wed() {
+    void given_week1WedNoonIsStartDate_when_next_then_calendarRangeIsW2MondayTillSundayMax_and_calendarPickerIsW2Wed() {
 
         // when:
-        sut.next(W1_WED);
+        sut.navigate(NEXT, W1_WED);
 
         // then:
         calendarStartIs(W2_MONDAY_MIDNIGHT);
@@ -84,10 +85,10 @@ class WeekCalendarNavigationTest {
     }
 
     @Test
-    void given_currentDateIsWednesday_when_atDateWeek_then_calendarRangeIsThisWeek_and_calendarPickerIsW1Wed() {
+    void given_currentDateIsWednesday_when_atDate_then_calendarRangeIsThisWeek_and_calendarPickerIsW1Wed() {
 
         // when:
-        sut.atDate(W1_WED);
+        sut.navigate(AT_DATE, W1_WED);
 
         calendarStartIs(W1_MONDAY_MIDNIGHT);
         calendarEndIs(W1_SUNDAY_MAX);

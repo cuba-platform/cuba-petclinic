@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,10 +43,10 @@ class DayCalendarNavigationTest {
     }
 
     @Test
-    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_PreviousDay_then_calendarRangeIsTuesday_and_calendarPickerIsTuesday() {
+    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_previous_then_calendarRangeIsTuesday_and_calendarPickerIsTuesday() {
 
         // when:
-        sut.previous(WED);
+        sut.navigate(PREVIOUS, WED);
 
         calendarStartIs(TUE_MIDNIGHT);
         calendarEndIs(TUE_MAX);
@@ -55,10 +56,10 @@ class DayCalendarNavigationTest {
     }
 
     @Test
-    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_NextDay_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
+    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_next_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
 
         // when:
-        sut.next(WED);
+        sut.navigate(NEXT, WED);
 
         calendarStartIs(THU_MIDNIGHT);
         calendarEndIs(THU_MAX);
@@ -69,10 +70,10 @@ class DayCalendarNavigationTest {
 
 
     @Test
-    void given_currentDateIsThursday_when_currentDay_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
+    void given_currentDateIsThursday_when_atDate_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
 
         // when:
-        sut.atDate(THU);
+        sut.navigate(AT_DATE, THU);
 
         calendarStartIs(THU.atStartOfDay());
         calendarEndIs(THU.atTime(LocalTime.MAX));

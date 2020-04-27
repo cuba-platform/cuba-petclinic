@@ -55,18 +55,18 @@
                             <groupBox stylename="light"
                                       width="100%"
                                       caption="msg://overview">
-                                <datePicker id="calendarRangePicker"
+                                <datePicker id="calendarNavigator"
                                             datatype="localDate"
                                             width="100%"
                                 />
                             </groupBox>
                             <groupBox stylename="light"
                                       width="100%"
-                                      caption="msg://calendarRange">
+                                      caption="msg://calendarMode">
                                 <radioButtonGroup
                                         width="100%"
                                         stylename="button-switcher"
-                                        id="calendarRange"
+                                        id="calendarMode"
                                 />
                             </groupBox>
                             <groupBox stylename="light"

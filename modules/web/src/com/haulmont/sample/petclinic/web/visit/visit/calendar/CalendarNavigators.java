@@ -16,11 +16,11 @@ public class CalendarNavigators {
     @Inject
     protected UserSessionSource userSessionSource;
 
-    public CalendarNavigation forMode(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, CalendarMode mode) {
+    public CalendarNavigation forMode(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarNavigator, CalendarMode mode) {
         switch (mode) {
-            case DAY: return new DayCalendarNavigation(calendar, calendarRangePicker);
-            case WEEK: return new WeekCalendarNavigation(calendar, calendarRangePicker, userSessionSource.getLocale());
-            case MONTH: return new MonthCalendarNavigation(calendar, calendarRangePicker);
+            case DAY: return new DayCalendarNavigation(calendar, calendarNavigator);
+            case WEEK: return new WeekCalendarNavigation(calendar, calendarNavigator, userSessionSource.getLocale());
+            case MONTH: return new MonthCalendarNavigation(calendar, calendarNavigator);
         }
         return null;
     }

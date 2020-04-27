@@ -13,7 +13,6 @@ import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.entity.visit.VisitType;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigation;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigators;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
@@ -22,8 +21,11 @@ import org.springframework.util.CollectionUtils;
 
 import javax.inject.Inject;
 import java.time.*;
-import java.time.temporal.WeekFields;
 import java.util.*;
+
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.PREVIOUS;
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.*;
 
 @UiController("petclinic_Visit.browse")
 @UiDescriptor("visit-browse.xml")
@@ -50,7 +52,7 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected CheckBoxGroup<VisitType> typeMultiFilter;
 
     @Inject
-    protected RadioButtonGroup<CalendarMode> calendarRange;
+    protected RadioButtonGroup<CalendarMode> calendarMode;
     @Inject
     protected TimeSource timeSource;
 
@@ -61,7 +63,7 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected CalendarNavigators calendarNavigators;
 
     @Inject
-    protected DatePicker<LocalDate> calendarRangePicker;
+    protected DatePicker<LocalDate> calendarNavigator;
     @Inject
     protected UserSessionSource userSessionSource;
 
@@ -71,23 +73,23 @@ public class VisitBrowse extends StandardLookup<Visit> {
         typeMultiFilter.setValue(EnumSet.allOf(VisitType.class));
         typeMultiFilter.setOptionIconProvider(o -> VisitTypeIcon.valueOf(o.getIcon()).source());
 
-        calendarRange.setOptionsEnum(CalendarMode.class);
-        calendarRangePicker.setValue(timeSource.now().toLocalDate());
+        calendarMode.setOptionsEnum(CalendarMode.class);
+        calendarNavigator.setValue(timeSource.now().toLocalDate());
 
         registerDateClickEventHandler();
+    }
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        current(CalendarMode.WEEK);
     }
 
     @SuppressWarnings("deprecation")
     private void registerDateClickEventHandler() {
         calendar.unwrap(com.vaadin.v7.ui.Calendar.class)
-                .setHandler((CalendarComponentEvents.DateClickHandler) event -> atDate(CalendarMode.DAY, toLocalDate(event.getDate())));
-    }
-
-
-    private LocalDate toLocalDate(Date dateToConvert) {
-        return dateToConvert.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
+                .setHandler((CalendarComponentEvents.DateClickHandler) event -> atDate(CalendarMode.DAY, event.getDate().toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()));
     }
 
     @Subscribe("calendar")
@@ -98,87 +100,65 @@ public class VisitBrowse extends StandardLookup<Visit> {
 
     @Subscribe("calendar")
     protected void onCalendarCalendarWeekClick(Calendar.CalendarWeekClickEvent<LocalDateTime> event) {
-        atDate(CalendarMode.WEEK, firstDayOfWeek(event));
+        atDate(CalendarMode.WEEK, startOfWeek(event.getYear(), event.getWeek(), userSessionSource.getLocale()));
     }
-
-    private LocalDate firstDayOfWeek(Calendar.CalendarWeekClickEvent<LocalDateTime> event) {
-        WeekFields weekFields = WeekFields.of(userSessionSource.getLocale());
-        return timeSource.now().toLocalDateTime()
-                .withYear(event.getYear())
-                .with(weekFields.weekOfYear(), event.getWeek())
-                .with(weekFields.dayOfWeek(), 1)
-                .toLocalDate();
-    }
-
 
     @Subscribe("navigatorPrevious")
     protected void onNavigatorPreviousClick(Button.ClickEvent event) {
-        previous(calendarRange.getValue());
+        previous(calendarMode.getValue());
     }
 
     @Subscribe("navigatorNext")
     protected void onNavigatorNextClick(Button.ClickEvent event) {
-        next(calendarRange.getValue());
+        next(calendarMode.getValue());
     }
 
     @Subscribe("navigatorCurrent")
     protected void onNavigatorCurrentClick(Button.ClickEvent event) {
-        current(calendarRange.getValue());
+        current(calendarMode.getValue());
     }
 
-    @Subscribe("calendarRangePicker")
+    @Subscribe("calendarNavigator")
     protected void onCalendarRangePickerValueChange(HasValue.ValueChangeEvent<LocalDate> event) {
         if (event.isUserOriginated()) {
-            atDate(calendarRange.getValue(), event.getValue());
+            atDate(calendarMode.getValue(), event.getValue());
         }
     }
 
     private void current(CalendarMode calendarMode) {
-        change(calendarMode, CalendarNavigationMode.PREVIOUS, timeSource.now().toLocalDate());
+        change(calendarMode, AT_DATE, timeSource.now().toLocalDate());
     }
 
     private void atDate(CalendarMode calendarMode, LocalDate date) {
-        change(calendarMode, CalendarNavigationMode.AT_DATE, date);
+        change(calendarMode, AT_DATE, date);
     }
 
     private void next(CalendarMode calendarMode) {
-        change(calendarMode, CalendarNavigationMode.NEXT, calendarRangePicker.getValue());
+        change(calendarMode, NEXT, calendarNavigator.getValue());
     }
 
     private void previous(CalendarMode calendarMode) {
-        change(calendarMode, CalendarNavigationMode.PREVIOUS, calendarRangePicker.getValue());
+        change(calendarMode, PREVIOUS, calendarNavigator.getValue());
     }
 
     private void change(CalendarMode calendarMode, CalendarNavigationMode navigationMode, LocalDate referenceDate) {
-        calendarRange.setValue(calendarMode);
-        String description = performChange(calendarMode, navigationMode, referenceDate);
+        this.calendarMode.setValue(calendarMode);
+
+        String description = calendarNavigators
+                .forMode(calendar, calendarNavigator, calendarMode)
+                .navigate(navigationMode, referenceDate);
+
         calendarRangeDescription.setValue(description);
+
         loadEvents();
     }
 
-    private String performChange(CalendarMode calendarMode, CalendarNavigationMode navigationMode, LocalDate referenceDate) {
-        CalendarNavigation navigator = calendarNavigators.forMode(calendar, calendarRangePicker, calendarMode);
 
-        switch (navigationMode) {
-            case NEXT: return navigator.next(referenceDate);
-            case PREVIOUS: return navigator.previous(referenceDate);
-            case CURRENT:
-            case AT_DATE: return navigator.atDate(referenceDate);
-        }
-        return null;
-    }
-
-
-    @Subscribe("calendarRange")
+    @Subscribe("calendarMode")
     protected void onCalendarRangeValueChange(HasValue.ValueChangeEvent event) {
         if (event.isUserOriginated()) {
-            atDate((CalendarMode) event.getValue(), calendarRangePicker.getValue());
+            atDate((CalendarMode) event.getValue(), calendarNavigator.getValue());
         }
-    }
-
-    @Subscribe
-    public void onBeforeShow(BeforeShowEvent event) {
-        current(CalendarMode.WEEK);
     }
 
     private void loadEvents() {

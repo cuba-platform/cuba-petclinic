@@ -9,36 +9,22 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
-
 public class DayCalendarNavigation implements CalendarNavigation {
 
     private final Calendar<LocalDateTime> calendar;
-    private final DatePicker<LocalDate> calendarRangePicker;
+    private final DatePicker<LocalDate> calendarNavigator;
 
-    public DayCalendarNavigation(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker) {
+    public DayCalendarNavigation(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarNavigator) {
         this.calendar = calendar;
-        this.calendarRangePicker = calendarRangePicker;
-    }
-
-    public String previous(LocalDate referenceDate) {
-        return change(PREVIOUS, referenceDate);
-    }
-
-    public String next(LocalDate referenceDate) {
-        return change(NEXT, referenceDate);
-    }
-
-    private String change(CalendarNavigationMode navigationMode, LocalDate referenceDate) {
-        LocalDate newDate = navigationMode.calculate(ChronoUnit.DAYS, referenceDate);
-        calendar.setStartDate(newDate.atStartOfDay());
-        calendar.setEndDate(newDate.atTime(LocalTime.MAX));
-        calendarRangePicker.setValue(newDate);
-        return newDate.toString();
+        this.calendarNavigator = calendarNavigator;
     }
 
     @Override
-    public String atDate(LocalDate referenceDate) {
-        return change(AT_DATE, referenceDate);
+    public String navigate(CalendarNavigationMode navigationMode, LocalDate referenceDate) {
+        LocalDate newDate = navigationMode.calculate(ChronoUnit.DAYS, referenceDate);
+        calendar.setStartDate(newDate.atStartOfDay());
+        calendar.setEndDate(newDate.atTime(LocalTime.MAX));
+        calendarNavigator.setValue(newDate);
+        return newDate.toString();
     }
 }

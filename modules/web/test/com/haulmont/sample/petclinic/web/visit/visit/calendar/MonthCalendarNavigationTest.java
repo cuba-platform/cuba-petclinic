@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
 
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -49,7 +50,7 @@ class MonthCalendarNavigationTest {
     void given_March1IsStartDate_when_previousMonth_then_calendarRangeIsFebruary_and_calendarPickerIsFeb1() {
 
         // when:
-        sut.previous(MARCH_1);
+        sut.navigate(PREVIOUS, MARCH_1);
 
         // then:
         calendarStartIs(FEB_1.atStartOfDay());
@@ -63,7 +64,7 @@ class MonthCalendarNavigationTest {
     void given_currentDateIsApr30_when_currentMonth_then_calendarRangeIsApril_and_calendarPickerIsApr30() {
 
         // when:
-        sut.atDate(APR_30);
+        sut.navigate(AT_DATE, APR_30);
 
         // then:
         calendarStartIs(APR_1.atStartOfDay());
@@ -74,10 +75,10 @@ class MonthCalendarNavigationTest {
     }
 
     @Test
-    void given_March1IsStartDate_when_nextMonth_then_calendarRangeIsApril_and_calendarPickerIsApr1() {
+    void given_March1IsStartDate_when_next_then_calendarRangeIsApril_and_calendarPickerIsApr1() {
 
         // when:
-        sut.next(MARCH_1);
+        sut.navigate(NEXT, MARCH_1);
 
         // then:
         calendarStartIs(APR_1.atStartOfDay());
@@ -88,10 +89,10 @@ class MonthCalendarNavigationTest {
     }
 
     @Test
-    void given_March15IsStartDate_when_nextMonth_then_calendarRangeIsApril_and_calendarPickerIsApr15() {
+    void given_March15IsStartDate_when_next_then_calendarRangeIsApril_and_calendarPickerIsApr15() {
 
         // when:
-        sut.next(MARCH_15);
+        sut.navigate(NEXT, MARCH_15);
 
         // then:
         calendarStartIs(APR_1.atStartOfDay());
