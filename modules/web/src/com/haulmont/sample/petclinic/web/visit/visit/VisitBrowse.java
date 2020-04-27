@@ -4,6 +4,7 @@ import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.Calendar;
@@ -70,6 +71,8 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected UserSessionSource userSessionSource;
     @Inject
     protected DatatypeFormatter datatypeFormatter;
+    @Inject
+    protected Notifications notifications;
 
     @Subscribe
     protected void onInit(InitEvent event) {
@@ -80,22 +83,12 @@ public class VisitBrowse extends StandardLookup<Visit> {
         calendarMode.setOptionsEnum(CalendarMode.class);
         calendarNavigator.setValue(timeSource.now().toLocalDate());
 
-        registerDateClickEventHandler();
         initSortForMonthlyView();
     }
-
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         current(CalendarMode.WEEK);
-    }
-
-    @SuppressWarnings("deprecation")
-    private void registerDateClickEventHandler() {
-        calendar.unwrap(com.vaadin.v7.ui.Calendar.class)
-                .setHandler((CalendarComponentEvents.DateClickHandler) event -> atDate(CalendarMode.DAY, event.getDate().toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()));
     }
 
     @SuppressWarnings("deprecation")
@@ -104,10 +97,11 @@ public class VisitBrowse extends StandardLookup<Visit> {
                 .setEventSortOrder(CalendarState.EventSortOrder.START_DATE_DESC);
     }
 
+
     @Subscribe("calendar")
-    protected void onCalendarCalendarDayClick(Calendar.CalendarDayClickEvent<LocalDateTime> event) {
-        // TODO: switch from direct Vaadin handler to this method
-//        atDate(CalendarMode.DAY, event.getDate().toLocalDate());
+    protected void onCalendarCalendarDayClick(Calendar.CalendarDateClickEvent<LocalDateTime> event) {
+        notifications.create(Notifications.NotificationType.TRAY).withCaption("date clicked").show();
+        atDate(CalendarMode.DAY, event.getDate().toLocalDate());
     }
 
     @Subscribe("calendar")
@@ -188,6 +182,27 @@ public class VisitBrowse extends StandardLookup<Visit> {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Calendar Visit Event Click
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Subscribe("calendar")
+    protected void onCalendarCalendarDayClick(Calendar.CalendarDayClickEvent<LocalDateTime> event) {
+        Screen visitEditor = screenBuilders.editor(Visit.class, this)
+                .newEntity()
+                .withInitializer(visit -> {
+                    visit.setVisitStart(event.getDate());
+                    visit.setVisitEnd(event.getDate().plusHours(1));
+                })
+                .withOpenMode(OpenMode.DIALOG)
+                .build();
+
+        visitEditor.addAfterCloseListener(afterCloseEvent -> {
+            if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                getScreenData().loadAll();
+            }
+        });
+
+        visitEditor.show();
+    }
+
     @Subscribe("calendar")
     protected void onCalendarCalendarEventClick(Calendar.CalendarEventClickEvent<LocalDateTime> event) {
 
@@ -209,6 +224,7 @@ public class VisitBrowse extends StandardLookup<Visit> {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Filter for Visit Types
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @Subscribe("typeMultiFilter")
     protected void onTypeMultiFilterValueChange(HasValue.ValueChangeEvent event) {
 
