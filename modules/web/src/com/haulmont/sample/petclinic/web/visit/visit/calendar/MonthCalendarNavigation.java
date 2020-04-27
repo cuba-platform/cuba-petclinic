@@ -6,7 +6,9 @@ import com.haulmont.cuba.gui.components.DatePicker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.beginningOfMonth;
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.endOfMonth;
@@ -14,11 +16,13 @@ import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDat
 public class MonthCalendarNavigation implements CalendarNavigation {
 
     private Calendar<LocalDateTime> calendar;
+    private final Locale locale;
     private DatePicker<LocalDate> calendarNavigator;
 
-    public MonthCalendarNavigation(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarNavigator) {
+    public MonthCalendarNavigation(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarNavigator, Locale locale) {
         this.calendarNavigator = calendarNavigator;
         this.calendar = calendar;
+        this.locale = locale;
     }
 
     @Override
@@ -28,9 +32,6 @@ public class MonthCalendarNavigation implements CalendarNavigation {
         calendar.setStartDate(beginningOfMonth(newMonth));
         calendar.setEndDate(endOfMonth(newMonth));
         calendarNavigator.setValue(newMonthDate);
-        return newMonth.toString();
+        return MonthFormatter.fullMonthYear(newMonth, locale);
     }
-
-
-
 }

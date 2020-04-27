@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar;
 
+import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,10 +13,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
+import java.util.Locale;
 
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class MonthCalendarNavigationTest {
@@ -43,7 +45,17 @@ class MonthCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new MonthCalendarNavigation(calendar, calendarRangePicker);
+        sut = new MonthCalendarNavigation(calendar, calendarRangePicker, Locale.GERMANY);
+    }
+
+    @Test
+    void when_atDate_then_captionContainsTheMonthNamePlusYear() {
+
+        // when:
+        String caption = sut.navigate(AT_DATE, LocalDate.of(2020, 3, 5));
+
+        // then:
+        assertThat(caption).isEqualTo("März 2020");
     }
 
     @Test

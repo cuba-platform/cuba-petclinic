@@ -1,6 +1,7 @@
 package com.haulmont.sample.petclinic.web.visit.visit;
 
 import com.haulmont.cuba.core.entity.Entity;
+import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.ScreenBuilders;
@@ -57,7 +58,7 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected TimeSource timeSource;
 
     @Inject
-    protected Label<String> calendarRangeDescription;
+    protected Label<String> calendarTitle;
 
     @Inject
     protected CalendarNavigators calendarNavigators;
@@ -66,6 +67,8 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected DatePicker<LocalDate> calendarNavigator;
     @Inject
     protected UserSessionSource userSessionSource;
+    @Inject
+    protected DatatypeFormatter datatypeFormatter;
 
     @Subscribe
     protected void onInit(InitEvent event) {
@@ -145,10 +148,10 @@ public class VisitBrowse extends StandardLookup<Visit> {
         this.calendarMode.setValue(calendarMode);
 
         String description = calendarNavigators
-                .forMode(calendar, calendarNavigator, calendarMode)
+                .forMode(calendar, calendarNavigator, datatypeFormatter, calendarMode)
                 .navigate(navigationMode, referenceDate);
 
-        calendarRangeDescription.setValue(description);
+        calendarTitle.setValue(description);
 
         loadEvents();
     }

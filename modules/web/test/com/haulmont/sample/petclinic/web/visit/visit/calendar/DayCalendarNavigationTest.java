@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar;
 
+import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,10 +37,12 @@ class DayCalendarNavigationTest {
     Calendar<LocalDateTime> calendar;
     @Mock
     DatePicker<LocalDate> calendarRangePicker;
+    @Mock
+    DatatypeFormatter datatypeFormatter;
 
     @BeforeEach
     void setUp() {
-        sut = new DayCalendarNavigation(calendar, calendarRangePicker);
+        sut = new DayCalendarNavigation(calendar, calendarRangePicker, datatypeFormatter);
     }
 
     @Test

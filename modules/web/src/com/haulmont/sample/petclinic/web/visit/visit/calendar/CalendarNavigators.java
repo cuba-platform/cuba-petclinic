@@ -1,6 +1,7 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar;
 
 
+import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
@@ -16,11 +17,16 @@ public class CalendarNavigators {
     @Inject
     protected UserSessionSource userSessionSource;
 
-    public CalendarNavigation forMode(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarNavigator, CalendarMode mode) {
+    public CalendarNavigation forMode(
+            Calendar<LocalDateTime> calendar,
+            DatePicker<LocalDate> calendarNavigator,
+            DatatypeFormatter datatypeFormatter,
+            CalendarMode mode
+    ) {
         switch (mode) {
-            case DAY: return new DayCalendarNavigation(calendar, calendarNavigator);
+            case DAY: return new DayCalendarNavigation(calendar, calendarNavigator, datatypeFormatter);
             case WEEK: return new WeekCalendarNavigation(calendar, calendarNavigator, userSessionSource.getLocale());
-            case MONTH: return new MonthCalendarNavigation(calendar, calendarNavigator);
+            case MONTH: return new MonthCalendarNavigation(calendar, calendarNavigator, userSessionSource.getLocale());
         }
         return null;
     }

@@ -97,7 +97,7 @@
                                             stylename="borderless-colored"
                                             icon="CARET_RIGHT"/>
                                 </buttonsPanel>
-                                <label id="calendarRangeDescription"
+                                <label id="calendarTitle"
                                        stylename="h3"
                                        icon="font-icon:CALENDAR"
                                        width="200px"/>
