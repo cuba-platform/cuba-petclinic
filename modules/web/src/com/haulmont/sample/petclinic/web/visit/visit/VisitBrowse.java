@@ -17,7 +17,6 @@ import com.haulmont.sample.petclinic.entity.visit.VisitType;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigators;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
-import com.vaadin.ui.InlineDateField;
 import com.vaadin.v7.shared.ui.calendar.CalendarState;
 import com.vaadin.v7.ui.components.calendar.CalendarComponentEvents;
 import org.springframework.util.CollectionUtils;
@@ -97,9 +96,6 @@ public class VisitBrowse extends StandardLookup<Visit> {
                 .setHandler((CalendarComponentEvents.DateClickHandler) event -> atDate(CalendarMode.DAY, event.getDate().toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate()));
-
-        calendarNavigator.unwrap(InlineDateField.class)
-                .set
     }
 
     @SuppressWarnings("deprecation")
