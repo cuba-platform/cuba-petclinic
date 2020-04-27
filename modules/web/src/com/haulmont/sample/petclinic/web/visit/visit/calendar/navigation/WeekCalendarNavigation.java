@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar;
+package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;

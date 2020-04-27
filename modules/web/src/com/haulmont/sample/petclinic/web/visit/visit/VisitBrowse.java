@@ -14,8 +14,8 @@ import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.entity.visit.VisitType;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigators;
+import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode;
+import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigators;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
 import com.vaadin.v7.shared.ui.calendar.CalendarState;
 import com.vaadin.v7.ui.components.calendar.CalendarComponentEvents;
@@ -25,8 +25,8 @@ import javax.inject.Inject;
 import java.time.*;
 import java.util.*;
 
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.PREVIOUS;
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.*;
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.PREVIOUS;
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.*;
 
 @UiController("petclinic_Visit.browse")

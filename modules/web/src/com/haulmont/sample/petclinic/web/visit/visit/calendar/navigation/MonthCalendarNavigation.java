@@ -1,12 +1,12 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar;
+package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
+import com.haulmont.sample.petclinic.web.visit.visit.calendar.MonthFormatter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
-import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
