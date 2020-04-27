@@ -3,6 +3,7 @@ package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
+import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.DayCalendarNavigation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DayCalendarNavigationTest {
@@ -40,10 +43,12 @@ class DayCalendarNavigationTest {
     DatePicker<LocalDate> calendarRangePicker;
     @Mock
     DatatypeFormatter datatypeFormatter;
+    @Mock
+    Label<String> calendarTitle;
 
     @BeforeEach
     void setUp() {
-        sut = new DayCalendarNavigation(calendar, calendarRangePicker, datatypeFormatter);
+        sut = new DayCalendarNavigation(calendar, calendarRangePicker, calendarTitle, datatypeFormatter);
     }
 
     @Test
@@ -58,6 +63,20 @@ class DayCalendarNavigationTest {
         // and:
         calendarPickerIs(TUE);
     }
+
+    @Test
+    void when_atDate_then_captionContainsTheMonthNamePlusYear() {
+
+        // given:
+        when(datatypeFormatter.formatLocalDate(WED))
+                .thenReturn("01.04.2020");
+        // when:
+        sut.navigate(AT_DATE, WED);
+
+        // then:
+        calendarTitleIs("01.04.2020");
+    }
+
 
     @Test
     void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_next_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
@@ -96,5 +115,9 @@ class DayCalendarNavigationTest {
 
     private void calendarPickerIs(LocalDate expectedDate) {
         verify(calendarRangePicker).setValue(expectedDate);
+    }
+
+    private void calendarTitleIs(String expectedCaption) {
+        verify(calendarTitle).setValue(expectedCaption);
     }
 }

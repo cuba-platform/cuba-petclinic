@@ -3,5 +3,5 @@ package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 import java.time.LocalDate;
 
 public interface CalendarNavigation {
-    String navigate(CalendarNavigationMode navigationMode, LocalDate referenceDate);
+    void navigate(CalendarNavigationMode navigationMode, LocalDate referenceDate);
 }

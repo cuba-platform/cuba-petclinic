@@ -2,6 +2,7 @@ package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
+import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.MonthCalendarNavigation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,20 +43,22 @@ class MonthCalendarNavigationTest {
     Calendar<LocalDateTime> calendar;
     @Mock
     DatePicker<LocalDate> calendarRangePicker;
+    @Mock
+    Label<String> calendarTitle;
 
     @BeforeEach
     void setUp() {
-        sut = new MonthCalendarNavigation(calendar, calendarRangePicker, Locale.GERMANY);
+        sut = new MonthCalendarNavigation(calendar, calendarRangePicker, calendarTitle, Locale.GERMANY);
     }
 
     @Test
     void when_atDate_then_captionContainsTheMonthNamePlusYear() {
 
         // when:
-        String caption = sut.navigate(AT_DATE, LocalDate.of(2020, 3, 5));
+        sut.navigate(AT_DATE, LocalDate.of(2020, 3, 5));
 
         // then:
-        assertThat(caption).isEqualTo("März 2020");
+        calendarTitleIs("März 2020");
     }
 
     @Test
@@ -126,4 +129,7 @@ class MonthCalendarNavigationTest {
         verify(calendarRangePicker).setValue(expectedDate);
     }
 
+    private void calendarTitleIs(String expectedCaption) {
+        verify(calendarTitle).setValue(expectedCaption);
+    }
 }

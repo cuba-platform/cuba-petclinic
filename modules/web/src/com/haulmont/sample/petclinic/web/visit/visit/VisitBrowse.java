@@ -156,11 +156,15 @@ public class VisitBrowse extends StandardLookup<Visit> {
     private void change(CalendarMode calendarMode, CalendarNavigationMode navigationMode, LocalDate referenceDate) {
         this.calendarMode.setValue(calendarMode);
 
-        String description = calendarNavigators
-                .forMode(calendar, calendarNavigator, datatypeFormatter, calendarMode)
+        calendarNavigators
+                .forMode(
+                        calendar,
+                        calendarNavigator,
+                        calendarTitle,
+                        datatypeFormatter,
+                        calendarMode
+                )
                 .navigate(navigationMode, referenceDate);
-
-        calendarTitle.setValue(description);
 
         loadEvents();
     }

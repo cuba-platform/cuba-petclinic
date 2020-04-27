@@ -5,6 +5,7 @@ import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
+import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +22,14 @@ public class CalendarNavigators {
     public CalendarNavigation forMode(
             Calendar<LocalDateTime> calendar,
             DatePicker<LocalDate> calendarNavigator,
+            Label<String> calendarTitle,
             DatatypeFormatter datatypeFormatter,
             CalendarMode mode
     ) {
         switch (mode) {
-            case DAY: return new DayCalendarNavigation(calendar, calendarNavigator, datatypeFormatter);
-            case WEEK: return new WeekCalendarNavigation(calendar, calendarNavigator, userSessionSource.getLocale());
-            case MONTH: return new MonthCalendarNavigation(calendar, calendarNavigator, userSessionSource.getLocale());
+            case DAY: return new DayCalendarNavigation(calendar, calendarNavigator, calendarTitle, datatypeFormatter);
+            case WEEK: return new WeekCalendarNavigation(calendar, calendarNavigator, calendarTitle, userSessionSource.getLocale());
+            case MONTH: return new MonthCalendarNavigation(calendar, calendarNavigator, calendarTitle, userSessionSource.getLocale());
         }
         return null;
     }

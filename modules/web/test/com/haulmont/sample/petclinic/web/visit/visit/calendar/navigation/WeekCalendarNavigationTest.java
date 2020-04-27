@@ -3,6 +3,7 @@ package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
 import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
+import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.WeekCalendarNavigation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,31 +42,32 @@ class WeekCalendarNavigationTest {
     @Mock
     DatePicker<LocalDate> calendarRangePicker;
     @Mock
-    DatatypeFormatter datatypeFormatter;
+    Label<String> calendarTitle;
+
 
     @BeforeEach
     void setUp() {
-        sut = new WeekCalendarNavigation(calendar, calendarRangePicker, Locale.GERMANY);
+        sut = new WeekCalendarNavigation(calendar, calendarRangePicker, calendarTitle, Locale.GERMANY);
     }
 
     @Test
     void given_weekIsWithinAMonth_when_atDate_then_captionContainsTheMonthNamePlusYear() {
 
         // when:
-        String caption = sut.navigate(AT_DATE, LocalDate.of(2020, 3, 5));
+        sut.navigate(AT_DATE, LocalDate.of(2020, 3, 5));
 
         // then:
-        assertThat(caption).isEqualTo("März 2020");
+        calendarTitleIs("März 2020");
     }
 
     @Test
     void given_weekOverlapsOverTheMonth_when_atDate_then_captionContainsBothMonthNames() {
 
         // when:
-        String caption = sut.navigate(AT_DATE, LocalDate.of(2020, 3, 31));
+        sut.navigate(AT_DATE, LocalDate.of(2020, 3, 31));
 
         // then:
-        assertThat(caption).isEqualTo("Mär - Apr 2020");
+        calendarTitleIs("Mär - Apr 2020");
     }
 
 
@@ -73,10 +75,10 @@ class WeekCalendarNavigationTest {
     void given_weekOverlapsOverTheYear_when_atDate_then_captionContainsBothMonthNamesAndYearNumbers() {
 
         // when:
-        String caption = sut.navigate(AT_DATE, LocalDate.of(2020, 12, 31));
+        sut.navigate(AT_DATE, LocalDate.of(2020, 12, 31));
 
         // then:
-        assertThat(caption).isEqualTo("Dez 2020 - Jan 2021");
+        calendarTitleIs("Dez 2020 - Jan 2021");
     }
 
     @Test
@@ -144,5 +146,9 @@ class WeekCalendarNavigationTest {
 
     private void calendarPickerIs(LocalDate expectedDate) {
         verify(calendarRangePicker).setValue(expectedDate);
+    }
+
+    private void calendarTitleIs(String expectedCaption) {
+        verify(calendarTitle).setValue(expectedCaption);
     }
 }
