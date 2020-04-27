@@ -38,38 +38,47 @@ class DayCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new DayCalendarNavigation();
+        sut = new DayCalendarNavigation(calendar, calendarRangePicker);
     }
 
     @Test
-    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_PreviousDay_then_calendarRangeIsTuesday() {
+    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_PreviousDay_then_calendarRangeIsTuesday_and_calendarPickerIsTuesday() {
 
         // when:
-        sut.previous(calendar, calendarRangePicker, WED);
+        sut.previous(WED);
 
         calendarStartIs(TUE_MIDNIGHT);
         calendarEndIs(TUE_MAX);
+
+        // and:
+        calendarPickerIs(TUE);
     }
 
     @Test
-    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_NextDay_then_calendarRangeIsThursday() {
+    void given_wednesdayIsCurrentlyConfiguredAsStartDate_when_NextDay_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
 
         // when:
-        sut.next(calendar, calendarRangePicker, WED);
+        sut.next(WED);
 
         calendarStartIs(THU_MIDNIGHT);
         calendarEndIs(THU_MAX);
+
+        // and:
+        calendarPickerIs(THU);
     }
 
 
     @Test
-    void given_currentDateIsThursday_when_currentDay_then_calendarRangeIsThursday() {
+    void given_currentDateIsThursday_when_currentDay_then_calendarRangeIsThursday_and_calendarPickerIsThursday() {
 
         // when:
-        sut.atDate(calendar, calendarRangePicker, THU);
+        sut.atDate(THU);
 
         calendarStartIs(THU.atStartOfDay());
         calendarEndIs(THU.atTime(LocalTime.MAX));
+
+        // and:
+        calendarPickerIs(THU);
     }
 
     private void calendarEndIs(LocalDateTime expectedEnd) {
@@ -78,5 +87,9 @@ class DayCalendarNavigationTest {
 
     private void calendarStartIs(LocalDateTime expectedStart) {
         verify(calendar).setStartDate(expectedStart);
+    }
+
+    private void calendarPickerIs(LocalDate expectedDate) {
+        verify(calendarRangePicker).setValue(expectedDate);
     }
 }

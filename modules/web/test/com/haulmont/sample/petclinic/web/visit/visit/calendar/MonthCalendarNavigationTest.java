@@ -20,6 +20,8 @@ import static org.mockito.Mockito.when;
 class MonthCalendarNavigationTest {
 
     private static final LocalDate MARCH_1 = LocalDate.of(2020, 3, 1);
+    private static final LocalDate MARCH_15 = LocalDate.of(2020, 3, 15);
+    private static final LocalDate APR_15 = MARCH_15.plusMonths(1);
     private static final LocalDate FEB_1 = MARCH_1.minusMonths(1);
     private static final LocalDate FEB_29 = MARCH_1.minusDays(1);
     private static final LocalDate APR_1 = MARCH_1.plusMonths(1);
@@ -40,37 +42,63 @@ class MonthCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new MonthCalendarNavigation();
+        sut = new MonthCalendarNavigation(calendar, calendarRangePicker);
     }
 
     @Test
-    void given_March1IsStartDate_when_previousMonth_then_calendarRangeIsFebruary() {
+    void given_March1IsStartDate_when_previousMonth_then_calendarRangeIsFebruary_and_calendarPickerIsFeb1() {
 
         // when:
-        sut.previous(calendar, calendarRangePicker, MARCH_1);
+        sut.previous(MARCH_1);
 
+        // then:
         calendarStartIs(FEB_1.atStartOfDay());
         calendarEndIs(FEB_29.atTime(LocalTime.MAX));
+
+        // and:
+        calendarPickerIs(FEB_1);
     }
 
     @Test
-    void given_currentDateIsApr30_when_currentMonth_then_calendarRangeIsJune() {
+    void given_currentDateIsApr30_when_currentMonth_then_calendarRangeIsApril_and_calendarPickerIsApr30() {
 
         // when:
-        sut.atDate(calendar, calendarRangePicker, APR_30);
+        sut.atDate(APR_30);
 
+        // then:
         calendarStartIs(APR_1.atStartOfDay());
         calendarEndIs(APR_30.atTime(LocalTime.MAX));
+
+        // and:
+        calendarPickerIs(APR_30);
     }
 
     @Test
-    void given_March1IsStartDate_when_nextMonth_then_calendarRangeIsApril() {
+    void given_March1IsStartDate_when_nextMonth_then_calendarRangeIsApril_and_calendarPickerIsApr1() {
 
         // when:
-        sut.next(calendar, calendarRangePicker, MARCH_1);
+        sut.next(MARCH_1);
 
+        // then:
         calendarStartIs(APR_1.atStartOfDay());
         calendarEndIs(APR_30.atTime(LocalTime.MAX));
+
+        // and:
+        calendarPickerIs(APR_1);
+    }
+
+    @Test
+    void given_March15IsStartDate_when_nextMonth_then_calendarRangeIsApril_and_calendarPickerIsApr15() {
+
+        // when:
+        sut.next(MARCH_15);
+
+        // then:
+        calendarStartIs(APR_1.atStartOfDay());
+        calendarEndIs(APR_30.atTime(LocalTime.MAX));
+
+        // and:
+        calendarPickerIs(APR_15);
     }
 
     private void calendarEndIs(LocalDateTime expectedEnd) {
@@ -81,8 +109,8 @@ class MonthCalendarNavigationTest {
         verify(calendar).setStartDate(expectedStart);
     }
 
-    private void calenderIsCurrently(LocalDateTime current) {
-        when(calendar.getStartDate()).thenReturn(current);
+    private void calendarPickerIs(LocalDate expectedDate) {
+        verify(calendarRangePicker).setValue(expectedDate);
     }
 
 }

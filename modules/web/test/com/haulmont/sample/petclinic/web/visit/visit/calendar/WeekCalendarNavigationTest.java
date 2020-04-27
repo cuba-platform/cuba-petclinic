@@ -1,6 +1,5 @@
 package com.haulmont.sample.petclinic.web.visit.visit.calendar;
 
-import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,11 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.Locale;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class WeekCalendarNavigationTest {
@@ -25,6 +22,7 @@ class WeekCalendarNavigationTest {
     private static final LocalDate W1_MON = LocalDate.of(2020, 3, 30);
     private static final LocalDate W2_MON = W1_MON.plusWeeks(1);
     private static final LocalDate W1_WED = W1_MON.plusDays(2);
+    private static final LocalDate W2_WED = W1_WED.plusWeeks(1);
     private static final LocalDateTime W1_MONDAY_MIDNIGHT = LocalDateTime.of(W1_MON, LocalTime.MIDNIGHT);
     private static final LocalDateTime W1_WED_NOON = LocalDateTime.of(W1_WED, LocalTime.NOON);
     private static final LocalDateTime W2_MONDAY_MIDNIGHT = W1_MONDAY_MIDNIGHT.plusWeeks(1);
@@ -40,54 +38,62 @@ class WeekCalendarNavigationTest {
 
     @BeforeEach
     void setUp() {
-        sut = new WeekCalendarNavigation(Locale.GERMANY);
+        sut = new WeekCalendarNavigation(calendar, calendarRangePicker, Locale.GERMANY);
     }
 
-
     @Test
-    void given_week1MondayIsStartDate_when_nextMonth_then_calendarRangeIsW2MondayTillSundayMax() {
-
-        // given:
-        calenderIsCurrently(W1_MONDAY_MIDNIGHT);
+    void given_week1MondayIsStartDate_when_nextMonth_then_calendarRangeIsW2MondayTillSundayMax_and_calendarPickerIsW2Mon() {
 
         // when:
-        sut.next(calendar, calendarRangePicker, W1_MON);
+        sut.next(W1_MON);
 
         // then:
         calendarStartIs(W2_MONDAY_MIDNIGHT);
         calendarEndIs(W2_SUNDAY_MAX);
+
+        // and:
+        calendarPickerIs(W2_MON);
     }
 
     @Test
-    void given_week2MondayIsStartDate_when_nextMonth_then_calendarRangeIsW1MondayTillSundayMax() {
+    void given_week2MondayIsStartDate_when_nextMonth_then_calendarRangeIsW1MondayTillSundayMax_and_calendarPickerIsW1Mon() {
 
         // when:
-        sut.previous(calendar, calendarRangePicker, W2_MON);
+        sut.previous(W2_MON);
 
         // then:
         calendarStartIs(W1_MONDAY_MIDNIGHT);
         calendarEndIs(W1_SUNDAY_MAX);
+
+        // and:
+        calendarPickerIs(W1_MON);
     }
 
     @Test
-    void given_week1WedNoonIsStartDate_when_nextMonth_then_calendarRangeIsW2MondayTillSundayMax() {
+    void given_week1WedNoonIsStartDate_when_nextMonth_then_calendarRangeIsW2MondayTillSundayMax_and_calendarPickerIsW2Wed() {
 
         // when:
-        sut.next(calendar, calendarRangePicker, W1_WED);
+        sut.next(W1_WED);
 
         // then:
         calendarStartIs(W2_MONDAY_MIDNIGHT);
         calendarEndIs(W2_SUNDAY_MAX);
+
+        // and:
+        calendarPickerIs(W2_WED);
     }
 
     @Test
-    void given_currentDateIsWednesday_when_currentWeek_then_calendarRangeIsThisWeek() {
+    void given_currentDateIsWednesday_when_atDateWeek_then_calendarRangeIsThisWeek_and_calendarPickerIsW1Wed() {
 
         // when:
-        sut.atDate(calendar, calendarRangePicker, W1_WED);
+        sut.atDate(W1_WED);
 
         calendarStartIs(W1_MONDAY_MIDNIGHT);
         calendarEndIs(W1_SUNDAY_MAX);
+
+        // and:
+        calendarPickerIs(W1_WED);
     }
 
     private void calendarEndIs(LocalDateTime expectedEnd) {
@@ -98,7 +104,7 @@ class WeekCalendarNavigationTest {
         verify(calendar).setStartDate(expectedStart);
     }
 
-    private void calenderIsCurrently(LocalDateTime current) {
-        when(calendar.getStartDate()).thenReturn(current);
+    private void calendarPickerIs(LocalDate expectedDate) {
+        verify(calendarRangePicker).setValue(expectedDate);
     }
 }

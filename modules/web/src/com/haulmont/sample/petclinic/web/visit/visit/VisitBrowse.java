@@ -157,13 +157,13 @@ public class VisitBrowse extends StandardLookup<Visit> {
     }
 
     private String performChange(CalendarMode calendarMode, CalendarNavigationMode navigationMode, LocalDate referenceDate) {
-        CalendarNavigation navigator = calendarNavigators.forMode(calendarMode);
+        CalendarNavigation navigator = calendarNavigators.forMode(calendar, calendarRangePicker, calendarMode);
 
         switch (navigationMode) {
-            case NEXT: return navigator.next(calendar, calendarRangePicker, referenceDate);
-            case PREVIOUS: return navigator.previous(calendar, calendarRangePicker, referenceDate);
+            case NEXT: return navigator.next(referenceDate);
+            case PREVIOUS: return navigator.previous(referenceDate);
             case CURRENT:
-            case AT_DATE: return navigator.atDate(calendar, calendarRangePicker, referenceDate);
+            case AT_DATE: return navigator.atDate(referenceDate);
         }
         return null;
     }

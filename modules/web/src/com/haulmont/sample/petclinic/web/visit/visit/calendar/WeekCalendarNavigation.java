@@ -12,33 +12,43 @@ import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
-public class WeekCalendarNavigation implements CalendarNavigation<LocalDateTime, LocalDate> {
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
+
+public class WeekCalendarNavigation implements CalendarNavigation {
 
 
     private final Locale locale;
+    private final Calendar<LocalDateTime> calendar;
+    private final DatePicker<LocalDate> calendarRangePicker;
 
-    public WeekCalendarNavigation(Locale locale) {
+    public WeekCalendarNavigation(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, Locale locale) {
+
+        this.calendar = calendar;
+        this.calendarRangePicker = calendarRangePicker;
         this.locale = locale;
     }
 
-    public String previous(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
-        LocalDate previousWeek = startOfWeek(referenceDate).minus(1, ChronoUnit.WEEKS);
-        setWeek(calendar, calendarRangePicker, previousWeek);
-        return previousWeek.toString();
-    }
-
-    public String next(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
-        LocalDate nextWeek = startOfWeek(referenceDate).plus(1, ChronoUnit.WEEKS);
-        setWeek(calendar, calendarRangePicker, nextWeek);
-        return nextWeek.toString();
+    @Override
+    public String previous(LocalDate referenceDate) {
+        return change(PREVIOUS, referenceDate);
     }
 
     @Override
-    public String atDate(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
-        LocalDate atDateWeek = startOfWeek(referenceDate);
-        setWeek(calendar, calendarRangePicker, atDateWeek);
-        calendarRangePicker.setValue(referenceDate);
-        return atDateWeek.toString();
+    public String next(LocalDate referenceDate) {
+        return change(NEXT, referenceDate);
+    }
+
+    @Override
+    public String atDate(LocalDate referenceDate) {
+        return change(AT_DATE, referenceDate);
+    }
+
+    private String change(CalendarNavigationMode navigationMode, LocalDate referenceDate) {
+        LocalDate newWeek = navigationMode.calculate(ChronoUnit.WEEKS, referenceDate);
+        calendar.setStartDate(startOfWeek(newWeek).atStartOfDay());
+        calendar.setEndDate(endOfWeek(newWeek.atStartOfDay()).atTime(LocalTime.MAX));
+        calendarRangePicker.setValue(newWeek);
+        return newWeek.toString();
     }
 
     private LocalDate startOfWeek(LocalDate date) {
@@ -50,12 +60,6 @@ public class WeekCalendarNavigation implements CalendarNavigation<LocalDateTime,
         final DayOfWeek firstDayOfWeek = WeekFields.of(locale).getFirstDayOfWeek();
         final DayOfWeek lastDayOfWeek = DayOfWeek.of(((firstDayOfWeek.getValue() + 5) % DayOfWeek.values().length) + 1);
         return date.with(TemporalAdjusters.nextOrSame(lastDayOfWeek)).toLocalDate();
-    }
-
-    private void setWeek(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
-        calendar.setStartDate(referenceDate.atStartOfDay());
-        calendar.setEndDate(endOfWeek(referenceDate.atStartOfDay()).atTime(LocalTime.MAX));
-        calendarRangePicker.setValue(referenceDate);
     }
 
 }

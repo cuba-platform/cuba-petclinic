@@ -9,45 +9,39 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
 
-public class MonthCalendarNavigation implements CalendarNavigation<LocalDateTime, LocalDate> {
+import static com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarNavigationMode.*;
 
+public class MonthCalendarNavigation implements CalendarNavigation {
 
-    public String previous(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
+    private Calendar<LocalDateTime> calendar;
+    private DatePicker<LocalDate> calendarRangePicker;
 
-        YearMonth previousMonth = YearMonth.from(
-                referenceDate.minus(1, ChronoUnit.MONTHS)
-        );
-        setMonth(calendar,calendarRangePicker, previousMonth);
-        return previousMonth.toString();
-    }
-
-
-    public String next(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
-
-        YearMonth nextMonth = YearMonth.from(
-                referenceDate.plus(1, ChronoUnit.MONTHS)
-        );
-        setMonth(calendar,calendarRangePicker, nextMonth);
-
-        return nextMonth.toString();
+    public MonthCalendarNavigation(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker) {
+        this.calendarRangePicker = calendarRangePicker;
+        this.calendar = calendar;
     }
 
     @Override
-    public String atDate(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, LocalDate referenceDate) {
-        YearMonth atDateMonth = YearMonth.from(
-                referenceDate
-        );
-        setMonth(calendar, calendarRangePicker, atDateMonth);
-        calendarRangePicker.setValue(referenceDate);
-        return atDateMonth.toString();
+    public String previous(LocalDate referenceDate) {
+        return changeWithRangePickerDateChange(PREVIOUS, referenceDate);
     }
 
-    private void setMonth(Calendar<LocalDateTime> calendar, DatePicker<LocalDate> calendarRangePicker, YearMonth referenceMonth) {
-
-        LocalDate referenceDate = referenceMonth.atDay(1);
-        calendar.setStartDate(referenceDate.atStartOfDay());
-        calendar.setEndDate(referenceMonth.atEndOfMonth().atTime(LocalTime.MAX));
-        calendarRangePicker.setValue(referenceDate);
+    @Override
+    public String next(LocalDate referenceDate) {
+        return changeWithRangePickerDateChange(NEXT, referenceDate);
     }
 
+    @Override
+    public String atDate(LocalDate referenceDate) {
+        return changeWithRangePickerDateChange(AT_DATE, referenceDate);
+    }
+
+    private String changeWithRangePickerDateChange(CalendarNavigationMode navigationMode, LocalDate referenceDate) {
+        LocalDate newMonthDate = navigationMode.calculate(ChronoUnit.MONTHS, referenceDate);
+        YearMonth newMonth = YearMonth.from(newMonthDate);
+        calendar.setStartDate(newMonth.atDay(1).atStartOfDay());
+        calendar.setEndDate(newMonth.atEndOfMonth().atTime(LocalTime.MAX));
+        calendarRangePicker.setValue(newMonthDate);
+        return newMonth.toString();
+    }
 }
