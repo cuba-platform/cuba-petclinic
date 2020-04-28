@@ -33,10 +33,8 @@ import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.*;
 @LoadDataBeforeShow
 public class VisitBrowse extends StandardLookup<Visit> {
 
-
     @Inject
     protected Calendar<LocalDateTime> calendar;
-
     @Inject
     protected CollectionLoader<Visit> visitsCalendarDl;
     @Inject
@@ -45,23 +43,18 @@ public class VisitBrowse extends StandardLookup<Visit> {
     protected CollectionContainer<Visit> visitsCalendarDc;
     @Inject
     protected CollectionLoader<Visit> visitsDl;
-
     @Inject
     protected DataContext dataContext;
     @Inject
     protected CheckBoxGroup<VisitType> typeMultiFilter;
-
     @Inject
     protected RadioButtonGroup<CalendarMode> calendarMode;
     @Inject
     protected TimeSource timeSource;
-
     @Inject
     protected Label<String> calendarTitle;
-
     @Inject
     protected CalendarNavigators calendarNavigators;
-
     @Inject
     protected DatePicker<LocalDate> calendarNavigator;
     @Inject
@@ -77,14 +70,14 @@ public class VisitBrowse extends StandardLookup<Visit> {
 
     @Subscribe
     protected void onInit(InitEvent event) {
+        initTypeFilter();
+        initSortCalendarEventsInMonthlyView();
+    }
+
+    private void initTypeFilter() {
         typeMultiFilter.setOptionsEnum(VisitType.class);
         typeMultiFilter.setValue(EnumSet.allOf(VisitType.class));
         typeMultiFilter.setOptionIconProvider(o -> VisitTypeIcon.valueOf(o.getIcon()).source());
-
-        calendarMode.setOptionsEnum(CalendarMode.class);
-        calendarNavigator.setValue(timeSource.now().toLocalDate());
-
-        initSortForMonthlyView();
     }
 
     @Subscribe
@@ -93,7 +86,7 @@ public class VisitBrowse extends StandardLookup<Visit> {
     }
 
     @SuppressWarnings("deprecation")
-    private void initSortForMonthlyView() {
+    private void initSortCalendarEventsInMonthlyView() {
         calendar.unwrap(com.vaadin.v7.ui.Calendar.class)
                 .setEventSortOrder(CalendarState.EventSortOrder.START_DATE_DESC);
     }

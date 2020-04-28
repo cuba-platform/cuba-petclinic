@@ -23,7 +23,8 @@ public class CalendarNavigators {
             case WEEK: return new WeekCalendarNavigation(screenAdjustment, userSessionSource.getLocale());
             case MONTH: return new MonthCalendarNavigation(screenAdjustment, userSessionSource.getLocale());
         }
-        return null;
+
+        throw new IllegalStateException("Calendar Mode has to be set");
     }
 
 }

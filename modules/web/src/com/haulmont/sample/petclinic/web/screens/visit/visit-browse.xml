@@ -66,6 +66,7 @@
                                 <radioButtonGroup
                                         width="100%"
                                         stylename="button-switcher"
+                                        optionsEnum="com.haulmont.sample.petclinic.web.screens.visit.CalendarMode"
                                         id="calendarMode"
                                 />
                             </groupBox>
