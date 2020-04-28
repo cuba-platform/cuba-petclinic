@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.entity.pet;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import com.haulmont.sample.petclinic.entity.NamedEntity;
@@ -9,4 +10,14 @@ import com.haulmont.sample.petclinic.entity.NamedEntity;
 public class PetType extends NamedEntity {
     private static final long serialVersionUID = -2633909809493220411L;
 
+    @Column(name = "COLOR")
+    protected String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

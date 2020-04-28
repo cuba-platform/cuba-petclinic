@@ -28,13 +28,16 @@
         <groupBox id="specialtiesBox" caption="msg://specialties" stylename="light">
             <table id="specialtiesTable" dataContainer="specialtiesDc" height="100%" width="100%">
                 <buttonsPanel>
-                    <button action="specialtiesTable.create"/>
-                    <button action="specialtiesTable.edit"/>
+                    <button action="specialtiesTable.add"/>
                     <button action="specialtiesTable.remove"/>
                 </buttonsPanel>
                 <actions>
-                    <action id="create" type="create" openType="DIALOG"/>
-                    <action id="edit" type="edit" openType="DIALOG"/>
+                    <action id="add" type="add">
+                        <properties>
+                            <property name="openMode" value="DIALOG"/>
+                            <property name="screenClass" value="com.haulmont.sample.petclinic.web.screens.vet.specialty.SpecialtyLookup"/>
+                        </properties>
+                    </action>
                     <action id="remove" type="remove"/>
                 </actions>
                 <columns>
