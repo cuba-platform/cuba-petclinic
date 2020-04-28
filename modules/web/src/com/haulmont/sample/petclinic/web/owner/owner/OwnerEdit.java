@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.web.owner.owner;
 
+import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.sample.petclinic.entity.owner.Owner;
 
@@ -7,5 +8,6 @@ import com.haulmont.sample.petclinic.entity.owner.Owner;
 @UiDescriptor("owner-edit.xml")
 @EditedEntityContainer("ownerDc")
 @LoadDataBeforeShow
+@Route(value = "owners/edit", parentPrefix = "owners")
 public class OwnerEdit extends StandardEditor<Owner> {
 }

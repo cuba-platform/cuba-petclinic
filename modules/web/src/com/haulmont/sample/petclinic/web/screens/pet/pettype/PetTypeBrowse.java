@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.web.screens.pet.pettype;
 
+import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.ColorPicker;
 import com.haulmont.cuba.gui.components.Component;
@@ -14,6 +15,7 @@ import static com.haulmont.sample.petclinic.web.screens.pet.pettype.ColorGenerat
 @UiDescriptor("pet-type-browse.xml")
 @LookupComponent("table")
 @LoadDataBeforeShow
+@Route("pet-types")
 public class PetTypeBrowse extends MasterDetailScreen<PetType> {
 
     @Inject

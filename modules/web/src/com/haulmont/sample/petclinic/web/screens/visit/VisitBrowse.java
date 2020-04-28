@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.Notifications;
+import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.Calendar;
@@ -31,6 +32,7 @@ import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.*;
 @UiDescriptor("visit-browse.xml")
 @LookupComponent("visitsTable")
 @LoadDataBeforeShow
+@Route("visits")
 public class VisitBrowse extends StandardLookup<Visit> {
 
     @Inject

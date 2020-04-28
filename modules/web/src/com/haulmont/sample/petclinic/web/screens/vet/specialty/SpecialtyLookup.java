@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.web.screens.vet.specialty;
 
+import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.sample.petclinic.entity.vet.Specialty;
 
