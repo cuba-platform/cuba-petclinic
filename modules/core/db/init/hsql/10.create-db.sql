@@ -30,6 +30,8 @@ create table PETCLINIC_PET_TYPE (
     DELETED_BY varchar(50),
     NAME varchar(255),
     --
+    COLOR varchar(255),
+    --
     primary key (ID)
 )^
 -- end PETCLINIC_PET_TYPE
