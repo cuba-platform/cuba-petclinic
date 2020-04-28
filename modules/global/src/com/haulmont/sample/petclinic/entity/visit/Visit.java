@@ -5,11 +5,13 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
+import com.haulmont.sample.petclinic.entity.NamedEntity;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @NamePattern("%s ()|pet")
 @Table(name = "PETCLINIC_VISIT")
@@ -41,13 +43,17 @@ public class Visit extends StandardEntity {
     @Transient
     @MetaProperty(related = "pet")
     public String getPetName() {
-        return getPet().getName();
+        return Optional.ofNullable(getPet())
+                .map(NamedEntity::getName)
+                .orElse("");
     }
 
     @Transient
     @MetaProperty(related = "type")
     public String getTypeStyle() {
-        return getType().getStyleName();
+        return Optional.ofNullable(getType())
+                .map(VisitType::getStyleName)
+                .orElse("");
     }
 
     public VisitType getType() {

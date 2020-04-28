@@ -2,7 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://editorCaption"
         focusComponent="fieldGroup"
-        messagesPack="com.haulmont.sample.petclinic.web.visit.visit">
+        messagesPack="com.haulmont.sample.petclinic.web.screens.visit">
     <data>
         <instance id="visitDc"
                   class="com.haulmont.sample.petclinic.entity.visit.Visit"
@@ -17,8 +17,6 @@
             </loader>
         </collection>
     </data>
-    <dialogMode height="600"
-                width="800"/>
     <layout expand="editActions" spacing="true">
         <form id="fieldGroup" dataContainer="visitDc">
             <column width="250px">
