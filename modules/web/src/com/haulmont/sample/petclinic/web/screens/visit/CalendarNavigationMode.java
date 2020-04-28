@@ -12,9 +12,6 @@ public enum CalendarNavigationMode {
     NEXT(
             (unit, referenceDate) -> referenceDate.plus(1, unit)
     ),
-    CURRENT(
-            ((unit, referenceDate) -> referenceDate)
-    ),
     AT_DATE(
             ((unit, referenceDate) -> referenceDate)
     );
