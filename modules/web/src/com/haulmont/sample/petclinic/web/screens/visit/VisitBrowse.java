@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DatatypeFormatter;
@@ -16,10 +16,6 @@ import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.entity.visit.VisitType;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigators;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarScreenAdjustment;
 import com.vaadin.v7.shared.ui.calendar.CalendarState;
 import org.springframework.util.CollectionUtils;
 
@@ -27,9 +23,9 @@ import javax.inject.Inject;
 import java.time.*;
 import java.util.*;
 
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.*;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.PREVIOUS;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.*;
+import static com.haulmont.sample.petclinic.web.screens.visit.CalendarNavigationMode.*;
+import static com.haulmont.sample.petclinic.web.screens.visit.CalendarNavigationMode.PREVIOUS;
+import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.*;
 
 @UiController("petclinic_Visit.browse")
 @UiDescriptor("visit-browse.xml")

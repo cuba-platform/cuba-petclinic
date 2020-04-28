@@ -1,9 +1,8 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.DatePicker;
 import com.haulmont.cuba.gui.components.Label;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.MonthCalendarNavigation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,7 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.util.Locale;
 
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation.CalendarNavigationMode.*;
+import static com.haulmont.sample.petclinic.web.screens.visit.CalendarNavigationMode.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 

@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import java.time.YearMonth;
 import java.time.format.TextStyle;

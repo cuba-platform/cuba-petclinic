@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import com.haulmont.cuba.web.testsupport.TestContainer;
 import com.haulmont.cuba.web.testsupport.TestEntityFactory;

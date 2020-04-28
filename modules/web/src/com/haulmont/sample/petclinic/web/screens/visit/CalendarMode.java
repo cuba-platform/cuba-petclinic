@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import com.haulmont.chile.core.datatypes.impl.EnumClass;
 

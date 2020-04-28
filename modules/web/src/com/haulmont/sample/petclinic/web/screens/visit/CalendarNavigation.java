@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import java.time.LocalDate;
 

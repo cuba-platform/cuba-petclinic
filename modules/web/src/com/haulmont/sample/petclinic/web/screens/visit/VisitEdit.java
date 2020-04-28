@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.sample.petclinic.entity.visit.Visit;

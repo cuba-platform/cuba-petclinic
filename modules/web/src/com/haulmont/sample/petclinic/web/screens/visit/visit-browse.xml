@@ -3,7 +3,7 @@
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://browseCaption"
         focusComponent="visitsTable"
-        messagesPack="com.haulmont.sample.petclinic.web.visit.visit">
+        messagesPack="com.haulmont.sample.petclinic.web.screens.visit">
     <data>
         <collection id="visitsDc"
                     class="com.haulmont.sample.petclinic.entity.visit.Visit"
@@ -104,7 +104,6 @@
                             </hbox>
                             <calendar id="calendar"
                                       dataContainer="visitsCalendarDc"
-                                      height="100%"
                                       width="100%"
                                       captionProperty="petName"
                                       descriptionProperty="description"
@@ -126,8 +125,7 @@
                     spacing="true"
                     margin="true"
                     caption="msg://table"
-                    expand="visitsTable"
-                    lazy="true">
+                    expand="visitsTable">
                 <filter id="filter"
                         applyTo="visitsTable"
                         dataLoader="visitsDl">

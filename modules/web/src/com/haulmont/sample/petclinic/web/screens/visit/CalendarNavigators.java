@@ -1,9 +1,8 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 
 import com.haulmont.cuba.core.global.DatatypeFormatter;
 import com.haulmont.cuba.core.global.UserSessionSource;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

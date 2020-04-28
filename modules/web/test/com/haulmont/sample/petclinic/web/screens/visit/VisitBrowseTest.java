@@ -1,5 +1,4 @@
-package com.haulmont.sample.petclinic.web.visit.visit;
-
+package com.haulmont.sample.petclinic.web.screens.visit;
 import com.haulmont.cuba.core.app.DataService;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.web.app.main.MainScreen;
@@ -8,7 +7,6 @@ import com.haulmont.cuba.web.testsupport.proxy.TestServiceProxy;
 import com.haulmont.sample.petclinic.entity.owner.Owner;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.web.PetclinicWebTestContainer;
-import com.haulmont.sample.petclinic.web.visit.visit.calendar.CalendarMode;
 import de.diedavids.sneferu.environment.SneferuTestUiEnvironment;
 import de.diedavids.sneferu.environment.StartScreen;
 import de.diedavids.sneferu.screen.StandardLookupTestAPI;

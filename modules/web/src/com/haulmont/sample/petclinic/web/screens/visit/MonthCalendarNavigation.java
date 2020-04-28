@@ -1,13 +1,13 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.MonthFormatter.fullMonthYear;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.beginningOfMonth;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.endOfMonth;
+import static com.haulmont.sample.petclinic.web.screens.visit.MonthFormatter.fullMonthYear;
+import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.beginningOfMonth;
+import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.endOfMonth;
 
 public class MonthCalendarNavigation implements CalendarNavigation {
 

@@ -1,13 +1,13 @@
-package com.haulmont.sample.petclinic.web.visit.visit.calendar.navigation;
+package com.haulmont.sample.petclinic.web.screens.visit;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.MonthFormatter.*;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.endOfWeek;
-import static com.haulmont.sample.petclinic.web.visit.visit.calendar.RelativeDates.startOfWeek;
+import static com.haulmont.sample.petclinic.web.screens.visit.MonthFormatter.*;
+import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.endOfWeek;
+import static com.haulmont.sample.petclinic.web.screens.visit.RelativeDates.startOfWeek;
 
 public class WeekCalendarNavigation implements CalendarNavigation {
 
