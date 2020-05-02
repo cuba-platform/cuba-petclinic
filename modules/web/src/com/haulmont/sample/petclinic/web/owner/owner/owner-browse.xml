@@ -24,11 +24,13 @@
             <properties include=".*"/>
         </filter>
         <groupTable id="ownersTable"
+                    multiselect="true"
                     dataContainer="ownersDc"
                     width="100%">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
+                <action id="bulkEdit" type="bulkEdit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
@@ -44,7 +46,9 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="ownersTable.create"/>
                 <button id="editBtn" action="ownersTable.edit"/>
+                <button id="bulkEditBtn" action="ownersTable.bulkEdit"/>
                 <button id="removeBtn" action="ownersTable.remove"/>
+                <relatedEntities for="ownersTable" openType="DIALOG"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

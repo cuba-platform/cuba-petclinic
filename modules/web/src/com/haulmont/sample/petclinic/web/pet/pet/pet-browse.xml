@@ -55,7 +55,7 @@
         <dataLoadCoordinator auto="true">
         </dataLoadCoordinator>
     </facets>
-    <dialogMode height="600" width="800"/>
+    <dialogMode height="768" width="1024"/>
     <layout expand="petsTable" spacing="true">
 
         <hbox width="100%" spacing="true">

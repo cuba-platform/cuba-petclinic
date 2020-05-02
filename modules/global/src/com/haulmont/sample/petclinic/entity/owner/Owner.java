@@ -1,14 +1,18 @@
 package com.haulmont.sample.petclinic.entity.owner;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import com.haulmont.chile.core.annotations.Composition;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 import com.haulmont.sample.petclinic.entity.Person;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Table(name = "PETCLINIC_OWNER")
 @Entity(name = "petclinic_Owner")
@@ -30,6 +34,8 @@ public class Owner extends Person {
     @Column(name = "TELEPHONE")
     protected String telephone;
 
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "owner")
     protected List<Pet> pets;
 

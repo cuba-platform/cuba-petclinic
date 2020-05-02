@@ -6,28 +6,48 @@
     <data>
         <instance id="ownerDc"
                   class="com.haulmont.sample.petclinic.entity.owner.Owner"
-                  view="_base">
+                  view="owner-with-pets">
             <loader/>
+            <collection id="petsDc" property="pets"/>
         </instance>
-
     </data>
-
     <dialogMode height="600"
                 width="800"/>
-
-    <layout expand="editActions" spacing="true">
+    <layout expand="petsBox" spacing="true">
+        <label stylename="h2" id="titleLabel" />
         <form id="fieldGroup" dataContainer="ownerDc">
-            <column width="250px">
+            <column width="200px">
                 <textField property="firstName"/>
-                <textField property="lastName"/>
                 <textField property="address"/>
-                <textField property="city"/>
                 <textField property="telephone"/>
+            </column>
+            <column width="200px">
+                <textField property="lastName"/>
+                <textField property="city"/>
                 <textField property="email"/>
             </column>
         </form>
-
-
+        <groupBox id="petsBox"
+                  expand="petsTable"
+                  stylename="light"
+                  caption="msg://com.haulmont.sample.petclinic.entity.owner/Owner.pets">
+            <table id="petsTable" dataContainer="petsDc" width="100%">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="identificationNumber"/>
+                    <column id="name"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="petsTable.create"/>
+                    <button action="petsTable.edit"/>
+                    <button action="petsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
