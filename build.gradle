@@ -38,6 +38,7 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    appComponent('com.haulmont.addon.helium:helium-global:0.2.0')
 
 }
 
