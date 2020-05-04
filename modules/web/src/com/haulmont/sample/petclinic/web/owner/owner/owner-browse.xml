@@ -47,7 +47,7 @@
                 <button id="createBtn" action="ownersTable.create"/>
                 <button id="editBtn" action="ownersTable.edit"/>
                 <button id="bulkEditBtn" action="ownersTable.bulkEdit"/>
-                <button id="removeBtn" action="ownersTable.remove"/>
+                <button id="removeBtn" action="ownersTable.remove"  stylename="danger"/>
                 <relatedEntities for="ownersTable" openType="DIALOG"/>
             </buttonsPanel>
         </groupTable>

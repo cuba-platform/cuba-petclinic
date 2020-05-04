@@ -29,7 +29,7 @@
             <table id="specialtiesTable" dataContainer="specialtiesDc" height="100%" width="100%">
                 <buttonsPanel>
                     <button action="specialtiesTable.add"/>
-                    <button action="specialtiesTable.remove"/>
+                    <button action="specialtiesTable.remove"  stylename="danger"/>
                 </buttonsPanel>
                 <actions>
                     <action id="add" type="add">

@@ -1,9 +1,9 @@
 -- begin PETCLINIC_PET
-alter table PETCLINIC_PET add constraint FK_PETCLINIC_PET_ON_TYPE foreign key (TYPE_ID) references PETCLINIC_PET_TYPE(ID)^
-alter table PETCLINIC_PET add constraint FK_PETCLINIC_PET_ON_OWNER foreign key (OWNER_ID) references PETCLINIC_OWNER(ID)^
+alter table PETCLINIC_PET add constraint FK_PETCLINIC_PET_TYPE foreign key (TYPE_ID) references PETCLINIC_PET_TYPE(ID)^
+alter table PETCLINIC_PET add constraint FK_PETCLINIC_PET_OWNER foreign key (OWNER_ID) references PETCLINIC_OWNER(ID)^
 create unique index IDX_PETCLINIC_PET_ID_UNQ on PETCLINIC_PET (IDENTIFICATION_NUMBER, DELETE_TS) ^
-create index IDX_PETCLINIC_PET_ON_TYPE on PETCLINIC_PET (TYPE_ID)^
-create index IDX_PETCLINIC_PET_ON_OWNER on PETCLINIC_PET (OWNER_ID)^
+create index IDX_PETCLINIC_PET_TYPE on PETCLINIC_PET (TYPE_ID)^
+create index IDX_PETCLINIC_PET_OWNER on PETCLINIC_PET (OWNER_ID)^
 -- end PETCLINIC_PET
 -- begin PETCLINIC_VISIT
 alter table PETCLINIC_VISIT add constraint FK_PETCLINIC_VISIT_PET foreign key (PET_ID) references PETCLINIC_PET(ID)^

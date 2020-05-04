@@ -19,7 +19,6 @@ def webModule = project(":${modulePrefix}-web")
 
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
-apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
 cuba {
@@ -27,12 +26,6 @@ cuba {
         group = 'com.haulmont.sample.petclinic'
         version = '0.1'
         isSnapshot = true
-    }
-    tomcat {
-        dir = "$project.rootDir/deploy/tomcat"
-    }
-    ide {
-        vcs = 'Git'
     }
 }
 
@@ -73,6 +66,7 @@ configure([globalModule, coreModule, webModule]) {
         useJUnitPlatform()
     }
 }
+
 
 configure(globalModule) {
     dependencies {

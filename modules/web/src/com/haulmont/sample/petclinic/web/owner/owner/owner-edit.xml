@@ -44,7 +44,7 @@
                 <buttonsPanel>
                     <button action="petsTable.create"/>
                     <button action="petsTable.edit"/>
-                    <button action="petsTable.remove"/>
+                    <button action="petsTable.remove"  stylename="danger"/>
                 </buttonsPanel>
             </table>
         </groupBox>

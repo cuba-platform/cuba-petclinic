@@ -1,0 +1,15 @@
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        extends="/com/haulmont/cuba/web/app/main/main-screen.xml">
+    <layout>
+        <cssLayout id="horizontalWrap">
+            <workArea id="workArea">
+                <initialLayout>
+
+                    <image align="MIDDLE_CENTER">
+                        <theme path="branding/petclinic_logo_full.png"/>
+                    </image>
+                </initialLayout>
+            </workArea>
+        </cssLayout>
+    </layout>
+</window>

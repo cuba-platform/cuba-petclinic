@@ -1,0 +1,5 @@
+@import "helium-ext";
+
+@mixin com_haulmont_sample_petclinic {
+  @include com_haulmont_sample_petclinic-helium-ext;
+}

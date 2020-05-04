@@ -152,7 +152,7 @@
                                   alwaysVisible="true">
                         <button id="createBtn" action="visitsTable.create"/>
                         <button id="editBtn" action="visitsTable.edit"/>
-                        <button id="removeBtn" action="visitsTable.remove"/>
+                        <button id="removeBtn" action="visitsTable.remove"  stylename="danger"/>
                     </buttonsPanel>
                 </groupTable>
             </tab>

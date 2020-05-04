@@ -1,0 +1,73 @@
+/* Define your theme modifications inside next mixin */
+@mixin com_haulmont_sample_petclinic-helium-ext {
+      /* Basic */
+    --primary-color: #6C5CE7;
+    --primary-color_rgb: 108, 92, 231;
+    --success-color: #83C93C;
+    --secondary-color: #83C93C;
+    --secondary-color_rgb: 131, 201, 60;
+    --warning-color: #FDD58D;
+    --hell-lila: #867AEB;
+    --white: #FFFFFF;
+
+      /* Common */
+    --primary-color-shade-1: #4C3CE2;
+    --primary-color-shade-2: #3421DE;
+    --primary-dim-color: #958CEE;
+    --secondary-color-shade-1: #75B332;
+    --secondary-color-shade-2: #689F2D;
+    --secondary-dim-color: #A7D874;
+    --text-dim-color: #6B7172;
+    --text-secondary-color: #2C3436;
+
+      /* SideMenu */
+
+
+
+      --sidemenu-background-color: var(--primary-color);
+      --sidemenu-text-color: var(--white);
+
+      --sidemenu-title-color: var(--sidemenu-text-color);
+      --sidemenu-title-background-color: var(--hell-lila);
+
+      --sidemenu-item-focused-color: var(--white);
+
+      --sedemenu-item-selected-color: var(--white);
+      --sedemenu-item-selected-background-color: var(--hell-lila);
+
+      --sidemenu-item-badge-color: var(--white);
+      --sidemenu-item-badge-background-color: var(--warning-color);
+
+      --sidemenu-action-button-color: var(--text-main-color);
+      --sidemenu-action-button-hover-background-color: var(--dim-color-shade-1);
+      --sidemenu-action-button-active-background-color: var(--dim-color-shade-2);
+
+      --sidemenu-responsive-title-background-color: var(--secondary-color);
+      --sidemenu-responsive-title-text-color: var(--secondary-contrast-text-color);
+
+      --sidemenu-responsive-item-separator-color: var(--primary-dim-color);
+      --sidemenu-responsive-item-header-background-color: #E6E3E8;
+
+      --sidemenu-responsive-item-selected-text-color: var(--sedemenu-item-selected-color);
+      --sidemenu-responsive-item-selected-background-color: var(--sedemenu-item-selected-background-color);
+
+      --sidemenu-mobile-button-color: var(--secondary-contrast-text-color);
+      --sidemenu-mobile-button-hover-background-color: var(--secondary-color-shade-1);
+      --sidemenu-mobile-button-active-background-color: var(--secondary-color-shade-2);
+
+      --sidemenu-collapsible-submenu-background-color: var(--hell-lila);
+
+      --sidemenu-collapsible-controls-panel-background-color: var(--hell-lila);
+
+      --sidemenu-collapsible-action-button-color: var(--white);
+      --sidemenu-collapsible-action-button-hover-background-color: var(--primary-color);
+      --sidemenu-collapsible-action-button-active-background-color: var(--primary-color);
+
+      --sidemenu-collapsible-collapse-button-color: var(--white);
+      --sidemenu-collapsible-collapse-button-background-color: var(--hell-lila);
+      --sidemenu-collapsible-collapse-button-hover-background-color: var(--primary-color);
+      --sidemenu-collapsible-collapse-button-active-background-color: var(--primary-color);
+
+      --groupbox-collapsed-caption-color: var(--white);
+
+}

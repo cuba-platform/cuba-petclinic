@@ -59,7 +59,7 @@
     <layout expand="petsTable" spacing="true">
 
         <hbox width="100%" spacing="true">
-            <tabSheet id="filterTabSheet" stylename="framed">
+            <tabSheet id="filterTabSheet">
                 <tab id="defaultFilterTab" caption="msg://defaultFilter" margin="true" spacing="true">
                     <hbox spacing="true">
                         <textField
@@ -126,8 +126,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel" alwaysVisible="true">
                 <button id="createBtn" action="petsTable.create"/>
-                <button id="editBtn" action="petsTable.edit"/>
-                <button id="removeBtn" action="petsTable.remove"/>
+                <button id="editBtn" action="petsTable.edit" stylename=""/>
+                <button id="removeBtn" action="petsTable.remove" stylename="danger"/>
             </buttonsPanel>
             <rows/>
         </groupTable>
