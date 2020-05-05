@@ -45,7 +45,7 @@
                     <split
                             orientation="horizontal"
                             id="split"
-                            pos="30"
+                            pos="20"
                             height="100%"
                             dockable="true"
                             dockMode="LEFT"
