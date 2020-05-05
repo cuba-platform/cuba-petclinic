@@ -28,7 +28,11 @@
                     width="100%">
             <actions>
                 <action id="create" type="create" />
-                <action id="edit" type="edit" />
+                <action id="view" type="view">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
                 <action id="remove" type="remove" />
             </actions>
             <columns>
@@ -39,7 +43,7 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="vetsTable.create"/>
-                <button id="editBtn" action="vetsTable.edit"/>
+                <button id="viewBtn" action="vetsTable.view"/>
                 <button id="removeBtn" action="vetsTable.remove"  stylename="danger"/>
             </buttonsPanel>
         </groupTable>
