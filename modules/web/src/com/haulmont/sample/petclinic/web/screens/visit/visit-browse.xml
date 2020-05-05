@@ -134,8 +134,16 @@
                             dataContainer="visitsDc"
                             width="100%">
                     <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
+                        <action id="create" type="create">
+                            <properties>
+                                <property name="openMode" value="DIALOG" />
+                            </properties>
+                        </action>
+                        <action id="edit" type="edit">
+                            <properties>
+                                <property name="openMode" value="DIALOG" />
+                            </properties>
+                        </action>
                         <action id="remove" type="remove"/>
                         <action id="bulkEdit" type="bulkEdit"/>
                     </actions>

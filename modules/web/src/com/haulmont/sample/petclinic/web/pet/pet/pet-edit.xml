@@ -27,8 +27,8 @@
         </collection>
     </data>
 
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode
+            forceDialog="true" />
 
     <layout expand="editActions" spacing="true">
         <form id="fieldGroup" dataContainer="petDc">
