@@ -6,7 +6,7 @@
                 <initialLayout>
 
                     <image align="MIDDLE_CENTER">
-                        <theme path="branding/petclinic_logo_full.png"/>
+                        <theme path="branding/petclinic_logo_full_purple.png"/>
                     </image>
                 </initialLayout>
             </workArea>

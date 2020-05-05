@@ -28,31 +28,47 @@
 
 
 
-      --sidemenu-background-color: var(--hell-lila);
+      --sidemenu-background-color: var(--primary-color);
       --sidemenu-text-color: var(--white);
 
       --sidemenu-title-color: var(--sidemenu-text-color);
-      --sidemenu-title-background-color: var(--primary-color);
+      --sidemenu-title-background-color: var(--hell-lila);
 
       --sidemenu-item-focused-color: var(--white);
 
       --sedemenu-item-selected-color: var(--white);
-      --sedemenu-item-selected-background-color: var(--primary-color);
+      --sedemenu-item-selected-background-color: var(--hell-lila);
 
       --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
       --sidemenu-item-badge-background-color: var(--secondary-color);
 
+      --sidemenu-action-button-color: var(--text-main-color);
+      --sidemenu-action-button-hover-background-color: var(--dim-color-shade-1);
+      --sidemenu-action-button-active-background-color: var(--dim-color-shade-2);
 
-      --sidemenu-collapsible-submenu-background-color: var(--primary-color);
+      --sidemenu-responsive-title-background-color: var(--secondary-color);
+      --sidemenu-responsive-title-text-color: var(--secondary-contrast-text-color);
 
-      --sidemenu-collapsible-controls-panel-background-color: var(--primary-color);
+      --sidemenu-responsive-item-separator-color: var(--primary-dim-color);
+      --sidemenu-responsive-item-header-background-color: #E6E3E8;
+
+      --sidemenu-responsive-item-selected-text-color: var(--sedemenu-item-selected-color);
+      --sidemenu-responsive-item-selected-background-color: var(--sedemenu-item-selected-background-color);
+
+      --sidemenu-mobile-button-color: var(--secondary-contrast-text-color);
+      --sidemenu-mobile-button-hover-background-color: var(--secondary-color-shade-1);
+      --sidemenu-mobile-button-active-background-color: var(--secondary-color-shade-2);
+
+      --sidemenu-collapsible-submenu-background-color: var(--hell-lila);
+
+      --sidemenu-collapsible-controls-panel-background-color: var(--hell-lila);
 
       --sidemenu-collapsible-action-button-color: var(--white);
       --sidemenu-collapsible-action-button-hover-background-color: var(--primary-color);
       --sidemenu-collapsible-action-button-active-background-color: var(--primary-color);
 
       --sidemenu-collapsible-collapse-button-color: var(--white);
-      --sidemenu-collapsible-collapse-button-background-color: var(--primary-color);
+      --sidemenu-collapsible-collapse-button-background-color: var(--hell-lila);
       --sidemenu-collapsible-collapse-button-hover-background-color: var(--primary-color);
       --sidemenu-collapsible-collapse-button-active-background-color: var(--primary-color);
 
