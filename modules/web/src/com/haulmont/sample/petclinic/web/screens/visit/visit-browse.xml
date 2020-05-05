@@ -90,7 +90,6 @@
                                     <button id="navigatorCurrent"
                                             stylename="borderless-colored"
                                             icon="HOME"/>
-
                                     <button id="navigatorPrevious"
                                             stylename="borderless-colored"
                                             icon="CARET_LEFT"/>
@@ -116,9 +115,7 @@
                                       stylenameProperty="typeStyle"
                                       navigationButtonsVisible="false"/>
                         </vbox>
-
                     </split>
-
                 </hbox>
             </tab>
             <tab
@@ -133,12 +130,14 @@
                     <properties include=".*"/>
                 </filter>
                 <groupTable id="visitsTable"
+                            multiselect="true"
                             dataContainer="visitsDc"
                             width="100%">
                     <actions>
                         <action id="create" type="create"/>
                         <action id="edit" type="edit"/>
                         <action id="remove" type="remove"/>
+                        <action id="bulkEdit" type="bulkEdit"/>
                     </actions>
                     <columns>
                         <column id="pet"/>
@@ -153,6 +152,7 @@
                         <button id="createBtn" action="visitsTable.create"/>
                         <button id="editBtn" action="visitsTable.edit"/>
                         <button id="removeBtn" action="visitsTable.remove"  stylename="danger"/>
+                        <button id="bulkEditBtn" action="visitsTable.bulkEdit"/>
                     </buttonsPanel>
                 </groupTable>
             </tab>

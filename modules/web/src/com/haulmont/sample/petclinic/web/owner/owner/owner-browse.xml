@@ -30,7 +30,7 @@
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
-                <action id="bulkEdit" type="bulkEdit"/>
+                <action id="excel" type="excel"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
@@ -46,7 +46,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="ownersTable.create"/>
                 <button id="editBtn" action="ownersTable.edit"/>
-                <button id="bulkEditBtn" action="ownersTable.bulkEdit"/>
+                <button id="excelBtn" action="ownersTable.excel" stylename="friendly"/>
                 <button id="removeBtn" action="ownersTable.remove"  stylename="danger"/>
                 <relatedEntities for="ownersTable" openType="DIALOG"/>
             </buttonsPanel>
