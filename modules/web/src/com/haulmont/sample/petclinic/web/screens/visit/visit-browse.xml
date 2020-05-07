@@ -49,7 +49,6 @@
                             height="100%"
                             dockable="true"
                             dockMode="LEFT"
-
                     >
                         <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="100%">
                             <groupBox stylename="light"
@@ -86,7 +85,6 @@
                         >
                             <hbox expand="navigator" spacing="true" margin="true">
                                 <buttonsPanel id="navigator" align="MIDDLE_RIGHT" margin="false" spacing="false">
-
                                     <button id="navigatorCurrent"
                                             stylename="borderless-colored"
                                             icon="HOME"/>
@@ -122,7 +120,7 @@
                     id="tableTab"
                     spacing="true"
                     margin="true"
-                    caption="msg://table"
+                    caption="msg://visitList"
                     expand="visitsTable">
                 <filter id="filter"
                         applyTo="visitsTable"
@@ -136,12 +134,12 @@
                     <actions>
                         <action id="create" type="create">
                             <properties>
-                                <property name="openMode" value="DIALOG" />
+                                <property name="openMode" value="DIALOG"/>
                             </properties>
                         </action>
                         <action id="edit" type="edit">
                             <properties>
-                                <property name="openMode" value="DIALOG" />
+                                <property name="openMode" value="DIALOG"/>
                             </properties>
                         </action>
                         <action id="remove" type="remove"/>
@@ -153,13 +151,14 @@
                         <column id="visitEnd"/>
                         <column id="description"/>
                         <column id="type"/>
+                        <column id="assignedNurse"/>
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
                                   alwaysVisible="true">
                         <button id="createBtn" action="visitsTable.create"/>
                         <button id="editBtn" action="visitsTable.edit"/>
-                        <button id="removeBtn" action="visitsTable.remove"  stylename="danger"/>
+                        <button id="removeBtn" action="visitsTable.remove" stylename="danger"/>
                         <button id="bulkEditBtn" action="visitsTable.bulkEdit"/>
                     </buttonsPanel>
                 </groupTable>

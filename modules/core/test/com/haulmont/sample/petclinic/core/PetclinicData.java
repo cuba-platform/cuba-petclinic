@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.core;
 
+import com.haulmont.cuba.security.entity.User;
 import com.haulmont.sample.petclinic.entity.owner.Owner;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import com.haulmont.sample.petclinic.entity.pet.PetType;
@@ -38,4 +39,9 @@ public class PetclinicData {
     return type;
   }
 
+  public User nurse(String name) {
+    User nurse = new User();
+    nurse.setName(name);
+    return nurse;
+  }
 }

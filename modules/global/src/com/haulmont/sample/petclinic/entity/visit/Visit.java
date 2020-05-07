@@ -5,6 +5,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
+import com.haulmont.cuba.security.entity.User;
 import com.haulmont.sample.petclinic.entity.NamedEntity;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 
@@ -23,6 +24,11 @@ public class Visit extends StandardEntity {
     @Column(name = "TYPE_", nullable = false)
     protected String type;
 
+    @Lookup(type = LookupType.DROPDOWN, actions = "lookup")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ASSIGNED_NURSE_ID")
+    protected User assignedNurse;
+
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -40,6 +46,14 @@ public class Visit extends StandardEntity {
     @Column(name = "DESCRIPTION", length = 4000)
     protected String description;
 
+    public User getAssignedNurse() {
+        return assignedNurse;
+    }
+
+    public void setAssignedNurse(User assignedNurse) {
+        this.assignedNurse = assignedNurse;
+    }
+
     @Transient
     @MetaProperty(related = "pet")
     public String getPetName() {
@@ -54,6 +68,17 @@ public class Visit extends StandardEntity {
         return Optional.ofNullable(getType())
                 .map(VisitType::getStyleName)
                 .orElse("");
+    }
+
+    @Column(name = "TREATMENT_STATUS")
+    private String treatmentStatus;
+
+    public VisitTreatmentStatus getTreatmentStatus() {
+        return treatmentStatus == null ? null : VisitTreatmentStatus.fromId(treatmentStatus);
+    }
+
+    public void setTreatmentStatus(VisitTreatmentStatus treatmentStatus) {
+        this.treatmentStatus = treatmentStatus == null ? null : treatmentStatus.getId();
     }
 
     public VisitType getType() {

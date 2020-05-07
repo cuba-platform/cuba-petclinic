@@ -4,10 +4,17 @@ import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.EntitySet;
 import com.haulmont.cuba.core.global.TimeSource;
+import com.haulmont.cuba.core.global.View;
+import com.haulmont.cuba.core.global.ViewBuilder;
+import com.haulmont.cuba.security.entity.Role;
+import com.haulmont.cuba.security.entity.User;
+import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.sample.petclinic.config.PetclinicTestdataConfig;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
+import com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus;
 import com.haulmont.sample.petclinic.entity.visit.VisitType;
+import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +24,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import org.springframework.util.CollectionUtils;
 
 @Component
 public class VisitTestDataCreation {
@@ -125,6 +133,8 @@ public class VisitTestDataCreation {
 
         Visit visit = dataManager.create(Visit.class);
 
+        visit.setTreatmentStatus(treatmentStatusFor(date));
+        visit.setAssignedNurse(randomNurse());
         visit.setPet(randomPet());
         visit.setType(randomVisitType());
         visit.setDescription(randomDescription());
@@ -133,6 +143,46 @@ public class VisitTestDataCreation {
         visit.setVisitEnd(visitEventRange.getVisitEnd());
 
         return visit;
+    }
+
+    private User randomNurse() {
+
+        final Optional<Role> nurseRole = loadRole("Nurse");
+
+        if (!nurseRole.isPresent()) {
+            return null;
+        }
+
+        final List<User> possibleNurses = list(UserRole.class, viewBuilder -> {
+            viewBuilder.add("role", View.MINIMAL);
+            viewBuilder.add("user", View.LOCAL);
+        })
+            .stream()
+            .filter(userRole -> userRole.getRole().equals(nurseRole))
+            .map(UserRole::getUser)
+            .collect(Collectors.toList());
+
+        return randomOfList(possibleNurses);
+
+    }
+
+    private Optional<Role> loadRole(String roleName) {
+        return dataManager.load(Role.class)
+            .query("e.name = ?1", roleName)
+            .optional();
+    }
+
+    private VisitTreatmentStatus treatmentStatusFor(LocalDate date) {
+        final LocalDate today = timeSource.now().toLocalDate();
+        if (date.equals(today)) {
+            return VisitTreatmentStatus.IN_PROGRESS;
+        }
+        else if (date.isAfter(today)) {
+            return VisitTreatmentStatus.UPCOMING;
+        }
+        else {
+            return VisitTreatmentStatus.DONE;
+        }
     }
 
     private VisitType randomVisitType() {
@@ -152,6 +202,9 @@ public class VisitTestDataCreation {
     }
 
     private <T> T randomOfList(List<T> list) {
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
         return list.get(random().nextInt(list.size()));
     }
 
@@ -161,6 +214,9 @@ public class VisitTestDataCreation {
 
     private <T extends Entity> List<T> list(Class<T> entityClass) {
         return dataManager.load(entityClass).list();
+    }
+    private <T extends Entity> List<T> list(Class<T> entityClass, Consumer<ViewBuilder> viewBuilderConfigurer) {
+        return dataManager.load(entityClass).view(viewBuilderConfigurer).list();
     }
 
 }

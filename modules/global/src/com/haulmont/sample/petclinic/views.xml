@@ -11,6 +11,7 @@
           name="visit-with-pet">
         <property name="pet"
                   view="_minimal"/>
+        <property name="assignedNurse" view="_minimal"/>
     </view>
     <view class="com.haulmont.sample.petclinic.entity.owner.Owner"
           extends="_local"
