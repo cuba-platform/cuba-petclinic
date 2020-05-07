@@ -6,7 +6,7 @@
         <item screen="petclinic_Owner.browse"/>
     </menu>
     <menu id="application-masterdata" insertBefore="administration">
-        <item screen="petclinic_Vet.browse"/>
+        <item screen="petclinic_Veterinarian.browse"/>
         <item screen="petclinic_PetType.browse"/>
         <item screen="petclinic_Specialty.browse"/>
     </menu>

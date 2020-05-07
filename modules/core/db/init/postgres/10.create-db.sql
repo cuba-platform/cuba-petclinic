@@ -16,8 +16,8 @@ create table PETCLINIC_VISIT (
     primary key (ID)
 )^
 -- end PETCLINIC_VISIT
--- begin PETCLINIC_VET
-create table PETCLINIC_VET (
+-- begin PETCLINIC_VETERINARIAN
+create table PETCLINIC_VETERINARIAN (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -31,7 +31,7 @@ create table PETCLINIC_VET (
     --
     primary key (ID)
 )^
--- end PETCLINIC_VET
+-- end PETCLINIC_VETERINARIAN
 -- begin PETCLINIC_OWNER
 create table PETCLINIC_OWNER (
     ID uuid,
@@ -103,10 +103,10 @@ create table PETCLINIC_SPECIALTY (
     primary key (ID)
 )^
 -- end PETCLINIC_SPECIALTY
--- begin PETCLINIC_VET_SPECIALTY_LINK
-create table PETCLINIC_VET_SPECIALTY_LINK (
+-- begin PETCLINIC_VETERINARIAN_SPECIALTY_LINK
+create table PETCLINIC_VETERINARIAN_SPECIALTY_LINK (
     VET_ID uuid,
     SPECIALTY_ID uuid,
     primary key (VET_ID, SPECIALTY_ID)
 )^
--- end PETCLINIC_VET_SPECIALTY_LINK
+-- end PETCLINIC_VETERINARIAN_SPECIALTY_LINK

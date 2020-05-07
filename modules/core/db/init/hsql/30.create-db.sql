@@ -1,22 +1,22 @@
 ----------------------------------------------------------------------------------------------------
 -- Vets
 ----------------------------------------------------------------------------------------------------
-insert into PETCLINIC_VET
+insert into PETCLINIC_VETERINARIAN
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, FIRST_NAME, LAST_NAME)
 values ('0ff2af01-0864-fca9-17e3-61795c76bf26', 2, '2018-11-05 17:38:39', 'admin', '2018-11-05 17:45:54', 'admin', null, null, 'Professor', 'Oak');
-insert into PETCLINIC_VET
+insert into PETCLINIC_VETERINARIAN
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, FIRST_NAME, LAST_NAME)
 values ('3d9c0a8d-fe96-dd9d-e4c8-43622a40288b', 2, '2018-11-05 17:38:39', 'admin', '2018-11-05 17:45:54', 'admin', null, null, 'Professor', 'Elm');
-insert into PETCLINIC_VET
+insert into PETCLINIC_VETERINARIAN
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, FIRST_NAME, LAST_NAME)
 values ('89823558-4410-1ce6-bf08-e458a3635587', 2, '2018-11-05 17:41:39', 'admin', '2018-11-05 17:48:28', 'admin', null, null, 'Professor', 'Juniper');
-insert into PETCLINIC_VET
+insert into PETCLINIC_VETERINARIAN
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, FIRST_NAME, LAST_NAME)
 values ('a4b53456-6f77-77d7-910c-88f8d6246228', 2, '2018-11-05 17:41:23', 'admin', '2018-11-05 17:47:39', 'admin', null, null, 'Professor', 'Birch');
-insert into PETCLINIC_VET
+insert into PETCLINIC_VETERINARIAN
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, FIRST_NAME, LAST_NAME)
 values ('cd0696db-ceb2-cc38-3783-8df3ac86e411', 2, '2018-11-05 17:41:34', 'admin', '2018-11-05 17:48:01', 'admin', null, null, 'Professor', 'Rowan');
-insert into PETCLINIC_VET
+insert into PETCLINIC_VETERINARIAN
 (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, FIRST_NAME, LAST_NAME)
 values ('fae58016-f5ba-47c3-26f9-387dd4704e2d', 2, '2018-11-05 17:41:48', 'admin', '2018-11-05 17:48:48', 'admin', null, null, 'Professor', 'Sycamore');
 
@@ -37,12 +37,12 @@ INSERT INTO PETCLINIC_SPECIALTY (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, 
 ----------------------------------------------------------------------------------------------------
 -- Vets to Specialties Mappings
 ----------------------------------------------------------------------------------------------------
-INSERT INTO PETCLINIC_VET_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('0ff2af01-0864-fca9-17e3-61795c76bf26', '9d7fb940-4439-9366-5105-d7d7cc972a27');
-INSERT INTO PETCLINIC_VET_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('3d9c0a8d-fe96-dd9d-e4c8-43622a40288b', '1e4ab428-d357-7431-88a2-02bf9380caaf');
-INSERT INTO PETCLINIC_VET_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('89823558-4410-1ce6-bf08-e458a3635587', '90b5b561-c4d3-ebc2-e804-46927812fdce');
-INSERT INTO PETCLINIC_VET_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('a4b53456-6f77-77d7-910c-88f8d6246228', '72501593-d5ea-00ae-fa8e-b38e612c6938');
-INSERT INTO PETCLINIC_VET_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('cd0696db-ceb2-cc38-3783-8df3ac86e411', '9b285d08-ab03-1f78-50e9-eda4b78bf0b0');
-INSERT INTO PETCLINIC_VET_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('fae58016-f5ba-47c3-26f9-387dd4704e2d', '6875768e-5b6a-3e57-02de-01adc15dbd29');
+INSERT INTO PETCLINIC_VETERINARIAN_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('0ff2af01-0864-fca9-17e3-61795c76bf26', '9d7fb940-4439-9366-5105-d7d7cc972a27');
+INSERT INTO PETCLINIC_VETERINARIAN_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('3d9c0a8d-fe96-dd9d-e4c8-43622a40288b', '1e4ab428-d357-7431-88a2-02bf9380caaf');
+INSERT INTO PETCLINIC_VETERINARIAN_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('89823558-4410-1ce6-bf08-e458a3635587', '90b5b561-c4d3-ebc2-e804-46927812fdce');
+INSERT INTO PETCLINIC_VETERINARIAN_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('a4b53456-6f77-77d7-910c-88f8d6246228', '72501593-d5ea-00ae-fa8e-b38e612c6938');
+INSERT INTO PETCLINIC_VETERINARIAN_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('cd0696db-ceb2-cc38-3783-8df3ac86e411', '9b285d08-ab03-1f78-50e9-eda4b78bf0b0');
+INSERT INTO PETCLINIC_VETERINARIAN_SPECIALTY_LINK (VET_ID, SPECIALTY_ID) VALUES ('fae58016-f5ba-47c3-26f9-387dd4704e2d', '6875768e-5b6a-3e57-02de-01adc15dbd29');
 
 
 
@@ -168,3 +168,27 @@ values ('9e8d1501-cd36-3167-59d4-d33d63f08566', 4, '2020-05-06 20:59:56', 'admin
   </and>
 </filter>
 ', null, true, null);
+
+
+
+----------------------------------------------------------------------------------------------------
+-- Users
+----------------------------------------------------------------------------------------------------
+
+insert into SEC_USER
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, LOGIN, LOGIN_LC, PASSWORD, PASSWORD_ENCRYPTION, NAME, FIRST_NAME, LAST_NAME, MIDDLE_NAME, POSITION_, EMAIL, LANGUAGE_, TIME_ZONE, TIME_ZONE_AUTO, ACTIVE, CHANGE_PASSWORD_AT_LOGON, GROUP_ID, GROUP_NAMES, IP_MASK, SYS_TENANT_ID)
+values ('78c1b6c3-f217-dc2e-8af6-e1d502256dd0', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, 'joy', 'joy', '$2a$10$TiUlTNX6VKpyHgargbleuOOmxF6.tx44r/haVxq/5MVPYdWebo9Ly', 'bcrypt', 'Joy ', 'Joy', null, null, null, null, 'en', null, null, true, false, '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', null, null, null);
+
+
+
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('c3ac9428-ef84-3aa3-d864-2c729e540553', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'Nurse');
+
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('e017d481-d700-dc52-a974-b13a9e701655', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'system-minimal');
+
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('e159437c-5f09-8ee8-7827-8584123f4680', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'helium-theme-minimal');

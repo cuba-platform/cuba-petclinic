@@ -7,7 +7,7 @@ import com.haulmont.sample.petclinic.entity.visit.Visit;
 
 import javax.inject.Inject;
 
-@UiController("petclnic_myVisit")
+@UiController("petclinic_myVisits")
 @UiDescriptor("my-visits.xml")
 @LookupComponent("table")
 @LoadDataBeforeShow

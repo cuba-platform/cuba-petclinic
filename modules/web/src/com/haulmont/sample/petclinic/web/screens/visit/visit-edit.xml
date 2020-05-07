@@ -18,7 +18,7 @@
         </collection>
         <collection id="assignedNurseesDc" class="com.haulmont.cuba.security.entity.User" view="_minimal">
             <loader>
-                <query>select e from sec$User e</query>
+                <query>select u from sec$User u join u.userRoles ur where ur.roleName = 'Nurse'</query>
             </loader>
         </collection>
     </data>
