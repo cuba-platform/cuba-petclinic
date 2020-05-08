@@ -63,6 +63,7 @@ public class NurseRole extends AnnotatedRoleDefinition {
       "petclinic_PetType.browse",
       "petclinic_PetType.edit",
       "petclinic_Specialty.browse",
+      "petclinic_Specialty.lookup",
       "petclinic_Specialty.edit",
   })
   @Override
