@@ -4,6 +4,7 @@ import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Timer;
 import com.haulmont.cuba.gui.components.mainwindow.SideMenu;
+import com.haulmont.cuba.gui.components.mainwindow.SideMenu.MenuItem;
 import com.haulmont.cuba.gui.screen.OpenMode;
 import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.cuba.gui.screen.UiController;
@@ -30,9 +31,18 @@ public class ExtMainScreen extends MainScreen {
     protected ScreenBuilders screenBuilders;
 
     @Subscribe
-    protected void onAfterShow1(AfterShowEvent event) {
+    protected void initMainMenu(AfterShowEvent event) {
+        createMyVisitMenuItem();
+        openPetclinicMenuItem();
+    }
 
-        SideMenu.MenuItem myVisits = sideMenu.createMenuItem("myVisits");
+    private void openPetclinicMenuItem() {
+        final MenuItem petclinicMenu = sideMenu.getMenuItem("application-petclinic");
+        petclinicMenu.setExpanded(true);
+    }
+
+    private void createMyVisitMenuItem() {
+        MenuItem myVisits = sideMenu.createMenuItem("myVisits");
         myVisits.setBadgeText(amountOfVisits() + " Visits");
         myVisits.setCaption("My Visits");
         myVisits.setCommand(menuItem ->

@@ -1,0 +1,2 @@
+alter table PETCLINIC_VET_SPECIALTY_LINK add constraint FK_VETSPE_VET foreign key (VET_ID) references PETCLINIC_VET(ID);
+alter table PETCLINIC_VET_SPECIALTY_LINK add constraint FK_VETSPE_SPECIALTY foreign key (SPECIALTY_ID) references PETCLINIC_SPECIALTY(ID);
