@@ -17,18 +17,18 @@ import com.haulmont.sample.petclinic.entity.vet.Specialty;
 import com.haulmont.sample.petclinic.entity.vet.Veterinarian;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 
-@Role(name = NurseRole.NAME)
-public class NurseRole extends AnnotatedRoleDefinition {
+@Role(name = VeterinarianRole.NAME)
+public class VeterinarianRole extends AnnotatedRoleDefinition {
 
-  public final static String NAME = "Nurse";
+  public final static String NAME = "Veterinarian";
 
   @EntityAccess(entityClass = Visit.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
   @EntityAccess(entityClass = Pet.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
   @EntityAccess(entityClass = Owner.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
-  @EntityAccess(entityClass = PetType.class, operations = {EntityOp.READ})
-  @EntityAccess(entityClass = Specialty.class, operations = {EntityOp.READ})
-  @EntityAccess(entityClass = Veterinarian.class, operations = {EntityOp.READ})
-  @EntityAccess(entityClass = User.class, operations = {EntityOp.READ})
+  @EntityAccess(entityClass = PetType.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
+  @EntityAccess(entityClass = Specialty.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
+  @EntityAccess(entityClass = Veterinarian.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
+  @EntityAccess(entityClass = User.class, operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
   @Override
   public EntityPermissionsContainer entityPermissions() {
     return super.entityPermissions();
@@ -38,10 +38,10 @@ public class NurseRole extends AnnotatedRoleDefinition {
   @EntityAttributeAccess(entityClass = Owner.class, modify = "*")
   @EntityAttributeAccess(entityClass = Pet.class, modify = "*")
   @EntityAttributeAccess(entityClass = Visit.class, modify = "*")
-  @EntityAttributeAccess(entityClass = PetType.class, view = "*")
-  @EntityAttributeAccess(entityClass = Specialty.class, view = "*")
-  @EntityAttributeAccess(entityClass = Veterinarian.class, view = "*")
-  @EntityAttributeAccess(entityClass = User.class, view = "*")
+  @EntityAttributeAccess(entityClass = PetType.class, modify = "*")
+  @EntityAttributeAccess(entityClass = Specialty.class, modify = "*")
+  @EntityAttributeAccess(entityClass = Veterinarian.class, modify = "*")
+  @EntityAttributeAccess(entityClass = User.class, modify = "*")
   @EntityAttributeAccess(entityClass = Visit.class, modify = "pet") // TODO: remove when https://github.com/cuba-platform/cuba/issues/2869 is solved
   @Override
   public EntityAttributePermissionsContainer entityAttributePermissions() {
