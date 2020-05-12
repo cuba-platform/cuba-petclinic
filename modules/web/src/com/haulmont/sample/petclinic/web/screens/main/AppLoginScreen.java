@@ -50,6 +50,6 @@ public class AppLoginScreen extends LoginScreen {
     @Override
     protected void initLogoImage() {
         logoImage.setSource(RelativePathResource.class)
-                .setPath("VAADIN/brand-login-screen/cuba-icon-login.svg");
+                .setPath("VAADIN/brand-login-screen/petclinic_logo_body.svg");
     }
 }

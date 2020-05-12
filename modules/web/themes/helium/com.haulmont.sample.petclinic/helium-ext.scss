@@ -5,8 +5,8 @@
   --white_rgb: 255, 255, 255;
 
   /* Basic */
-  --primary-color: #6C5CE7;
-  --primary-color_rgb: 108, 92, 231;
+  --primary-color: #867AEB;
+  --primary-color_rgb: 134, 122, 235;
 
 
   --secondary-color: #FFD042;
@@ -15,9 +15,9 @@
 
   /* Common */
   /* Common */
-  --primary-color-shade-1: #4C3CE2;
-  --primary-color-shade-2: #3421DE;
-  --primary-dim-color: #958CEE;
+  --primary-color-shade-1: #6A5CE6;
+  --primary-color-shade-2: #4D3DE1;
+  --primary-dim-color: #AAA2F1;
   --secondary-color-shade-1: #FFC61A;
   --secondary-color-shade-2: #FABB00;
   --secondary-contrast-text-color: #2C3436;
@@ -43,7 +43,7 @@
   --sidemenu-item-focused-color: var(--white);
 
   --sedemenu-item-selected-color: var(--secondary-dim-color);
-  --sedemenu-item-selected-background-color: #000;
+  --sedemenu-item-selected-background-color: var(--main-menu-purple);
 
   --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
   --sidemenu-item-badge-background-color: var(--secondary-color);
@@ -64,6 +64,12 @@
 
   --groupbox-collapsed-caption-color: var(--white);
 
+
+  /* Table */
+  --table-hovered-row-background-color: #DFDBFD;
+  --table-selected-row-background-color: #DFDBFD;
+  --table-selected-row-border-color: #DFDBFD;
+  --table-selected-row-text-color: var(--text-main-color);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
   // Side menu
@@ -89,5 +95,15 @@
       content: '\f0d7';
       margin-left: -2em;
     }
+  }
+
+
+  .v-tooltip {
+    color: var(--secondary-contrast-text-color) !important;
+  }
+
+  // make visit-type selection color icons round
+  .v-select-optiongroup-visit-type .v-icon {
+    border-radius:3px;
   }
 }
