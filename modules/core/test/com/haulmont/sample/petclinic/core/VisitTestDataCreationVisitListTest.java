@@ -28,20 +28,20 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class VisitTestDataCreationVisitListTest {
 
+    private static final LocalDate TOMORROW = LocalDate.now().plusDays(1);
+    private static final LocalDateTime TOMORROW_MORNING = TOMORROW.atStartOfDay();
+
     VisitTestDataCreation visitTestDataCreation;
 
     @Mock
     PetclinicTestdataConfig petclinicTestdataConfig;
-
     @Mock
     TimeSource timeSource;
-    private RandomVisitDateTime randomVisitDateTime;
     @Mock
-    private DataManager dataManager;
-    private PetclinicData data;
+    DataManager dataManager;
 
-    private static final LocalDateTime TOMORROW_MORNING = LocalDateTime.now().plusDays(1).toLocalDate().atStartOfDay();
-    private static final LocalDate TOMORROW = TOMORROW_MORNING.toLocalDate();
+    PetclinicData data;
+
 
 
     @BeforeEach
@@ -50,8 +50,12 @@ class VisitTestDataCreationVisitListTest {
         when(dataManager.create(Visit.class))
                 .then(invocation -> new Visit());
 
-        randomVisitDateTime = new RandomVisitDateTime();
-        visitTestDataCreation = new VisitTestDataCreation(petclinicTestdataConfig, timeSource, dataManager, randomVisitDateTime);
+        visitTestDataCreation = new VisitTestDataCreation(
+            petclinicTestdataConfig,
+            timeSource,
+            dataManager,
+            new RandomVisitDateTime()
+        );
 
         when(timeSource.now())
                 .thenReturn(ZonedDateTime.now());
@@ -106,7 +110,6 @@ class VisitTestDataCreationVisitListTest {
         List<Visit> visits = visitTestDataCreation.createVisits();
 
         // then: the more far into the future, the less amount of visits are generated
-
         assertThat(amountOfVisitsForDate(visits, TOMORROW))
                 .isLessThan(10);
         assertThat(amountOfVisitsForDate(visits, TOMORROW.plusDays(7)))

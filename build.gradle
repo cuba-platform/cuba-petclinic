@@ -1,14 +1,14 @@
 buildscript {
-    ext.cubaVersion = '7.2.4'
-    repositories {
-        maven {
-            url 'https://dl.bintray.com/cuba-platform/main'
-        }
-        jcenter()
+  ext.cubaVersion = '7.2.4'
+  repositories {
+    maven {
+      url 'https://dl.bintray.com/cuba-platform/main'
     }
-    dependencies {
-        classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
-    }
+    jcenter()
+  }
+  dependencies {
+    classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
+  }
 }
 
 def modulePrefix = 'petclinic'
@@ -22,184 +22,181 @@ def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 apply(plugin: 'cuba')
 
 cuba {
-    artifact {
-        group = 'com.haulmont.sample.petclinic'
-        version = '0.1'
-        isSnapshot = true
-    }
+  artifact {
+    group = 'com.haulmont.sample.petclinic'
+    version = '0.1'
+    isSnapshot = true
+  }
 }
 
 dependencies {
-    appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent('com.haulmont.addon.helium:helium-global:0.2.0')
-
+  appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+  appComponent('com.haulmont.addon.helium:helium-global:0.2.0')
 }
 
 def hsql = 'org.hsqldb:hsqldb:2.4.1'
 
 configure([globalModule, coreModule, webModule]) {
-    apply(plugin: 'java')
-    apply(plugin: 'maven')
-    apply(plugin: 'cuba')
+  apply(plugin: 'java')
+  apply(plugin: 'maven')
+  apply(plugin: 'cuba')
 
-    dependencies {
-        testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
-        testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
-        testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
+  dependencies {
+    testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
+    testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
+    testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
 
-        testCompile("org.assertj:assertj-core:3.11.1")
+    testCompile("org.assertj:assertj-core:3.11.1")
 
-        testCompile 'org.mockito:mockito-core:3.2.4'
-        testCompile 'org.mockito:mockito-junit-jupiter:3.2.4'
-    }
+    testCompile 'org.mockito:mockito-core:3.2.4'
+    testCompile 'org.mockito:mockito-junit-jupiter:3.2.4'
+  }
 
-    task sourceJar(type: Jar) {
-        from file('src')
-        classifier = 'sources'
-    }
+  task sourceJar(type: Jar) {
+    from file('src')
+    classifier = 'sources'
+  }
 
-    artifacts {
-        archives sourceJar
-    }
+  artifacts {
+    archives sourceJar
+  }
 
-    test {
-        useJUnitPlatform()
-    }
+  test {
+    useJUnitPlatform()
+  }
 }
 
-
 configure(globalModule) {
-    dependencies {
-        if (!JavaVersion.current().isJava8()) {
-            runtime('javax.xml.bind:jaxb-api:2.3.1')
-            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
-        }
+  dependencies {
+    if (!JavaVersion.current().isJava8()) {
+      runtime('javax.xml.bind:jaxb-api:2.3.1')
+      runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
     }
+  }
 
-    entitiesEnhancing {
-        main {
-            enabled = true
-        }
+  entitiesEnhancing {
+    main {
+      enabled = true
     }
+  }
 }
 
 configure(coreModule) {
 
-    configurations {
-        jdbc
-        dbscripts
-    }
+  configurations {
+    jdbc
+    dbscripts
+  }
 
-    dependencies {
-        compile(globalModule)
-        compileOnly(servletApi)
-        jdbc(hsql)
-        testRuntime(hsql)
-    }
+  dependencies {
+    compile(globalModule)
+    compileOnly(servletApi)
+    jdbc(hsql)
+    testRuntime(hsql)
+  }
 
-    task cleanConf(description: 'Cleans up conf directory', type: Delete) {
-        delete "$cuba.appHome/${modulePrefix}-core/conf"
-    }
+  task cleanConf(description: 'Cleans up conf directory', type: Delete) {
+    delete "$cuba.appHome/${modulePrefix}-core/conf"
+  }
 
-    task deploy(dependsOn: [assemble, cleanConf], type: CubaDeployment) {
-        appName = "${modulePrefix}-core"
-        appJars(modulePrefix + '-global', modulePrefix + '-core')
-    }
+  task deploy(dependsOn: [assemble, cleanConf], type: CubaDeployment) {
+    appName = "${modulePrefix}-core"
+    appJars(modulePrefix + '-global', modulePrefix + '-core')
+  }
 
-    task startDb(type: CubaHsqlStart) {
-        dbName = 'petclinic'
-    }
+  task startDb(type: CubaHsqlStart) {
+    dbName = 'petclinic'
+  }
 
-    task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'hsql'
-        host = 'localhost'
-        dbName = 'petclinic'
-        dbUser = 'sa'
-        dbPassword = ''
-    }
+  task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
+    dbms = 'hsql'
+    host = 'localhost'
+    dbName = 'petclinic-3'
+    dbUser = 'sa'
+    dbPassword = ''
+  }
 
-    task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        dbms = 'hsql'
-        host = 'localhost'
-        dbName = 'petclinic'
-        dbUser = 'sa'
-        dbPassword = ''
-    }
+  task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
+    dbms = 'hsql'
+    host = 'localhost'
+    dbName = 'petclinic-3'
+    dbUser = 'sa'
+    dbPassword = ''
+  }
 }
 
 configure(webModule) {
-    configurations {
-        webcontent
-    }
+  configurations {
+    webcontent
+  }
 
-    dependencies {
-        compileOnly(servletApi)
-        compile(globalModule)
+  dependencies {
+    compileOnly(servletApi)
+    compile(globalModule)
 
+    testCompile('de.diedavids.sneferu:sneferu:0.3.1')
+  }
 
-        testCompile('de.diedavids.sneferu:sneferu:0.3.1')
-    }
+  task webArchive(type: Zip) {
+    from file("$buildDir/web")
+    from file('web')
+    classifier = 'web'
+  }
 
-    task webArchive(type: Zip) {
-        from file("$buildDir/web")
-        from file('web')
-        classifier = 'web'
-    }
+  artifacts {
+    archives webArchive
+  }
 
-    artifacts {
-        archives webArchive
-    }
+  task deployConf(type: Copy) {
+    from file('src')
+    include "com/haulmont/sample/petclinic/**"
+    into "$cuba.appHome/${modulePrefix}/conf"
+  }
 
-    task deployConf(type: Copy) {
-        from file('src')
-        include "com/haulmont/sample/petclinic/**"
-        into "$cuba.appHome/${modulePrefix}/conf"
-    }
+  task clearMessagesCache(type: CubaClearMessagesCache) {
+    appName = "${modulePrefix}"
+  }
+  deployConf.dependsOn clearMessagesCache
 
-    task clearMessagesCache(type: CubaClearMessagesCache) {
-        appName = "${modulePrefix}"
-    }
-    deployConf.dependsOn clearMessagesCache
+  task cleanConf(description: 'Cleans up conf directory', type: Delete) {
+    delete "$cuba.appHome/${modulePrefix}/conf"
+  }
 
-    task cleanConf(description: 'Cleans up conf directory', type: Delete) {
-        delete "$cuba.appHome/${modulePrefix}/conf"
-    }
+  task deploy(dependsOn: [assemble, cleanConf], type: CubaDeployment) {
+    appName = "${modulePrefix}"
+    appJars(modulePrefix + '-global', modulePrefix + '-web')
+  }
 
-    task deploy(dependsOn: [assemble, cleanConf], type: CubaDeployment) {
-        appName = "${modulePrefix}"
-        appJars(modulePrefix + '-global', modulePrefix + '-web')
-    }
+  task buildScssThemes(type: CubaWebScssThemeCreation)
 
-    task buildScssThemes(type: CubaWebScssThemeCreation)
+  task deployThemes(type: CubaDeployThemeTask, dependsOn: buildScssThemes)
 
-    task deployThemes(type: CubaDeployThemeTask, dependsOn: buildScssThemes)
+  assemble.dependsOn buildScssThemes
 
-    assemble.dependsOn buildScssThemes
+  task themesJar(type: Jar) {
+    from file('themes')
+    classifier = 'themes'
+  }
 
-    task themesJar(type: Jar) {
-        from file('themes')
-        classifier = 'themes'
-    }
-
-    artifacts {
-        archives themesJar
-    }
+  artifacts {
+    archives themesJar
+  }
 }
 
 task undeploy(type: Delete, dependsOn: ":${modulePrefix}-web:cleanConf") {
-    delete("$cuba.tomcat.dir/shared")
-    delete("$cuba.tomcat.dir/webapps/${modulePrefix}-core")
-    delete("$cuba.tomcat.dir/webapps/${modulePrefix}")
+  delete("$cuba.tomcat.dir/shared")
+  delete("$cuba.tomcat.dir/webapps/${modulePrefix}-core")
+  delete("$cuba.tomcat.dir/webapps/${modulePrefix}")
 }
 
 task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy"],
-        description: 'Redeploys applications and restarts local Tomcat') {
-    doLast {
-        ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
-            not {
-                socket(server: 'localhost', port: '8787')
-            }
-        }
+             description: 'Redeploys applications and restarts local Tomcat') {
+  doLast {
+    ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
+      not {
+        socket(server: 'localhost', port: '8787')
+      }
     }
+  }
 }
 restart.finalizedBy start

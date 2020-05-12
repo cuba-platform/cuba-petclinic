@@ -130,11 +130,10 @@ public class VisitTestDataCreation {
             return null;
         }
 
-
         Visit visit = dataManager.create(Visit.class);
 
         visit.setTreatmentStatus(treatmentStatusFor(date));
-        visit.setAssignedNurse(randomNurse());
+        visit.setAssignedNurse(randomNurse(date));
         visit.setPet(randomPet());
         visit.setType(randomVisitType());
         visit.setDescription(randomDescription());
@@ -145,31 +144,27 @@ public class VisitTestDataCreation {
         return visit;
     }
 
-    private User randomNurse() {
+    private User randomNurse(LocalDate date) {
 
-        final Optional<Role> nurseRole = loadRole("Nurse");
-
-        if (!nurseRole.isPresent()) {
+        if (nurseShouldBeAssigned(date)) {
             return null;
         }
-
         final List<User> possibleNurses = list(UserRole.class, viewBuilder -> {
-            viewBuilder.add("role", View.MINIMAL);
+            viewBuilder.add("roleName");
             viewBuilder.add("user", View.LOCAL);
         })
             .stream()
-            .filter(userRole -> userRole.getRole().equals(nurseRole))
+            .filter(userRole -> userRole.getRoleName().equals("Nurse"))
             .map(UserRole::getUser)
+            .distinct()
             .collect(Collectors.toList());
 
         return randomOfList(possibleNurses);
 
     }
 
-    private Optional<Role> loadRole(String roleName) {
-        return dataManager.load(Role.class)
-            .query("e.name = ?1", roleName)
-            .optional();
+    private boolean nurseShouldBeAssigned(LocalDate date) {
+        return date.isAfter(timeSource.now().toLocalDate().plusWeeks(1));
     }
 
     private VisitTreatmentStatus treatmentStatusFor(LocalDate date) {

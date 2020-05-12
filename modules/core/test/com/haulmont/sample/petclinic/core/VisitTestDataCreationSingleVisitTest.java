@@ -43,14 +43,12 @@ class VisitTestDataCreationSingleVisitTest {
 
     @Mock
     PetclinicTestdataConfig petclinicTestdataConfig;
-
     @Mock
     TimeSource timeSource;
     @Mock
-    private DataManager dataManager;
+    DataManager dataManager;
 
-    private RandomVisitDateTime randomVisitDateTime;
-    private PetclinicData data;
+    PetclinicData data;
 
 
     @BeforeEach
@@ -61,14 +59,18 @@ class VisitTestDataCreationSingleVisitTest {
         lenient().when(timeSource.now())
                 .thenReturn(ZonedDateTime.now());
 
-        randomVisitDateTime = new RandomVisitDateTime();
-        visitTestDataCreation = new VisitTestDataCreation(petclinicTestdataConfig, timeSource, dataManager, randomVisitDateTime);
+        visitTestDataCreation = new VisitTestDataCreation(
+            petclinicTestdataConfig,
+            timeSource,
+            dataManager,
+            new RandomVisitDateTime()
+        );
 
         data = new PetclinicData();
     }
 
     @Test
-    void when_createVisit_thenVisitContainsRandomValuesForTypeAndPetAndDescription() {
+    void when_createVisit_thenVisitContainsRandomValuesForTypeAndPetAndDescriptionAndNurse() {
 
         // given:
         possibleDescriptions("Fever, Disease");
@@ -99,6 +101,33 @@ class VisitTestDataCreationSingleVisitTest {
 
         assertThat(visit.getDescription())
                 .isIn("Fever", "Disease");
+    }
+
+
+    @Test
+    void when_createVisitInTheFutureMoreThenOneWeek_thenAssignedNurseIsNotSet() {
+
+        // given:
+        possibleDescriptions("Fever, Disease");
+
+        List<Pet> possiblePets = asList(
+                data.pet("Pikachu"),
+                data.pet("Garchomp")
+        );
+
+        possiblePets(possiblePets);
+
+        possibleNurses(asList(
+            data.nurse("Joy"),
+            data.nurse("Audino")
+        ));
+
+        // when:
+        Visit visit = visitTestDataCreation.createVisit(TOMORROW.plusDays(7));
+
+        // then:
+        assertThat(visit.getAssignedNurse())
+            .isNull();;
     }
 
 
@@ -169,24 +198,18 @@ class VisitTestDataCreationSingleVisitTest {
     }
 
     private void possibleNurses(List<User> nurses) {
-        final Role nurseRole = new Role();
 
         FluentLoader fluentLoader = mock(FluentLoader.class);
-        FluentLoader.ByQuery byQuery = mock(FluentLoader.ByQuery.class);
 
         lenient().when(dataManager.load(Role.class))
             .thenReturn(fluentLoader);
 
-        when(fluentLoader.query(anyString(), anyString()))
-            .thenReturn(byQuery);
-        when(byQuery.one())
-            .thenReturn(nurseRole);
 
         final List<UserRole> nursesUserRoles = nurses.stream()
             .map(user -> {
                 final UserRole userRole = new UserRole();
                 userRole.setUser(user);
-                userRole.setRole(nurseRole);
+                userRole.setRoleName("Nurse");
                 return userRole;
             })
             .collect(Collectors.toList());
@@ -195,7 +218,6 @@ class VisitTestDataCreationSingleVisitTest {
     }
     private <E extends Entity> void mockList(Class<E> entityClass, List<E> entityList) {
         FluentLoader fluentLoader = mock(FluentLoader.class);
-        FluentLoader.ByQuery byQuery = mock(FluentLoader.ByQuery.class);
 
         lenient().when(dataManager.load(entityClass))
             .thenReturn(fluentLoader);

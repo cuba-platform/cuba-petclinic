@@ -69,7 +69,7 @@ public class ExtMainScreen extends MainScreen {
 
     private int amountOfVisits() {
         return dataManager.load(Visit.class)
-                .query("e.assignedNurse = :currentUser")
+                .query("e.assignedNurse = :currentUser and e.treatmentStatus <> @enum(com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus.DONE)")
                 .parameter("currentUser", userSession.getCurrentOrSubstitutedUser())
                 .list().size();
     }

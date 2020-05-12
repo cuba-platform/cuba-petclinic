@@ -8,7 +8,7 @@
                     view="visit-with-pet">
             <loader id="visitsDl">
                 <query>
-                    <![CDATA[select e from petclinic_Visit e where e.assignedNurse = :currentUser]]>
+                    <![CDATA[select e from petclinic_Visit e where e.assignedNurse = :currentUser and e.treatmentStatus <> @enum(com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus.DONE)]]>
                 </query>
             </loader>
         </collection>
@@ -22,22 +22,32 @@
         <action id="save" icon="icons/ok.png" caption="mainMsg://actions.Ok" shortcut="CTRL-ENTER"/>
         <action id="cancel" icon="icons/cancel.png" caption="mainMsg://actions.Cancel" description="Esc"/>
     </actions>
-    <dialogMode height="600" width="800"/>
+    <dialogMode height="800" width="800"/>
     <layout>
             <vbox id="lookupBox" expand="table" height="100%" margin="false,true,false,false" spacing="true">
                 <table id="table"
                             width="100%"
                             contextMenuEnabled="false"
                             columnControlVisible="false"
+                            reorderingAllowed="false"
                             dataContainer="visitsDc">
                     <actions>
                         <action id="create" type="create"/>
                         <action id="edit" type="edit"/>
+                        <action id="start"
+                          trackSelection="true"
+                          icon="PLAY_CIRCLE_O"
+                          caption="msg://startWork"
+                        />
                     </actions>
                     <columns>
-                        <column id="visitStart" sort="DESCENDING"/>
+                        <column id="visitStart" sort="ASCENDING"/>
                         <column id="type"/>
+                        <column id="treatmentStatus"/>
                     </columns>
+                    <buttonsPanel>
+                        <button id="startBtn" width="100%" action="table.start" primary="true"/>
+                    </buttonsPanel>
                     <rowsCount/>
                 </table>
                 <hbox id="lookupActions" spacing="true" visible="false">
@@ -45,9 +55,9 @@
                     <button action="lookupCancelAction"/>
                 </hbox>
             </vbox>
-            <vbox id="editBox" height="100%" margin="false,false,false,true" expand="fieldGroupBox" spacing="true">
+            <vbox id="editBox"  margin="true" expand="fieldGroupBox" spacing="true">
                 <scrollBox id="fieldGroupBox">
-                    <form id="form" dataContainer="visitDc">
+                    <form id="form" dataContainer="visitDc" editable="false">
                         <column width="250px">
                             <dateField property="visitStart"/>
                             <lookupField id="typeField" property="type"/>
@@ -60,8 +70,6 @@
                     </form>
                 </scrollBox>
                 <hbox id="actionsPane" spacing="true" visible="false">
-                    <button id="saveBtn" action="save"/>
-                    <button id="cancelBtn" action="cancel"/>
                 </hbox>
             </vbox>
     </layout>

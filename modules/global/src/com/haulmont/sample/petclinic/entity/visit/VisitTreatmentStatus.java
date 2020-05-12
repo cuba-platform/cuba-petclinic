@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 public enum VisitTreatmentStatus implements EnumClass<String> {
 
   UPCOMING("UPCOMING"),
-    IN_PROGRESS("IN_PROGRESS"),
-    DONE("DONE");
+  IN_PROGRESS("IN_PROGRESS"),
+  DONE("DONE");
 
   private String id;
 

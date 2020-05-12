@@ -35,10 +35,10 @@
             spacing="true">
         <tabSheet id="contentTabSheet">
             <tab
-                    id="calenderTab"
+                    id="calendarTab"
                     spacing="true"
                     margin="true"
-                    caption="msg://calender"
+                    caption="msg://calendar"
                     expand="calendarFilter"
             >
                 <hbox spacing="true" id="calendarFilter" expand="split" width="100%">
@@ -153,6 +153,7 @@
                         <column id="visitEnd"/>
                         <column id="description"/>
                         <column id="type"/>
+                        <column id="treatmentStatus"/>
                         <column id="assignedNurse"/>
                     </columns>
                     <rowsCount/>
