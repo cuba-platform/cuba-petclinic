@@ -50,7 +50,7 @@
                             dockable="true"
                             dockMode="LEFT"
                     >
-                        <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="100%">
+                        <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="95%">
                             <groupBox stylename="light"
                                       width="100%"
                                       caption="msg://overview">
@@ -73,6 +73,7 @@
                                       width="100%"
                                       caption="msg://type">
                                 <checkBoxGroup id="typeMultiFilter"
+                                               stylename="visit-type"
                                                orientation="vertical"/>
                             </groupBox>
                         </vbox>
@@ -97,6 +98,7 @@
                                 </buttonsPanel>
                                 <label id="calendarTitle"
                                        stylename="h3"
+                                  align="MIDDLE_CENTER"
                                        icon="font-icon:CALENDAR"
                                        width="200px"/>
                             </hbox>

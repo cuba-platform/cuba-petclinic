@@ -39,14 +39,14 @@
                 htmlName="loginField"
                 icon="USER"
                 inputPrompt="mainMsg://loginWindow.loginPlaceholder"
-                stylename="c-login-field inline-icon"/>
+                stylename="c-login-field inline-icon username-field"/>
               <passwordField id="passwordField"
                 autocomplete="true"
                 capsLockIndicator="capsLockIndicator"
                 htmlName="passwordField"
                 icon="LOCK"
                 inputPrompt="mainMsg://loginWindow.passwordPlaceholder"
-                stylename="c-login-field inline-icon"/>
+                stylename="c-login-field inline-icon password-field"/>
               <hbox id="paramsBox"
                 align="MIDDLE_CENTER"
                 width="350px">

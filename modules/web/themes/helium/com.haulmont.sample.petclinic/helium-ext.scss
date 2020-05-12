@@ -1,61 +1,109 @@
 /* Define your theme modifications inside next mixin */
 @mixin com_haulmont_sample_petclinic-helium-ext {
-   --hell-lila: #867AEB;
-      --white: #FFFFFF;
+  --hell-lila: #867AEB;
+  --white: #FFFFFF;
+  --white_rgb: 255, 255, 255;
 
-        /* Basic */
-      --primary-color: #6C5CE7;
-      --primary-color_rgb: 108, 92, 231;
-      --secondary-color: #FDD58D;
-      --secondary-color_rgb: 253, 213, 141;
-      --success-color: #83C93C;
-
-        /* Common */
-      --primary-color-shade-1: #4C3CE2;
-      --primary-color-shade-2: #3421DE;
-      --primary-dim-color: #958CEE;
-      --secondary-color-shade-1: #FCC464;
-      --secondary-color-shade-2: #FBB53C;
-      --secondary-contrast-text-color: #2C3436;
-      --secondary-dim-color: #FDDFAA;
-      --success-color-shade-1: #75B332;
-      --success-color-shade-2: #689F2D;
-      --success-dim-color: #A7D874;
-      --text-dim-color: #6B7172;
-      --text-secondary-color: #2C3436;
-
-        /* SideMenu */
+  /* Basic */
+  --primary-color: #867AEB;
+  --primary-color_rgb: 134, 122, 235;
 
 
+  --secondary-color: #FFD042;
+  --secondary-color_rgb: 255, 208, 66;
+  --success-color: #83C93C;
 
-        --sidemenu-background-color: var(--hell-lila);
-        --sidemenu-text-color: var(--white);
+  /* Common */
+  /* Common */
+  --primary-color-shade-1: #6A5CE6;
+  --primary-color-shade-2: #4D3DE1;
+  --primary-dim-color: #AAA2F1;
+  --secondary-color-shade-1: #FFC61A;
+  --secondary-color-shade-2: #FABB00;
+  --secondary-contrast-text-color: #2C3436;
+  --secondary-dim-color: #FFDD75;
+  --success-color-shade-1: #75B332;
+  --success-color-shade-2: #689F2D;
+  --success-dim-color: #A7D874;
+  --text-dim-color: #6B7172;
+  --text-secondary-color: #2C3436;
 
-        --sidemenu-title-color: var(--sidemenu-text-color);
-        --sidemenu-title-background-color: var(--primary-color);
-
-        --sidemenu-item-focused-color: var(--white);
-
-        --sedemenu-item-selected-color: var(--white);
-        --sedemenu-item-selected-background-color: var(--primary-color);
-
-        --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
-        --sidemenu-item-badge-background-color: var(--secondary-color);
+  /* SideMenu */
 
 
-        --sidemenu-collapsible-submenu-background-color: var(--primary-color);
+  --dark-purple: #584CAE;
+  --main-menu-purple: #6356C0;
 
-        --sidemenu-collapsible-controls-panel-background-color: var(--primary-color);
+  --sidemenu-background-color: var(--main-menu-purple);
+  --sidemenu-text-color: var(--white);
 
-        --sidemenu-collapsible-action-button-color: var(--white);
-        --sidemenu-collapsible-action-button-hover-background-color: var(--primary-color);
-        --sidemenu-collapsible-action-button-active-background-color: var(--primary-color);
+  --sidemenu-title-color: var(--sidemenu-text-color);
+  --sidemenu-title-background-color: var(--dark-purple);
 
-        --sidemenu-collapsible-collapse-button-color: var(--white);
-        --sidemenu-collapsible-collapse-button-background-color: var(--primary-color);
-        --sidemenu-collapsible-collapse-button-hover-background-color: var(--primary-color);
-        --sidemenu-collapsible-collapse-button-active-background-color: var(--primary-color);
+  --sidemenu-item-focused-color: var(--white);
 
-        --groupbox-collapsed-caption-color: var(--white);
+  --sedemenu-item-selected-color: var(--secondary-dim-color);
+  --sedemenu-item-selected-background-color: var(--main-menu-purple);
 
+  --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
+  --sidemenu-item-badge-background-color: var(--secondary-color);
+
+
+  --sidemenu-collapsible-submenu-background-color: var(--main-menu-purple);
+
+  --sidemenu-collapsible-controls-panel-background-color: var(--dark-purple);
+
+  --sidemenu-collapsible-action-button-color: var(--white);
+  --sidemenu-collapsible-action-button-hover-background-color: var(--primary-color);
+  --sidemenu-collapsible-action-button-active-background-color: var(--primary-color);
+
+  --sidemenu-collapsible-collapse-button-color: var(--white);
+  --sidemenu-collapsible-collapse-button-background-color: var(--dark-purple);
+  --sidemenu-collapsible-collapse-button-hover-background-color: var(--primary-color);
+  --sidemenu-collapsible-collapse-button-active-background-color: var(--primary-color);
+
+  --groupbox-collapsed-caption-color: var(--white);
+
+
+  /* Table */
+  --table-hovered-row-background-color: #DFDBFD;
+  --table-selected-row-background-color: #DFDBFD;
+  --table-selected-row-border-color: #DFDBFD;
+  --table-selected-row-text-color: var(--text-main-color);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  // Side menu
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  .c-sidemenu-panel {
+
+    .c-sidemenu-item-action.c-sidemenu-item-focused {
+      color: var(--secondary-dim-color) !important;
+    }
+
+    .c-sidemenu-item-header-open .c-sidemenu-item-wrap {
+      color: #{'rgba(var(--white_rgb), 0.5)'} !important;
+      border-bottom: 1px solid #{'rgba(var(--white_rgb), 0.3)'};
+      margin: 0;
+    }
+    .c-sidemenu-item-header-open .c-sidemenu-item-wrap::after {
+      font-family: FontAwesome;
+      content: '\f0d8' !important;
+      margin-left: -2em;
+    }
+    .c-sidemenu-item-header .c-sidemenu-item-wrap::after {
+      font-family: FontAwesome;
+      content: '\f0d7';
+      margin-left: -2em;
+    }
+  }
+
+
+  .v-tooltip {
+    color: var(--secondary-contrast-text-color) !important;
+  }
+
+  // make visit-type selection color icons round
+  .v-select-optiongroup-visit-type .v-icon {
+    border-radius:3px;
+  }
 }

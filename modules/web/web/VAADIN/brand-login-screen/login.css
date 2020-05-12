@@ -10,17 +10,35 @@
   height: 40px;
   width: 350px;
   margin-top: 10px;
+  border-radius: 0px !important;
+}
+
+.c-login-wrapper .c-login-field.password-field {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  margin-top: -15px;
+}
+
+.c-login-wrapper .c-login-field.username-field {
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
 }
 
 .c-login-wrapper .c-login-button {
-  background: #1b6198;
-  border-radius: 2px;
+  background: #6356C0;
+  border: 1px solid #867AEB;
+  border-radius: 6px;
   color: #e8eff5;
   margin-top: 30px;
   height: 45px;
-  width: 200px;
+  width: 350px;
   box-shadow: none;
   font-weight: 700;
+}
+.c-login-wrapper .c-login-button:hover {
+  border: 1px solid #6356C0 !important;
+  background: #867AEB !important;
+  color: #e8eff5 !important;
 }
 
 .c-login-background {
@@ -38,7 +56,7 @@
 
 .c-login-welcome-label {
   font-size: 25px;
-  color: #1b6198;
+  color: #6356C0;
   font-weight: 600;
 }
 

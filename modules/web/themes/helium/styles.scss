@@ -16,6 +16,7 @@
     // Weekly view event background color
     .v-calendar-week-wrapper .v-calendar-event-#{$event-name} .v-calendar-event-content {
       background-color: $background-color;
+      border:none;
     }
 }
 
@@ -26,9 +27,9 @@
   @include com_haulmont_sample_petclinic-helium-ext;
 
 
-  @include calendar-event(event-red, #e00000, #f4c8c8);
-  @include calendar-event(event-green, #3c853a, #c8f4ca);
-  @include calendar-event(event-yellow, #7f7e76, #f4efc8);
-  @include calendar-event(event-purple, #ffffff, #b411dd);
-  @include calendar-event(event-blue, #00a2d9, #bae0f3);
+  @include calendar-event(event-red, #DF6679, #FFC8D0);
+  @include calendar-event(event-green, #23BA75, #BAF2D8);
+  @include calendar-event(event-yellow, #E3A023, #FFE2AD);
+  @include calendar-event(event-purple, #6E64B9, #D6D0FF);
+  @include calendar-event(event-blue, #249FAF, #BAF7FF);
 }
