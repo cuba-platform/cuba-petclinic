@@ -5,11 +5,11 @@
         messagesPack="com.haulmont.sample.petclinic.web.vet.vet">
     <data readOnly="true">
         <collection id="vetsDc"
-                    class="com.haulmont.sample.petclinic.entity.vet.Vet"
+                    class="com.haulmont.sample.petclinic.entity.vet.Veterinarian"
                     view="vet-with-specialties">
             <loader id="vetsDl">
                 <query>
-                    <![CDATA[select e from petclinic_Vet e]]>
+                    <![CDATA[select e from petclinic_Veterinarian e]]>
                 </query>
             </loader>
         </collection>

@@ -8,12 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-@Table(name = "PETCLINIC_VET")
-@Entity(name = "petclinic_Vet")
-public class Vet extends Person {
+@Table(name = "PETCLINIC_VETERINARIAN")
+@Entity(name = "petclinic_Veterinarian")
+public class Veterinarian extends Person {
     private static final long serialVersionUID = 8571203926820669424L;
 
-    @JoinTable(name = "PETCLINIC_VET_SPECIALTY_LINK",
+    @JoinTable(name = "PETCLINIC_VETERINARIAN_SPECIALTY_LINK",
         joinColumns = @JoinColumn(name = "VET_ID"),
         inverseJoinColumns = @JoinColumn(name = "SPECIALTY_ID"))
     @ManyToMany

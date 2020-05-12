@@ -5,7 +5,7 @@
         messagesPack="com.haulmont.sample.petclinic.web.vet.vet">
     <data>
         <instance id="vetDc"
-                  class="com.haulmont.sample.petclinic.entity.vet.Vet"
+                  class="com.haulmont.sample.petclinic.entity.vet.Veterinarian"
                   view="vet-with-specialties">
             <loader/>
 
