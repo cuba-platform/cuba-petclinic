@@ -106,4 +106,44 @@
   .v-select-optiongroup-visit-type .v-icon {
     border-radius:3px;
   }
+
+  table.possible-users th, table.possible-users td  {
+    padding: 5px;
+  }
+  .possible-user {
+    background-color:var(--dark-purple);
+    color: var(--sidemenu-text-color);
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  .possible-role {
+    background-color:#BAF7FF;
+    color: #249FAF;
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  .possible-user-password {
+    background-color:#FFC8D0;
+    color: #DF6679;
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  .possible-user-password::before {
+     font-family: FontAwesome;
+     content: '\f023';
+    padding-right: 10px;
+   }
+  .possible-user::before {
+    padding-right: 10px;
+     font-family: FontAwesome;
+     content: '\f007';
+   }
+  .possible-role::before {
+    padding-right: 10px;
+     font-family: FontAwesome;
+     content: '\f0c0';
+   }
 }

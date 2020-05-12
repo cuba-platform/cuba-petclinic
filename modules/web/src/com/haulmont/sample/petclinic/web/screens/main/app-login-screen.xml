@@ -7,6 +7,9 @@
       caption="msg://loginWindow.okButton"
       shortcut="ENTER"/>
   </actions>
+  <facets>
+    <messageDialog id="helpDialog" caption="msg://helpLoginDialogCaption" message="msg://helpDialogMessage" contentMode="HTML" />
+  </facets>
   <layout>
     <cssLayout id="mainLayout"
       height="100%"
@@ -33,6 +36,7 @@
               value="mainMsg://loginWindow.welcomeLabel"/>
             <capsLockIndicator id="capsLockIndicator"
               align="MIDDLE_CENTER"/>
+            <linkButton id="helpBtn" icon="font-icon:QUESTION_CIRCLE_O" caption="msg://loginHelp" align="BOTTOM_RIGHT" />
             <vbox id="loginForm"
               spacing="true">
               <textField id="loginField"

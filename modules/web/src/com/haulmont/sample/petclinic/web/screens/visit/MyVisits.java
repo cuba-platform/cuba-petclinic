@@ -6,7 +6,6 @@ import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.Notifications.NotificationType;
 import com.haulmont.cuba.gui.actions.list.EditAction;
 import com.haulmont.cuba.gui.components.Action.ActionPerformedEvent;
-import com.haulmont.cuba.gui.components.ListComponent;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
@@ -45,6 +44,8 @@ public class MyVisits extends MasterDetailScreen<Visit> {
   protected InstanceContainer<Visit> visitDc;
   @Inject
   protected DataManager dataManager;
+  @Inject
+  protected MessageBundle messageBundle;
 
   @Subscribe
   protected void onInit(InitEvent event) {
@@ -62,8 +63,45 @@ public class MyVisits extends MasterDetailScreen<Visit> {
 
   @Subscribe("table.start")
   protected void onStart(ActionPerformedEvent event) {
-    final Visit visitToStart = table.getSingleSelected();
-    visitToStart.setTreatmentStatus(VisitTreatmentStatus.IN_PROGRESS);
+    final Visit visit = table.getSingleSelected();
+
+    if (visit.hasStarted()) {
+      petTreatmentWarningMessage("treatmentAlreadyStarted", visit.getPetName());
+    }
+    else {
+      updateTreatmentTo(visit, VisitTreatmentStatus.IN_PROGRESS);
+      petTreatmentSuccessMessage("treatmentStarted", visit.getPetName());
+    }
+  }
+
+  @Subscribe("table.finish")
+  protected void onTableFinish(ActionPerformedEvent event) {
+    final Visit visit = table.getSingleSelected();
+
+    if (visit.hasFinished()) {
+      petTreatmentWarningMessage("treatmentAlreadyFinished", visit.getPetName());
+    }
+    else {
+      updateTreatmentTo(visit, VisitTreatmentStatus.DONE);
+      petTreatmentSuccessMessage("treatmentFinished", visit.getPetName());
+    }
+  }
+
+  private void petTreatmentWarningMessage(String messageKey, String petName) {
+    message(messageKey, petName, NotificationType.WARNING);
+  }
+
+  private void petTreatmentSuccessMessage(String messageKey, String petName) {
+    message(messageKey, petName, NotificationType.TRAY);
+  }
+
+  private void message(String messageKey, String petName, NotificationType warning) {
+    notifications.create(warning)
+        .withCaption(messageBundle.formatMessage(messageKey, petName))
+        .show();
+  }
+  private void updateTreatmentTo(Visit visitToStart, VisitTreatmentStatus targetStatus) {
+    visitToStart.setTreatmentStatus(targetStatus);
     dataManager.commit(visitToStart);
     visitsDl.load();
   }

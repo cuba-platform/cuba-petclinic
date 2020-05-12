@@ -22,7 +22,7 @@
         <action id="save" icon="icons/ok.png" caption="mainMsg://actions.Ok" shortcut="CTRL-ENTER"/>
         <action id="cancel" icon="icons/cancel.png" caption="mainMsg://actions.Cancel" description="Esc"/>
     </actions>
-    <dialogMode height="800" width="800"/>
+    <dialogMode height="600" width="800" resizable="true"/>
     <layout>
             <vbox id="lookupBox" expand="table" height="100%" margin="false,true,false,false" spacing="true">
                 <table id="table"
@@ -37,7 +37,12 @@
                         <action id="start"
                           trackSelection="true"
                           icon="PLAY_CIRCLE_O"
-                          caption="msg://startWork"
+                          caption="msg://start"
+                        />
+                        <action id="finish"
+                          trackSelection="true"
+                          icon="CHECK_CIRCLE_O"
+                          caption="msg://finish"
                         />
                     </actions>
                     <columns>
@@ -46,7 +51,8 @@
                         <column id="treatmentStatus"/>
                     </columns>
                     <buttonsPanel>
-                        <button id="startBtn" width="100%" action="table.start" primary="true"/>
+                        <button id="startBtn" action="table.start" primary="true"/>
+                        <button id="finishBtn" action="table.finish" stylename="secondary"/>
                     </buttonsPanel>
                     <rowsCount/>
                 </table>

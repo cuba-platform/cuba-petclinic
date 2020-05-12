@@ -1,5 +1,7 @@
 package com.haulmont.sample.petclinic.entity.visit;
 
+import static com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus.*;
+
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
@@ -74,7 +76,7 @@ public class Visit extends StandardEntity {
     private String treatmentStatus;
 
     public VisitTreatmentStatus getTreatmentStatus() {
-        return treatmentStatus == null ? null : VisitTreatmentStatus.fromId(treatmentStatus);
+        return treatmentStatus == null ? null : fromId(treatmentStatus);
     }
 
     public void setTreatmentStatus(VisitTreatmentStatus treatmentStatus) {
@@ -120,4 +122,17 @@ public class Visit extends StandardEntity {
     public Pet getPet() {
         return pet;
     }
+
+    public boolean hasStarted() {
+        return inTreatmentStatus(IN_PROGRESS) || inTreatmentStatus(DONE);
+    }
+
+    public boolean hasFinished() {
+        return inTreatmentStatus(DONE);
+    }
+
+    private boolean inTreatmentStatus(VisitTreatmentStatus inProgress) {
+        return getTreatmentStatus().equals(inProgress);
+    }
+
 }
