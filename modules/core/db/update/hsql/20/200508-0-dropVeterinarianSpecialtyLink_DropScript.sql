@@ -1,1 +1,0 @@
-drop table PETCLINIC_VETERINARIAN_SPECIALTY_LINK__U78391 if exists cascade ;

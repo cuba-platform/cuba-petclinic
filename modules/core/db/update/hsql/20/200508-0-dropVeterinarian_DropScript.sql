@@ -1,1 +1,0 @@
-drop table PETCLINIC_VETERINARIAN__U31145 if exists cascade ;

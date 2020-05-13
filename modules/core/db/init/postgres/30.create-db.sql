@@ -1,5 +1,3 @@
-
-
 ----------------------------------------------------------------------------------------------------
 -- Vets
 ----------------------------------------------------------------------------------------------------
@@ -145,3 +143,106 @@ INSERT INTO PETCLINIC_PET (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATE
 INSERT INTO PETCLINIC_PET (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, IDENTIFICATION_NUMBER, BIRTH_DATE, TYPE_ID, OWNER_ID) VALUES ('e66f31a9-fa41-3e76-e881-d139439afc27', 1, '2018-11-06 08:07:44.372000', 'admin', '2018-11-06 08:07:44.372000', null, null, null, 'Murkrow', '198', '1998-03-11', 'f3520ed7-47a0-b8a4-722c-41c3eeb663b4', '1dd854d8-b5a2-79d5-5734-2207aa949ec4');
 INSERT INTO PETCLINIC_PET (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, IDENTIFICATION_NUMBER, BIRTH_DATE, TYPE_ID, OWNER_ID) VALUES ('ebc6b61a-e6cc-8b95-4139-cc76fd408539', 1, '2018-11-06 12:05:35.403000', 'admin', '2018-11-06 12:05:35.403000', null, null, null, 'Goldeen', '118', '1998-05-15', '1e2abb1f-5f77-865e-17fa-b67e85497523', 'c3bb4197-4189-c26a-2aa9-35c0ebb9faa4');
 INSERT INTO PETCLINIC_PET (ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAME, IDENTIFICATION_NUMBER, BIRTH_DATE, TYPE_ID, OWNER_ID) VALUES ('f6c097bb-8fcf-55d1-3949-342f98cc7e62', 1, '2018-11-06 16:08:57.900000', 'admin', '2018-11-06 16:08:57.900000', null, null, null, 'Psyduck', '054', '1998-09-19', '1e2abb1f-5f77-865e-17fa-b67e85497523', 'c3bb4197-4189-c26a-2aa9-35c0ebb9faa4');
+
+
+
+----------------------------------------------------------------------------------------------------
+-- Filter
+----------------------------------------------------------------------------------------------------
+
+insert into SEC_FILTER
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, COMPONENT, NAME, CODE, XML, USER_ID, GLOBAL_DEFAULT, SYS_TENANT_ID)
+values ('9e8d1501-cd36-3167-59d4-d33d63f08566', 4, '2020-05-06 20:59:56', 'admin', '2020-05-06 21:04:07', 'admin', null, null, '[petclinic_Visit.browse].filter', 'Default', null, '<?xml version="1.0" encoding="UTF-8"?>
+
+<filter>
+  <and>
+    <c name="pet" class="com.haulmont.sample.petclinic.entity.pet.Pet" operatorType="EQUAL" width="1" type="PROPERTY"><![CDATA[e.pet.id = :component$filter.pet30363]]>
+      <param name="component$filter.pet30363" javaClass="com.haulmont.sample.petclinic.entity.pet.Pet">NULL</param>
+    </c>
+    <c name="pet.owner" class="com.haulmont.sample.petclinic.entity.owner.Owner" caption="Owner" operatorType="EQUAL" width="1" type="PROPERTY"><![CDATA[e.pet.owner.id = :component$filter.pet_owner60844]]>
+      <param name="component$filter.pet_owner60844" javaClass="com.haulmont.sample.petclinic.entity.owner.Owner">NULL</param>
+    </c>
+    <c name="type" class="com.haulmont.sample.petclinic.entity.visit.VisitType" operatorType="EQUAL" width="1" type="PROPERTY"><![CDATA[e.type = :component$filter.type42592]]>
+      <param name="component$filter.type42592" javaClass="com.haulmont.sample.petclinic.entity.visit.VisitType">NULL</param>
+    </c>
+  </and>
+</filter>
+', null, true, null);
+
+
+
+----------------------------------------------------------------------------------------------------
+-- Users
+----------------------------------------------------------------------------------------------------
+
+-- Nurse Joy
+insert into SEC_USER
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, LOGIN, LOGIN_LC, PASSWORD, PASSWORD_ENCRYPTION, NAME, FIRST_NAME, LAST_NAME, MIDDLE_NAME, POSITION_, EMAIL, LANGUAGE_, TIME_ZONE, TIME_ZONE_AUTO, ACTIVE, CHANGE_PASSWORD_AT_LOGON, GROUP_ID, GROUP_NAMES, IP_MASK, SYS_TENANT_ID)
+values ('78c1b6c3-f217-dc2e-8af6-e1d502256dd0', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, 'joy', 'joy', '$2a$10$TiUlTNX6VKpyHgargbleuOOmxF6.tx44r/haVxq/5MVPYdWebo9Ly', 'bcrypt', 'Nurse Joy', 'Nurse', 'Joy', null, null, null, 'en', null, null, true, false, '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', null, null, null);
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('c3ac9428-ef84-3aa3-d864-2c729e540553', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'Nurse');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('e017d481-d700-dc52-a974-b13a9e701655', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'system-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('e159437c-5f09-8ee8-7827-8584123f4680', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'helium-theme-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('e159437c-5f09-8ee8-7827-8584123f4681', 1, '2020-05-07 15:57:26', 'admin', '2020-05-07 15:57:26', null, null, null, '78c1b6c3-f217-dc2e-8af6-e1d502256dd0', null, 'Employee');
+
+
+
+-- Nurse Comfey
+insert into SEC_USER
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, LOGIN, LOGIN_LC, PASSWORD, PASSWORD_ENCRYPTION, NAME, FIRST_NAME, LAST_NAME, MIDDLE_NAME, POSITION_, EMAIL, LANGUAGE_, TIME_ZONE, TIME_ZONE_AUTO, ACTIVE, CHANGE_PASSWORD_AT_LOGON, GROUP_ID, GROUP_NAMES, IP_MASK, SYS_TENANT_ID)
+values ('5769d573-a189-70a1-896f-a5c367a51290', 1, '2020-05-12 09:34:58', 'admin', '2020-05-12 09:34:58', null, null, null, 'comfey', 'comfey', '$2a$10$5J.1mQv1jbqjVBAjrLTdVu73i0dEYV6Uzayq.4lhKWFyzT.xxUuKC', 'bcrypt', 'Nurse Comfey', 'Nurse', 'Comfey', null, null, null, 'en', null, null, true, false, '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', null, null, null);
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('7a5aa7c2-7aee-b5ba-ff87-f50d755ad357', 1, '2020-05-12 09:34:58', 'admin', '2020-05-12 09:34:58', null, null, null, '5769d573-a189-70a1-896f-a5c367a51290', null, 'Nurse');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('8ff5621d-1fef-31e1-1c49-ad076b3b1ca8', 1, '2020-05-12 09:34:58', 'admin', '2020-05-12 09:34:58', null, null, null, '5769d573-a189-70a1-896f-a5c367a51290', null, 'system-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('2ce1241a-5924-32ee-6152-02d530ac52ae', 1, '2020-05-12 09:34:58', 'admin', '2020-05-12 09:34:58', null, null, null, '5769d573-a189-70a1-896f-a5c367a51290', null, 'helium-theme-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('2ce1241a-5924-32ee-6152-02d530ac52a1', 1, '2020-05-12 09:34:58', 'admin', '2020-05-12 09:34:58', null, null, null, '5769d573-a189-70a1-896f-a5c367a51290', null, 'Employee');
+
+
+
+-- Prof. Oak
+insert into SEC_USER
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, LOGIN, LOGIN_LC, PASSWORD, PASSWORD_ENCRYPTION, NAME, FIRST_NAME, LAST_NAME, MIDDLE_NAME, POSITION_, EMAIL, LANGUAGE_, TIME_ZONE, TIME_ZONE_AUTO, ACTIVE, CHANGE_PASSWORD_AT_LOGON, GROUP_ID, GROUP_NAMES, IP_MASK, SYS_TENANT_ID)
+values ('a16a7c13-8909-9dbf-6b64-80c15da25042', 1, '2020-05-12 19:20:17', 'admin', '2020-05-12 19:20:17', null, null, null, 'oak', 'oak', '$2a$10$m3UYVx.NKqAn/Yoy7NHwluV2pR2RbjxJm5WARMjbQ2X3A89u2PbfO', 'bcrypt', 'Prof. Oak', 'Prof.', 'Oak', null, null, null, 'en', null, null, true, false, '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', null, null, null);
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('bd5b097c-4782-3598-e10d-ddf88af799c1', 1, '2020-05-12 19:20:17', 'admin', '2020-05-12 19:20:17', null, null, null, 'a16a7c13-8909-9dbf-6b64-80c15da25042', null, 'system-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('bd5b097c-4782-3598-e10d-ddf88af799c2', 1, '2020-05-12 19:20:17', 'admin', '2020-05-12 19:20:17', null, null, null, 'a16a7c13-8909-9dbf-6b64-80c15da25042', null, 'helium-theme-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('bd5b097c-4782-3598-e10d-ddf88af744dd', 1, '2020-05-12 19:20:17', 'admin', '2020-05-12 19:20:17', null, null, null, 'a16a7c13-8909-9dbf-6b64-80c15da25042', null, 'Veterinarian');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('bd5b097c-4782-3598-e10d-ddf88af744de', 1, '2020-05-12 19:20:17', 'admin', '2020-05-12 19:20:17', null, null, null, 'a16a7c13-8909-9dbf-6b64-80c15da25042', null, 'Employee');
+
+-- Prof. Juniper
+insert into SEC_USER
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, LOGIN, LOGIN_LC, PASSWORD, PASSWORD_ENCRYPTION, NAME, FIRST_NAME, LAST_NAME, MIDDLE_NAME, POSITION_, EMAIL, LANGUAGE_, TIME_ZONE, TIME_ZONE_AUTO, ACTIVE, CHANGE_PASSWORD_AT_LOGON, GROUP_ID, GROUP_NAMES, IP_MASK, SYS_TENANT_ID)
+values ('0859b00d-1278-5714-d9cf-50e49cf65c31', 1, '2020-05-12 19:23:41', 'admin', '2020-05-12 19:23:41', null, null, null, 'juniper', 'juniper', '$2a$10$oLluGjvwtwJwpjC8Xlz0zuFjQbpg8e5UiL.xtUkUkskU.WW8MtwYi', 'bcrypt', 'Prof. Juniper', 'Prof.', 'Juniper', null, null, null, 'en', null, null, true, false, '0fa2b1a5-1d68-4d69-9fbd-dff348347f93', null, null, null);
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('c6ba9697-a71c-3577-2775-8b1355201365', 1, '2020-05-12 19:23:41', 'admin', '2020-05-12 19:23:41', null, null, null, '0859b00d-1278-5714-d9cf-50e49cf65c31', null, 'system-minimal');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('c6ba9697-a71c-3577-2775-8b1355204c21', 1, '2020-05-12 19:23:41', 'admin', '2020-05-12 19:23:41', null, null, null, '0859b00d-1278-5714-d9cf-50e49cf65c31', null, 'Veterinarian');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('c6ba9697-a71c-3577-2775-8b1355204c22', 1, '2020-05-12 19:23:41', 'admin', '2020-05-12 19:23:41', null, null, null, '0859b00d-1278-5714-d9cf-50e49cf65c31', null, 'Employee');
+insert into SEC_USER_ROLE
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, USER_ID, ROLE_ID, ROLE_NAME)
+values ('c6ba9697-a71c-3577-2775-8b1355204c23', 1, '2020-05-12 19:23:41', 'admin', '2020-05-12 19:23:41', null, null, null, '0859b00d-1278-5714-d9cf-50e49cf65c31', null, 'helium-theme-minimal');

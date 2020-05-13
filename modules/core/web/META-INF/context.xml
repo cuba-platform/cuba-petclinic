@@ -8,7 +8,7 @@
       maxIdle="2"
       maxWaitMillis="5000"
       driverClassName="org.hsqldb.jdbc.JDBCDriver"
-      url="jdbc:hsqldb:hsql://localhost/petclinic-3"
+      url="jdbc:hsqldb:hsql://localhost/petclinic"
       username="sa"
       password=""/>
 
