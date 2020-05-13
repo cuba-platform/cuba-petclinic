@@ -7,8 +7,8 @@
 }
 
 .c-login-wrapper .c-login-field {
-  height: 40px;
-  width: 350px;
+  height: 40px !important;
+  width: 350px !important;
   margin-top: 10px;
   border-radius: 0px !important;
 }
@@ -19,21 +19,29 @@
   margin-top: -15px;
 }
 
+.dark .c-login-wrapper .c-login-field.password-field {
+  margin-top: -12px;
+}
+
+.dark .v-caption-password-field .v-icon {
+  margin-top: -12px;
+}
+
 .c-login-wrapper .c-login-field.username-field {
   border-top-left-radius: 6px !important;
   border-top-right-radius: 6px !important;
 }
 
 .c-login-wrapper .c-login-button {
-  background: #6356C0;
-  border: 1px solid #867AEB;
-  border-radius: 6px;
-  color: #e8eff5;
-  margin-top: 30px;
-  height: 45px;
-  width: 350px;
-  box-shadow: none;
-  font-weight: 700;
+  background: #6356C0 !important;
+  border: 1px solid #867AEB !important;
+  border-radius: 6px !important;
+  color: #e8eff5 !important;
+  margin-top: 30px !important;
+  height: 45px !important;
+  width: 350px !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
 }
 .c-login-wrapper .c-login-button:hover {
   border: 1px solid #6356C0 !important;

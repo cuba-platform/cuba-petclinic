@@ -2,6 +2,7 @@
 @import "com.haulmont.sample.petclinic/helium-ext-defaults";
 @import "app-components";
 @import "com.haulmont.sample.petclinic/helium-ext";
+@import "com.haulmont.sample.petclinic/helium-ext-dark";
 
 @mixin calendar-event($event-name, $text-color, $background-color) {
 
@@ -25,6 +26,21 @@
   @include app_components;
 
   @include com_haulmont_sample_petclinic-helium-ext;
+
+
+  @include calendar-event(event-red, #DF6679, #FFC8D0);
+  @include calendar-event(event-green, #23BA75, #BAF2D8);
+  @include calendar-event(event-yellow, #E3A023, #FFE2AD);
+  @include calendar-event(event-purple, #6E64B9, #D6D0FF);
+  @include calendar-event(event-blue, #249FAF, #BAF7FF);
+}
+
+.helium.dark {
+  // include auto-generated app components SCSS
+  @include app_components;
+
+  @include com_haulmont_sample_petclinic-helium-ext;
+  @include com_haulmont_sample_petclinic-helium-ext-dark;
 
 
   @include calendar-event(event-red, #DF6679, #FFC8D0);

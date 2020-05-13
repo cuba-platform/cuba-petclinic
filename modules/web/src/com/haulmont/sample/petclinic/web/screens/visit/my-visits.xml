@@ -51,8 +51,14 @@
                         <column id="treatmentStatus"/>
                     </columns>
                     <buttonsPanel>
-                        <button id="startBtn" action="table.start" primary="true"/>
-                        <button id="finishBtn" action="table.finish" stylename="secondary"/>
+                        <button id="startBtn"
+                          action="table.start"
+                          primary="true"
+                        />
+                        <button id="finishBtn"
+                          action="table.finish"
+                          stylename="secondary"
+                        />
                     </buttonsPanel>
                     <rowsCount/>
                 </table>

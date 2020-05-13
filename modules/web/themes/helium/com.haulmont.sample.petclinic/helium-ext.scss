@@ -1,6 +1,5 @@
 /* Define your theme modifications inside next mixin */
 @mixin com_haulmont_sample_petclinic-helium-ext {
-  --hell-lila: #867AEB;
   --white: #FFFFFF;
   --white_rgb: 255, 255, 255;
 
@@ -43,13 +42,13 @@
   --sidemenu-item-focused-color: var(--white);
 
   --sedemenu-item-selected-color: var(--secondary-dim-color);
-  --sedemenu-item-selected-background-color: var(--main-menu-purple);
+  --sedemenu-item-selected-background-color: none;
 
   --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
   --sidemenu-item-badge-background-color: var(--secondary-color);
 
 
-  --sidemenu-collapsible-submenu-background-color: var(--main-menu-purple);
+  --sidemenu-collapsible-submenu-background-color: none;
 
   --sidemenu-collapsible-controls-panel-background-color: var(--dark-purple);
 
@@ -85,11 +84,13 @@
       border-bottom: 1px solid #{'rgba(var(--white_rgb), 0.3)'};
       margin: 0;
     }
+
     .c-sidemenu-item-header-open .c-sidemenu-item-wrap::after {
       font-family: FontAwesome;
       content: '\f0d8' !important;
       margin-left: -2em;
     }
+
     .c-sidemenu-item-header .c-sidemenu-item-wrap::after {
       font-family: FontAwesome;
       content: '\f0d7';
@@ -104,46 +105,46 @@
 
   // make visit-type selection color icons round
   .v-select-optiongroup-visit-type .v-icon {
-    border-radius:3px;
+    border-radius: 3px;
   }
 
-  table.possible-users th, table.possible-users td  {
+  table.possible-users th, table.possible-users td {
     padding: 5px;
   }
   .possible-user {
-    background-color:var(--dark-purple);
+    background-color: var(--dark-purple);
     color: var(--sidemenu-text-color);
     padding: 3px;
     border-radius: 3px;
     margin-right: 10px;
   }
   .possible-role {
-    background-color:#BAF7FF;
+    background-color: #BAF7FF;
     color: #249FAF;
     padding: 3px;
     border-radius: 3px;
     margin-right: 10px;
   }
   .possible-user-password {
-    background-color:#FFC8D0;
+    background-color: #FFC8D0;
     color: #DF6679;
     padding: 3px;
     border-radius: 3px;
     margin-right: 10px;
   }
   .possible-user-password::before {
-     font-family: FontAwesome;
-     content: '\f023';
+    font-family: FontAwesome;
+    content: '\f023';
     padding-right: 10px;
-   }
+  }
   .possible-user::before {
     padding-right: 10px;
-     font-family: FontAwesome;
-     content: '\f007';
-   }
+    font-family: FontAwesome;
+    content: '\f007';
+  }
   .possible-role::before {
     padding-right: 10px;
-     font-family: FontAwesome;
-     content: '\f0c0';
-   }
+    font-family: FontAwesome;
+    content: '\f0c0';
+  }
 }
