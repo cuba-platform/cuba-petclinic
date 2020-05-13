@@ -31,6 +31,7 @@
   --groupbox-collapsed-caption-color: var(--secondary-contrast-text-color);
 
   .v-calendar-month-day-today .v-calendar-event,
+  .v-calendar-month-day-today .v-calendar-event .v-calendar-event-time,
   .v-calendar-month-day-today .v-calendar-bottom-spacer {
     color: var(--primary-color);
   }

@@ -147,4 +147,15 @@
     font-family: FontAwesome;
     content: '\f0c0';
   }
+
+
+  .v-calendar-month-day-today .v-calendar-event,
+  .v-calendar-month-day-today .v-calendar-event .v-calendar-event-time,
+  .v-calendar-month-day-today .v-calendar-bottom-spacer {
+    color: var(--white);
+  }
+
+  .v-calendar-month-day-today .v-calendar-bottom-spacer:hover {
+    color: var(--white);
+  }
 }
