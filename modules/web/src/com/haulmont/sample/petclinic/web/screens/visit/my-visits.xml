@@ -1,0 +1,88 @@
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://myVisits"
+        focusComponent="table"
+        messagesPack="com.haulmont.sample.petclinic.web.screens.visit">
+    <data>
+        <collection id="visitsDc"
+                    class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                    view="visit-with-pet">
+            <loader id="visitsDl">
+                <query>
+                    <![CDATA[select e from petclinic_Visit e where e.assignedNurse = :currentUser and e.treatmentStatus <> @enum(com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus.DONE)]]>
+                </query>
+            </loader>
+        </collection>
+        <instance id="visitDc"
+                  class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                  view="visit-with-pet">
+            <loader/>
+        </instance>
+    </data>
+    <actions>
+        <action id="save" icon="icons/ok.png" caption="mainMsg://actions.Ok" shortcut="CTRL-ENTER"/>
+        <action id="cancel" icon="icons/cancel.png" caption="mainMsg://actions.Cancel" description="Esc"/>
+    </actions>
+    <dialogMode height="600" width="800" resizable="true"/>
+    <layout>
+            <vbox id="lookupBox" expand="table" height="100%" margin="false,true,false,false" spacing="true">
+                <table id="table"
+                            width="100%"
+                            contextMenuEnabled="false"
+                            columnControlVisible="false"
+                            reorderingAllowed="false"
+                            dataContainer="visitsDc">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="start"
+                          trackSelection="true"
+                          icon="PLAY_CIRCLE_O"
+                          caption="msg://start"
+                        />
+                        <action id="finish"
+                          trackSelection="true"
+                          icon="CHECK_CIRCLE_O"
+                          caption="msg://finish"
+                        />
+                    </actions>
+                    <columns>
+                        <column id="visitStart" sort="ASCENDING"/>
+                        <column id="type"/>
+                        <column id="treatmentStatus"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button id="startBtn"
+                          action="table.start"
+                          primary="true"
+                        />
+                        <button id="finishBtn"
+                          action="table.finish"
+                          stylename="secondary"
+                        />
+                    </buttonsPanel>
+                    <rowsCount/>
+                </table>
+                <hbox id="lookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </vbox>
+            <vbox id="editBox"  margin="true" expand="fieldGroupBox" spacing="true">
+                <scrollBox id="fieldGroupBox">
+                    <form id="form" dataContainer="visitDc" editable="false">
+                        <column width="250px">
+                            <dateField property="visitStart"/>
+                            <lookupField id="typeField" property="type"/>
+                            <textArea rows="5" property="description" colspan="2" width="100%"/>
+                        </column>
+                        <column width="250px">
+                            <dateField property="visitEnd"/>
+                            <lookupPickerField property="pet" />
+                        </column>
+                    </form>
+                </scrollBox>
+                <hbox id="actionsPane" spacing="true" visible="false">
+                </hbox>
+            </vbox>
+    </layout>
+</window>

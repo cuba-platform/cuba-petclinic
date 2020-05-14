@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="specialtiesTable"
+        messagesPack="com.haulmont.sample.petclinic.web.screens.veterinarian.specialty">
+    <data readOnly="true">
+        <collection id="specialtiesDc"
+                    class="com.haulmont.sample.petclinic.entity.veterinarian.Specialty"
+                    view="_local">
+            <loader id="specialtiesDl">
+                <query>
+                    <![CDATA[select e from petclinic_Specialty e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="specialtiesTable"
+            spacing="true">
+        <table id="specialtiesTable"
+               width="100%"
+               dataContainer="specialtiesDc">
+            <columns>
+                <column id="name"/>
+            </columns>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

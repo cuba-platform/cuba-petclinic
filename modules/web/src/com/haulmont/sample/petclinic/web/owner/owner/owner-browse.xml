@@ -29,8 +29,8 @@
                     width="100%">
             <actions>
                 <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="bulkEdit" type="bulkEdit"/>
+                <action id="view" type="view" />
+                <action id="excel" type="excel"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
@@ -45,9 +45,9 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="ownersTable.create"/>
-                <button id="editBtn" action="ownersTable.edit"/>
-                <button id="bulkEditBtn" action="ownersTable.bulkEdit"/>
-                <button id="removeBtn" action="ownersTable.remove"/>
+                <button id="viewBtn" action="ownersTable.view"/>
+                <button id="excelBtn" action="ownersTable.excel" stylename="friendly"/>
+                <button id="removeBtn" action="ownersTable.remove"  stylename="danger"/>
                 <relatedEntities for="ownersTable" openType="DIALOG"/>
             </buttonsPanel>
         </groupTable>

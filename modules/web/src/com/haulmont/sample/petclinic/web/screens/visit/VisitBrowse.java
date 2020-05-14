@@ -96,13 +96,22 @@ public class VisitBrowse extends StandardLookup<Visit> {
 
     @Subscribe("calendar")
     protected void onCalendarCalendarDayClick(Calendar.CalendarDateClickEvent<LocalDateTime> event) {
-        notifications.create(Notifications.NotificationType.TRAY).withCaption("date clicked").show();
-        atDate(CalendarMode.DAY, event.getDate().toLocalDate());
+        atDate(
+            CalendarMode.DAY,
+            event.getDate().toLocalDate()
+        );
     }
 
     @Subscribe("calendar")
     protected void onCalendarCalendarWeekClick(Calendar.CalendarWeekClickEvent<LocalDateTime> event) {
-        atDate(CalendarMode.WEEK, startOfWeek(event.getYear(), event.getWeek(), userSessionSource.getLocale()));
+        atDate(
+            CalendarMode.WEEK,
+            startOfWeek(
+                event.getYear(),
+                event.getWeek(),
+                userSessionSource.getLocale()
+            )
+        );
     }
 
     @Subscribe("navigatorPrevious")

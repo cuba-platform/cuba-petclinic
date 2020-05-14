@@ -44,13 +44,14 @@
                 <buttonsPanel>
                     <button action="petsTable.create"/>
                     <button action="petsTable.edit"/>
-                    <button action="petsTable.remove"/>
+                    <button action="petsTable.remove"  stylename="danger"/>
                 </buttonsPanel>
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
+            <button action="enableEditing"/>
         </hbox>
     </layout>
 </window>

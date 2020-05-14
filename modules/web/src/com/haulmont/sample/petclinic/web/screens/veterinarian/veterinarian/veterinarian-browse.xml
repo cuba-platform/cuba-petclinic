@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="veterinariansTable"
+        messagesPack="com.haulmont.sample.petclinic.web.screens.veterinarian.veterinarian">
+    <data readOnly="true">
+        <collection id="veterinariansDc"
+                    class="com.haulmont.sample.petclinic.entity.veterinarian.Veterinarian"
+                    view="veterinarian-with-specialties">
+            <loader id="veterinariansDl">
+                <query>
+                    <![CDATA[select e from petclinic_Veterinarian e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="veterinariansTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="veterinariansTable"
+                dataLoader="veterinariansDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="veterinariansTable"
+                    dataContainer="veterinariansDc"
+                    width="100%">
+            <actions>
+                <action id="create" type="create" />
+                <action id="view" type="view">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="remove" />
+            </actions>
+            <columns>
+                <column id="firstName"/>
+                <column id="lastName"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="veterinariansTable.create"/>
+                <button id="viewBtn" action="veterinariansTable.view"/>
+                <button id="removeBtn" action="veterinariansTable.remove"  stylename="danger"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

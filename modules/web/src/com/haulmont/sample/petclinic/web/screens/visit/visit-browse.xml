@@ -35,23 +35,22 @@
             spacing="true">
         <tabSheet id="contentTabSheet">
             <tab
-                    id="calenderTab"
+                    id="calendarTab"
                     spacing="true"
                     margin="true"
-                    caption="msg://calender"
+                    caption="msg://calendar"
                     expand="calendarFilter"
             >
                 <hbox spacing="true" id="calendarFilter" expand="split" width="100%">
                     <split
                             orientation="horizontal"
                             id="split"
-                            pos="30"
+                            pos="20"
                             height="100%"
                             dockable="true"
                             dockMode="LEFT"
-
                     >
-                        <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="100%">
+                        <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="95%">
                             <groupBox stylename="light"
                                       width="100%"
                                       caption="msg://overview">
@@ -65,6 +64,7 @@
                                       caption="msg://calendarMode">
                                 <radioButtonGroup
                                         width="100%"
+                                        orientation="horizontal"
                                         stylename="button-switcher"
                                         optionsEnum="com.haulmont.sample.petclinic.web.screens.visit.CalendarMode"
                                         id="calendarMode"
@@ -74,6 +74,7 @@
                                       width="100%"
                                       caption="msg://type">
                                 <checkBoxGroup id="typeMultiFilter"
+                                               stylename="visit-type"
                                                orientation="vertical"/>
                             </groupBox>
                         </vbox>
@@ -86,11 +87,9 @@
                         >
                             <hbox expand="navigator" spacing="true" margin="true">
                                 <buttonsPanel id="navigator" align="MIDDLE_RIGHT" margin="false" spacing="false">
-
                                     <button id="navigatorCurrent"
                                             stylename="borderless-colored"
                                             icon="HOME"/>
-
                                     <button id="navigatorPrevious"
                                             stylename="borderless-colored"
                                             icon="CARET_LEFT"/>
@@ -100,6 +99,7 @@
                                 </buttonsPanel>
                                 <label id="calendarTitle"
                                        stylename="h3"
+                                  align="MIDDLE_CENTER"
                                        icon="font-icon:CALENDAR"
                                        width="200px"/>
                             </hbox>
@@ -116,16 +116,14 @@
                                       stylenameProperty="typeStyle"
                                       navigationButtonsVisible="false"/>
                         </vbox>
-
                     </split>
-
                 </hbox>
             </tab>
             <tab
                     id="tableTab"
                     spacing="true"
                     margin="true"
-                    caption="msg://table"
+                    caption="msg://visitList"
                     expand="visitsTable">
                 <filter id="filter"
                         applyTo="visitsTable"
@@ -133,12 +131,22 @@
                     <properties include=".*"/>
                 </filter>
                 <groupTable id="visitsTable"
+                            multiselect="true"
                             dataContainer="visitsDc"
                             width="100%">
                     <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
+                        <action id="create" type="create">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="edit" type="edit">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
                         <action id="remove" type="remove"/>
+                        <action id="bulkEdit" type="bulkEdit"/>
                     </actions>
                     <columns>
                         <column id="pet"/>
@@ -146,13 +154,16 @@
                         <column id="visitEnd"/>
                         <column id="description"/>
                         <column id="type"/>
+                        <column id="treatmentStatus"/>
+                        <column id="assignedNurse"/>
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
                                   alwaysVisible="true">
                         <button id="createBtn" action="visitsTable.create"/>
                         <button id="editBtn" action="visitsTable.edit"/>
-                        <button id="removeBtn" action="visitsTable.remove"/>
+                        <button id="removeBtn" action="visitsTable.remove" stylename="danger"/>
+                        <button id="bulkEditBtn" action="visitsTable.bulkEdit"/>
                     </buttonsPanel>
                 </groupTable>
             </tab>

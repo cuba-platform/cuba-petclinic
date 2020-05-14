@@ -27,17 +27,21 @@
         </collection>
     </data>
 
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode
+            width="800px"
+            height="600px"
+            forceDialog="true" />
 
     <layout expand="editActions" spacing="true">
         <form id="fieldGroup" dataContainer="petDc">
             <column width="250px">
-                <textField property="name"/>
-                <textField property="identificationNumber"/>
-                <dateField property="birthDate"/>
+                <textField property="name" colspan="2" width="100%"/>
                 <lookupPickerField property="type" optionsContainer="typesDc"/>
                 <lookupPickerField property="owner" optionsContainer="ownersDc"/>
+            </column>
+            <column width="250px">
+                <textField property="identificationNumber"/>
+                <dateField property="birthDate"/>
             </column>
         </form>
 

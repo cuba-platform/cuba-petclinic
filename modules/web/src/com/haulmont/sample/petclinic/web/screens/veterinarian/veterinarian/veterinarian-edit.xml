@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.sample.petclinic.web.screens.veterinarian.veterinarian">
+    <data>
+        <instance id="veterinarianDc"
+                  class="com.haulmont.sample.petclinic.entity.veterinarian.Veterinarian"
+                  view="veterinarian-with-specialties">
+            <loader/>
+
+            <collection id="specialtiesDc" property="specialties"/>
+        </instance>
+
+    </data>
+
+    <dialogMode height="600"
+                width="800"/>
+
+    <layout expand="editActions" spacing="true">
+        <form id="fieldGroup" dataContainer="veterinarianDc">
+            <column width="250px">
+                <textField property="firstName"/>
+                <textField property="lastName"/>
+            </column>
+        </form>
+
+        <groupBox id="specialtiesBox" caption="msg://specialties" stylename="light">
+            <table id="specialtiesTable" dataContainer="specialtiesDc" height="100%" width="100%">
+                <buttonsPanel>
+                    <button action="specialtiesTable.add"/>
+                    <button action="specialtiesTable.remove"  stylename="danger"/>
+                </buttonsPanel>
+                <actions>
+                    <action id="add" type="add">
+                        <properties>
+                            <property name="openMode" value="DIALOG"/>
+                            <property name="screenClass" value="com.haulmont.sample.petclinic.web.screens.veterinarian.specialty.SpecialtyLookup"/>
+                        </properties>
+                    </action>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                </columns>
+            </table>
+        </groupBox>
+
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+            <button action="enableEditing"/>
+        </hbox>
+    </layout>
+</window>

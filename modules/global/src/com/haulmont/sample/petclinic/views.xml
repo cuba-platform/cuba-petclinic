@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
-    <view class="com.haulmont.sample.petclinic.entity.vet.Vet"
+    <view class="com.haulmont.sample.petclinic.entity.veterinarian.Veterinarian"
           extends="_local"
-          name="vet-with-specialties">
+          name="veterinarian-with-specialties">
         <property name="specialties"
                   view="_minimal"/>
     </view>
@@ -11,6 +11,7 @@
           name="visit-with-pet">
         <property name="pet"
                   view="_minimal"/>
+        <property name="assignedNurse" view="_minimal"/>
     </view>
     <view class="com.haulmont.sample.petclinic.entity.owner.Owner"
           extends="_local"

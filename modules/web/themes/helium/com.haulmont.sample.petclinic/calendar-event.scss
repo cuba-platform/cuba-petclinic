@@ -1,0 +1,16 @@
+@mixin calendar-event($event-name, $text-color, $background-color) {
+
+  .v-calendar-event.#{$event-name} {
+    background-color: $background-color;
+    color: $text-color;
+  }
+  // Weekly view event text color, Monthly view event 'point' color
+  .v-calendar-week-wrapper .v-calendar-event-#{$event-name}, .v-calendar-event-#{$event-name}:before {
+    color: $text-color;
+  }
+  // Weekly view event background color
+  .v-calendar-week-wrapper .v-calendar-event-#{$event-name} .v-calendar-event-content {
+    background-color: $background-color;
+    border:none;
+  }
+}

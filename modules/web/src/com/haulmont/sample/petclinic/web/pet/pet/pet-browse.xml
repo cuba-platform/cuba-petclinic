@@ -59,7 +59,7 @@
     <layout expand="petsTable" spacing="true">
 
         <hbox width="100%" spacing="true">
-            <tabSheet id="filterTabSheet" stylename="framed">
+            <tabSheet id="filterTabSheet">
                 <tab id="defaultFilterTab" caption="msg://defaultFilter" margin="true" spacing="true">
                     <hbox spacing="true">
                         <textField
@@ -112,6 +112,7 @@
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
+                <action id="excel" type="excel"/>
                 <action id="clearFilter"
                         caption="msg://clearFilter"
                         icon="ERASER"/>
@@ -127,7 +128,8 @@
             <buttonsPanel id="buttonsPanel" alwaysVisible="true">
                 <button id="createBtn" action="petsTable.create"/>
                 <button id="editBtn" action="petsTable.edit"/>
-                <button id="removeBtn" action="petsTable.remove"/>
+                <button id="removeBtn" action="petsTable.remove" stylename="danger"/>
+                <button id="excelBtn" action="petsTable.excel" stylename="friendly"/>
             </buttonsPanel>
             <rows/>
         </groupTable>
