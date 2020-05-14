@@ -1,4 +1,4 @@
-package com.haulmont.sample.petclinic.entity.vet;
+package com.haulmont.sample.petclinic.entity.veterinarian;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

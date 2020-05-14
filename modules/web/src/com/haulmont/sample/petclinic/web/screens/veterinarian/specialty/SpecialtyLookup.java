@@ -1,8 +1,7 @@
-package com.haulmont.sample.petclinic.web.screens.vet.specialty;
+package com.haulmont.sample.petclinic.web.screens.veterinarian.specialty;
 
-import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.screen.*;
-import com.haulmont.sample.petclinic.entity.vet.Specialty;
+import com.haulmont.sample.petclinic.entity.veterinarian.Specialty;
 
 @UiController("petclinic_Specialty.lookup")
 @UiDescriptor("specialty-lookup.xml")

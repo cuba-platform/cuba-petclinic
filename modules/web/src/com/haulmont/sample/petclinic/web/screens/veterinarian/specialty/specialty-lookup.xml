@@ -3,10 +3,10 @@
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://browseCaption"
         focusComponent="specialtiesTable"
-        messagesPack="com.haulmont.sample.petclinic.web.screens.vet.specialty">
+        messagesPack="com.haulmont.sample.petclinic.web.screens.veterinarian.specialty">
     <data readOnly="true">
         <collection id="specialtiesDc"
-                    class="com.haulmont.sample.petclinic.entity.vet.Specialty"
+                    class="com.haulmont.sample.petclinic.entity.veterinarian.Specialty"
                     view="_local">
             <loader id="specialtiesDl">
                 <query>

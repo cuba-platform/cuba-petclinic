@@ -13,8 +13,8 @@ import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
 import com.haulmont.sample.petclinic.entity.owner.Owner;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import com.haulmont.sample.petclinic.entity.pet.PetType;
-import com.haulmont.sample.petclinic.entity.vet.Specialty;
-import com.haulmont.sample.petclinic.entity.vet.Veterinarian;
+import com.haulmont.sample.petclinic.entity.veterinarian.Specialty;
+import com.haulmont.sample.petclinic.entity.veterinarian.Veterinarian;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 
 @Role(name = NurseRole.NAME)

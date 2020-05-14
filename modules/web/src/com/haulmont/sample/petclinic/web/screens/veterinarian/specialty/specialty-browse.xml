@@ -2,10 +2,10 @@
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://browseCaption"
         focusComponent="table"
-        messagesPack="com.haulmont.sample.petclinic.web.screens.vet.specialty">
+        messagesPack="com.haulmont.sample.petclinic.web.screens.veterinarian.specialty">
     <data>
         <collection id="specialtiesDc"
-                    class="com.haulmont.sample.petclinic.entity.vet.Specialty"
+                    class="com.haulmont.sample.petclinic.entity.veterinarian.Specialty"
                     view="_local">
             <loader id="specialtiesDl">
                 <query>
@@ -14,7 +14,7 @@
             </loader>
         </collection>
         <instance id="specialtyDc"
-                  class="com.haulmont.sample.petclinic.entity.vet.Specialty"
+                  class="com.haulmont.sample.petclinic.entity.veterinarian.Specialty"
                   view="_local">
             <loader/>
         </instance>

@@ -21,20 +21,6 @@ You can find the CUBA Petclinic as an online hosted example here: [CUBA Petclini
 
 ## Domain model
 
-
 ![CUBA Petclinic Domain model](https://github.com/cuba-platform/cuba-petclinic/blob/master/img/domain-model.png)
-
-
-## starting the application
-
-#### start database
-```
-./start-db.sh
-```
-
-#### start application
-```
-./restart-server.sh
-```
 
 
