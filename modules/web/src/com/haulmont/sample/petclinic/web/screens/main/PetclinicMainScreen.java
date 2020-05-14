@@ -26,8 +26,8 @@ import javax.inject.Inject;
 
 
 @UiController("extMainScreen")
-@UiDescriptor("ext-main-screen.xml")
-public class ExtMainScreen extends MainScreen {
+@UiDescriptor("petclinic-main-screen.xml")
+public class PetclinicMainScreen extends MainScreen {
 
     @Inject
     protected SideMenu sideMenu;
@@ -52,13 +52,15 @@ public class ExtMainScreen extends MainScreen {
         createMyVisitMenuItem();
         openPetclinicMenuItem();
 
-      final String currentThemeMode = heliumThemeVariantsManager.loadUserAppThemeModeSettingOrDefault();
-      updateThemeModeIcon(targetThemeIcons.get(currentThemeMode));
+        final HeliumThemeSwitchBtnMode currentThemeMode = HeliumThemeSwitchBtnMode
+            .fromId(heliumThemeVariantsManager.loadUserAppThemeModeSettingOrDefault());
+        updateHeliumSwitchBtn(currentThemeMode);
 
     }
 
-    private void updateThemeModeIcon(Icons.Icon icon) {
-        switchThemeModeBtn.setIconFromSet(icon);
+    private void updateHeliumSwitchBtn(HeliumThemeSwitchBtnMode mode) {
+        switchThemeModeBtn.setIconFromSet(mode.getIcon());
+        switchThemeModeBtn.setStyleName(mode.getStyleName());
     }
 
 
@@ -100,22 +102,25 @@ public class ExtMainScreen extends MainScreen {
     @Subscribe("switchThemeMode")
     protected void onSwitchThemeMode(ActionPerformedEvent event) {
 
-        final String otherMode = newTargetThemeMode();
+        final HeliumThemeSwitchBtnMode newTargetThemeMode = newTargetThemeMode();
 
-        heliumThemeVariantsManager.setUserAppThemeMode(otherMode);
+        heliumThemeVariantsManager.setUserAppThemeMode(newTargetThemeMode.getName());
         Page.getCurrent().reload();
-        updateThemeModeIcon(targetThemeIcons.get(otherMode));
+        updateHeliumSwitchBtn(newTargetThemeMode);
     }
 
-    private String newTargetThemeMode() {
-        return heliumThemeVariantsManager
-            .getAppThemeModeList()
-            .stream()
-            .filter(mode -> !mode.equals(
-                heliumThemeVariantsManager.loadUserAppThemeModeSettingOrDefault())
-            )
-            .findFirst()
-            .orElse("light");
+    private HeliumThemeSwitchBtnMode newTargetThemeMode() {
+
+        return HeliumThemeSwitchBtnMode.fromId(
+            heliumThemeVariantsManager
+                .getAppThemeModeList()
+                .stream()
+                .filter(mode -> !mode.equals(
+                    heliumThemeVariantsManager.loadUserAppThemeModeSettingOrDefault())
+                )
+                .findFirst()
+                .orElse("light")
+        );
     }
 
 

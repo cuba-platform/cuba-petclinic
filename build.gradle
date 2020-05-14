@@ -24,8 +24,8 @@ apply(plugin: 'cuba')
 cuba {
   artifact {
     group = 'com.haulmont.sample.petclinic'
-    version = '0.1'
-    isSnapshot = true
+    version = '2.0'
+    isSnapshot = false
   }
 }
 
@@ -78,6 +78,14 @@ configure(globalModule) {
     main {
       enabled = true
     }
+  }
+  buildInfo {
+    appName = 'CUBA Petclinic'
+    properties = [
+        'License': 'Apache License 2.0',
+        'Github': 'https://github.com/cuba-platform/cuba-petclinic',
+        'Issue Tracker': 'https://github.com/cuba-platform/cuba-petclinic/issues'
+    ]
   }
 }
 

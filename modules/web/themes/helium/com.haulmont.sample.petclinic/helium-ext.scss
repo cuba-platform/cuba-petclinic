@@ -25,12 +25,8 @@
   --success-color-shade-1: #75B332;
   --success-color-shade-2: #689F2D;
   --success-dim-color: #A7D874;
-  --text-dim-color: #6B7172;
-  --text-secondary-color: #2C3436;
 
   /* SideMenu */
-
-
   --dark-purple: #584CAE;
   --main-menu-purple: #6356C0;
 
@@ -160,10 +156,29 @@
     color: var(--white);
   }
 
+  .light-switch {
+    border: none;
+  }
+  .light-switch:hover {
+    border: 1px solid var(--secondary-contrast-text-color) !important;
+  }
+  .dark-switch {
+    background-color: var(--secondary-contrast-text-color);
+    border: none;
+    color: var(--secondary-color);
+  }
+
+  .dark-switch:hover {
+    background-color: var(--secondary-contrast-text-color) !important;
+    border: 1px solid var(--secondary-dim-color) !important;
+    color: var(--secondary-dim-color) !important;
+  }
 
   @include calendar-event(event-red, #DF6679, #FFC8D0);
   @include calendar-event(event-green, #23BA75, #BAF2D8);
   @include calendar-event(event-yellow, #E3A023, #FFE2AD);
   @include calendar-event(event-purple, #6E64B9, #D6D0FF);
   @include calendar-event(event-blue, #249FAF, #BAF7FF);
+
+
 }

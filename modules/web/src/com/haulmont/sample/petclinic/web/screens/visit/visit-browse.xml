@@ -64,6 +64,7 @@
                                       caption="msg://calendarMode">
                                 <radioButtonGroup
                                         width="100%"
+                                        orientation="horizontal"
                                         stylename="button-switcher"
                                         optionsEnum="com.haulmont.sample.petclinic.web.screens.visit.CalendarMode"
                                         id="calendarMode"

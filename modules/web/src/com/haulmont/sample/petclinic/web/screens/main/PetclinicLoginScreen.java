@@ -1,6 +1,5 @@
 package com.haulmont.sample.petclinic.web.screens.main;
 
-import com.haulmont.cuba.gui.Dialogs;
 import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.Action.ActionPerformedEvent;
@@ -9,15 +8,14 @@ import com.haulmont.cuba.gui.components.Component.Alignment;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.web.app.login.LoginScreen;
 import com.haulmont.cuba.web.gui.screen.ScreenDependencyUtils;
-import com.vaadin.ui.Dependency;
 import com.vaadin.ui.Dependency.Type;
 import javax.inject.Inject;
 
 
 @Route(path = "login", root = true)
 @UiController("login")
-@UiDescriptor("app-login-screen.xml")
-public class AppLoginScreen extends LoginScreen {
+@UiDescriptor("petclinic-login-screen.xml")
+public class PetclinicLoginScreen extends LoginScreen {
 
     @Inject
     protected HBoxLayout bottomPanel;
