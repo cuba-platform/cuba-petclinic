@@ -176,10 +176,12 @@
             $active-color: --secondary-contrast-text-color,
             $disabled-color: --button-default-disabled-color,
             $disabled-text-color: --button-default-disabled-text-color,
-            $focused-border-color: --secondary-dim-color);
+            $focused-border-color: --secondary-dim-color
+    );
 
     &:hover:not(.v-disabled) {
       color: var(--secondary-dim-color);
+      border-color: var(--secondary-dim-color);
     }
 
     &:active:not(.v-disabled) {
