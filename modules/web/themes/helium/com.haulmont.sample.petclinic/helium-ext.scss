@@ -67,25 +67,26 @@
   --table-selected-row-border-color: #DFDBFD;
   --table-selected-row-text-color: var(--text-main-color);
 
+  /* Tooltip */
+  --tooltip-font-color: var(--secondary-contrast-text-color);
+
+  &.dark {
+    @include com_haulmont_sample_petclinic-helium-ext-dark();
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////
   // Side menu
   //////////////////////////////////////////////////////////////////////////////////////////////////
   .c-sidemenu-panel {
 
     .c-sidemenu-item-action.c-sidemenu-item-focused {
-      color: var(--secondary-dim-color) !important;
+      color: var(--secondary-dim-color);
     }
 
     .c-sidemenu-item-header-open .c-sidemenu-item-wrap {
-      color: #{'rgba(var(--white_rgb), 0.5)'} !important;
-      border-bottom: 1px solid #{'rgba(var(--white_rgb), 0.3)'};
+      color: he-rgba(--white_rgb, .5);
+      border-bottom: 1px solid he-rgba(--white_rgb, .3);
       margin: 0;
-    }
-
-    .c-sidemenu-item-header-open .c-sidemenu-item-wrap::after {
-      font-family: FontAwesome;
-      content: '\f0d8' !important;
-      margin-left: -2em;
     }
 
     .c-sidemenu-item-header .c-sidemenu-item-wrap::after {
@@ -93,11 +94,12 @@
       content: '\f0d7';
       margin-left: -2em;
     }
-  }
 
-
-  .v-tooltip {
-    color: var(--secondary-contrast-text-color) !important;
+    .c-sidemenu-item-header-open .c-sidemenu-item-wrap::after {
+      font-family: FontAwesome;
+      content: '\f0d8';
+      margin-left: -2em;
+    }
   }
 
   // make visit-type selection color icons round
@@ -156,22 +158,35 @@
     color: var(--white);
   }
 
-  .light-switch {
-    border: none;
-  }
-  .light-switch:hover {
-    border: 1px solid var(--secondary-contrast-text-color) !important;
-  }
-  .dark-switch {
-    background-color: var(--secondary-contrast-text-color);
-    border: none;
-    color: var(--secondary-color);
+  .v-button.light-switch {
+    &:hover:not(.v-disabled) {
+      border-color: var(--secondary-contrast-text-color);
+    }
+
+    &:focus:not(.v-disabled) {
+      border-color: var(--secondary-contrast-text-color);
+    }
   }
 
-  .dark-switch:hover {
-    background-color: var(--secondary-contrast-text-color) !important;
-    border: 1px solid var(--secondary-dim-color) !important;
-    color: var(--secondary-dim-color) !important;
+  .v-button.dark-switch {
+    @include he-button-color-style(
+            $main-color: --secondary-contrast-text-color,
+            $text-color: --secondary-color,
+            $hover-color: --secondary-contrast-text-color,
+            $active-color: --secondary-contrast-text-color,
+            $disabled-color: --button-default-disabled-color,
+            $disabled-text-color: --button-default-disabled-text-color,
+            $focused-border-color: --secondary-dim-color
+    );
+
+    &:hover:not(.v-disabled) {
+      color: var(--secondary-dim-color);
+      border-color: var(--secondary-dim-color);
+    }
+
+    &:active:not(.v-disabled) {
+      color: var(--secondary-dim-color);
+    }
   }
 
   @include calendar-event(event-red, #DF6679, #FFC8D0);

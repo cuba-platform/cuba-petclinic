@@ -17,12 +17,13 @@
   --button-error-disabled-text-color: var(--secondary-contrast-text-color);
 
 
-  --button-secondary-color: var(--secondary-color) !important;
-  --button-secondary-text-color: var(--secondary-contrast-text-color) !important;
-  --button-secondary-hover-color: var(--secondary-color-shade-1) !important;
-  --button-secondary-hover-text-color: var(--secondary-contrast-text-color) !important;
-  --button-secondary-disabled-color: var(--secondary-dim-color) !important;
-  --button-secondary-disabled-text-color: var(--secondary-contrast-text-color) !important;
+  --button-secondary-color: var(--secondary-color);
+  --button-secondary-text-color: var(--secondary-contrast-text-color);
+  --button-secondary-hover-color: var(--secondary-color-shade-1);
+  --button-secondary-active-color: var(--secondary-color-shade-2);
+  --button-secondary-disabled-color: var(--secondary-dim-color);
+  --button-secondary-disabled-text-color: var(--secondary-contrast-text-color);
+  --button-secondary-focused-border-color: var(--button-secondary-disabled-color);
 
 
   --slider-handle-border-color: var(--border-color);
@@ -39,5 +40,10 @@
   .v-calendar-month-day-today .v-calendar-bottom-spacer:hover {
     color: var(--primary-color-shade-1);
   }
+
+  .v-reconnect-dialog {
+    background-color: var(--dark-purple);
+  }
+
 
 }

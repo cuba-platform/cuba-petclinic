@@ -18,10 +18,6 @@
   margin-top: -15px;
 }
 
-.dark .c-login-wrapper .c-login-field.password-field {
-  margin-top: -12px;
-}
-
 .dark .v-caption-password-field .v-icon {
   margin-top: -12px;
 }
@@ -61,7 +57,7 @@
   width: 64px;
 }
 
-.c-login-welcome-label {
+.v-label.c-login-welcome-label {
   font-size: 25px;
   color: #6356C0;
   font-weight: 600;

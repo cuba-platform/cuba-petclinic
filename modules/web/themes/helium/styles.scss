@@ -11,11 +11,3 @@
 
   @include com_haulmont_sample_petclinic-helium-ext;
 }
-
-.helium.dark {
-  // include auto-generated app components SCSS
-  @include app_components;
-
-  @include com_haulmont_sample_petclinic-helium-ext;
-  @include com_haulmont_sample_petclinic-helium-ext-dark;
-}
