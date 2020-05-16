@@ -1,6 +1,7 @@
 package com.haulmont.sample.petclinic.core;
 
 
+import java.time.DayOfWeek;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -18,7 +19,6 @@ class RandomVisitDateTimeTest {
 
     @BeforeEach
     void createTestEnvironment() {
-
         randomVisitDateTime = new RandomVisitDateTime();
     }
 
@@ -26,7 +26,7 @@ class RandomVisitDateTimeTest {
     public void aVisitEventRangeStartsAt7AMEarliest() {
 
         // when:
-        LocalDate date = LocalDate.now();
+        final LocalDate date = aWeekday();
         VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(date);
 
         // then:
@@ -39,7 +39,7 @@ class RandomVisitDateTimeTest {
     public void aVisitEventRangeEndsAt8PMLatest() {
 
         // when:
-        LocalDate date = LocalDate.now();
+        final LocalDate date = aWeekday();
         VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(date);
 
         // then:
@@ -51,8 +51,7 @@ class RandomVisitDateTimeTest {
     public void aVisitEventRangeIsMin15Minutes() {
 
         // when:
-        LocalDate date = LocalDate.now();
-        VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(date);
+        VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(aWeekday());
 
         // then:
         assertThat(actual.lengthInMinutes())
@@ -64,8 +63,7 @@ class RandomVisitDateTimeTest {
     public void aVisitEventRangeIsMax90Minutes() {
 
         // when:
-        LocalDate date = LocalDate.now();
-        VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(date);
+        VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(aWeekday());
 
         // then:
         assertThat(actual.lengthInMinutes())
@@ -76,8 +74,7 @@ class RandomVisitDateTimeTest {
     public void aVisitEventStartsOnlyAtEveryFullQuarterHour() {
 
         // when:
-        LocalDate date = LocalDate.now();
-        VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(date);
+        VisitEventRange actual = randomVisitDateTime.randomVisitEventRange(aWeekday());
 
         // then:
         assertThat(actual.getVisitStart().getMinute() % 15)
@@ -117,12 +114,17 @@ class RandomVisitDateTimeTest {
             .isCloseTo(ONE_IN_A_HUNDRED, within(0.03));
     }
 
+
+    private LocalDate aWeekday() {
+        return LocalDate.now().with(DayOfWeek.WEDNESDAY);
+    }
+
     private LocalDate aSaturday() {
-        return LocalDate.of(2020,1,4);
+        return aWeekday().with(DayOfWeek.SATURDAY);
     }
 
     private LocalDate aSunday() {
-        return LocalDate.of(2020,1,5);
+        return aWeekday().with(DayOfWeek.SUNDAY);
     }
 
 }

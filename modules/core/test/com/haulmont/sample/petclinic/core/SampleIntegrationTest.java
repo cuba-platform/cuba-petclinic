@@ -12,30 +12,35 @@ import com.haulmont.cuba.security.entity.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Test;
 
 import java.util.List;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.junit.Assert.assertEquals;
 
 public class SampleIntegrationTest {
 
-    @ClassRule
+
+    @RegisterExtension
     public static PetclinicTestContainer cont = PetclinicTestContainer.Common.INSTANCE;
 
-    private Metadata metadata;
-    private Persistence persistence;
-    private DataManager dataManager;
+    private static Metadata metadata;
+    private static Persistence persistence;
+    private static DataManager dataManager;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeAll
+    public static void beforeAll() throws Exception {
         metadata = cont.metadata();
         persistence = cont.persistence();
         dataManager = AppBeans.get(DataManager.class);
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterAll
+    public static void afterAll() throws Exception {
     }
 
     @Test
@@ -43,11 +48,11 @@ public class SampleIntegrationTest {
         try (Transaction tx = persistence.createTransaction()) {
             EntityManager em = persistence.getEntityManager();
             TypedQuery<User> query = em.createQuery(
-                    "select u from sec$User u where u.login = :userLogin", User.class);
+                "select u from sec$User u where u.login = :userLogin", User.class);
             query.setParameter("userLogin", "admin");
             List<User> users = query.getResultList();
             tx.commit();
-            assertEquals(1, users.size());
+            Assertions.assertEquals(1, users.size());
         }
     }
 }

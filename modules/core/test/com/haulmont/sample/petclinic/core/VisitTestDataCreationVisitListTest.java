@@ -1,35 +1,48 @@
 package com.haulmont.sample.petclinic.core;
 
 
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.FluentLoader;
 import com.haulmont.cuba.core.global.TimeSource;
+import com.haulmont.cuba.security.entity.Role;
+import com.haulmont.cuba.security.entity.User;
+import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.sample.petclinic.config.PetclinicTestdataConfig;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class VisitTestDataCreationVisitListTest {
 
-    private static final LocalDate TOMORROW = LocalDate.now().plusDays(1);
+    /**
+     * NOW is freezed to some wednesday in order to not accidentally hit the weekend limitation
+     * of the visit test data generation
+     */
+    private static final LocalDate TODAY = LocalDate.now().with(DayOfWeek.WEDNESDAY);
+    private static final LocalDate TOMORROW = TODAY.plusDays(1);
     private static final LocalDateTime TOMORROW_MORNING = TOMORROW.atStartOfDay();
+    private static final ZonedDateTime NOW = TODAY.atStartOfDay(ZoneId.of("Europe/Berlin")).plusHours(8);
 
     VisitTestDataCreation visitTestDataCreation;
 
@@ -41,7 +54,6 @@ class VisitTestDataCreationVisitListTest {
     DataManager dataManager;
 
     PetclinicData data;
-
 
 
     @BeforeEach
@@ -58,7 +70,7 @@ class VisitTestDataCreationVisitListTest {
         );
 
         when(timeSource.now())
-                .thenReturn(ZonedDateTime.now());
+                .thenReturn(NOW);
 
         data = new PetclinicData();
     }
@@ -77,6 +89,8 @@ class VisitTestDataCreationVisitListTest {
                 data.pet("Pikachu"),
                 data.pet("Garchomp")
         );
+
+        possibleNurses(asList(data.nurse("Joy")));
 
         // when:
         List<Visit> visits = visitTestDataCreation.createVisits();
@@ -105,6 +119,8 @@ class VisitTestDataCreationVisitListTest {
                 data.pet("Pikachu"),
                 data.pet("Garchomp")
         );
+
+        possibleNurses(asList(data.nurse("Joy")));
 
         // when:
         List<Visit> visits = visitTestDataCreation.createVisits();
@@ -150,6 +166,8 @@ class VisitTestDataCreationVisitListTest {
                 data.pet("Garchomp")
         );
 
+        possibleNurses(asList(data.nurse("Joy")));
+
         // when:
         List<Visit> visits = visitTestDataCreation.createVisits();
 
@@ -167,6 +185,39 @@ class VisitTestDataCreationVisitListTest {
                 .thenReturn(asList(
                         pets
                 ));
+    }
+
+
+    private void possibleNurses(List<User> nurses) {
+
+        FluentLoader fluentLoader = mock(FluentLoader.class);
+
+        lenient().when(dataManager.load(Role.class))
+            .thenReturn(fluentLoader);
+
+
+        final List<UserRole> nursesUserRoles = nurses.stream()
+            .map(user -> {
+                final UserRole userRole = new UserRole();
+                userRole.setUser(user);
+                userRole.setRoleName("Nurse");
+                return userRole;
+            })
+            .collect(Collectors.toList());
+
+        mockList(UserRole.class, nursesUserRoles);
+    }
+    private <E extends Entity> void mockList(Class<E> entityClass, List<E> entityList) {
+        FluentLoader fluentLoader = mock(FluentLoader.class);
+
+        lenient().when(dataManager.load(entityClass))
+            .thenReturn(fluentLoader);
+
+        lenient().when(fluentLoader.view(any(Consumer.class)))
+            .thenReturn(fluentLoader);
+
+        lenient().when(fluentLoader.list())
+            .thenReturn(entityList);
     }
 
     private void daysInPastToGenerateFor(int days) {

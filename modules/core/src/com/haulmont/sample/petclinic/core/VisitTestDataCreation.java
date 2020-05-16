@@ -6,7 +6,6 @@ import com.haulmont.cuba.core.global.EntitySet;
 import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.cuba.core.global.View;
 import com.haulmont.cuba.core.global.ViewBuilder;
-import com.haulmont.cuba.security.entity.Role;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.sample.petclinic.config.PetclinicTestdataConfig;
@@ -66,26 +65,31 @@ public class VisitTestDataCreation {
     }
 
     List<Visit> createVisits() {
+        final List<User> allNurses = allNurses();
+        final List<Pet> allPets = list(Pet.class);
+
         return Stream.concat(
-                createPastVisits(),
-                createFutureVisits()
+                createPastVisits(allPets, allNurses),
+                createFutureVisits(allPets, allNurses)
         )
                 .collect(Collectors.toList());
     }
 
-    private Stream<Visit> createPastVisits() {
+    private Stream<Visit> createPastVisits(List<Pet> possiblePets, List<User> possibleNurses) {
         return IntStream.range(0, petclinicTestdataConfig.getTestdataVisitStartAmountPastDays())
                 .mapToObj(value -> timeSource.now().minusDays(value).toLocalDate())
-                .map(this::createVisitsForDate)
+                .map(localDate -> createVisitsForDate(localDate, possiblePets, possibleNurses))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull);
     }
 
-    private Stream<Visit> createFutureVisits() {
+    private Stream<Visit> createFutureVisits(List<Pet> possiblePets, List<User> possibleNurses) {
         return IntStream.range(1, petclinicTestdataConfig.getTestdataVisitStartAmountFutureDays() + 1)
                 .mapToObj(i -> createVisitsForDate(
                         timeSource.now().plusDays(i).toLocalDate(),
-                        amountForFutureDate(i)
+                        amountForFutureDate(i),
+                        possiblePets,
+                        possibleNurses
                 ))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull);
@@ -96,15 +100,15 @@ public class VisitTestDataCreation {
         return (int) ((double) (max - i) / max * petclinicTestdataConfig.getTestdataVisitAmountPerDay());
     }
 
-    private List<Visit> createVisitsForDate(LocalDate localDate) {
+    private List<Visit> createVisitsForDate(LocalDate localDate, List<Pet> possiblePets, List<User> possibleNurses) {
         return IntStream.range(0, petclinicTestdataConfig.getTestdataVisitAmountPerDay())
-                .mapToObj(i -> createVisit(localDate))
+                .mapToObj(i -> createVisit(localDate, possiblePets, possibleNurses))
                 .collect(Collectors.toList());
     }
 
-    private List<Visit> createVisitsForDate(LocalDate localDate, int amount) {
+    private List<Visit> createVisitsForDate(LocalDate localDate, int amount, List<Pet> possiblePets, List<User> possibleNurses) {
         return IntStream.range(0, amount)
-                .mapToObj(i -> createVisit(localDate))
+                .mapToObj(i -> createVisit(localDate, possiblePets, possibleNurses))
                 .collect(Collectors.toList());
     }
 
@@ -122,7 +126,11 @@ public class VisitTestDataCreation {
         return visits.toArray(new Visit[visits.size()]);
     }
 
-    Visit createVisit(LocalDate date) {
+    Visit createVisit(
+        LocalDate date,
+        List<Pet> possiblePets,
+        List<User> possibleNurses
+    ) {
 
         VisitEventRange visitEventRange = randomVisitDateTime.randomVisitEventRange(date);
 
@@ -133,8 +141,12 @@ public class VisitTestDataCreation {
         Visit visit = dataManager.create(Visit.class);
 
         visit.setTreatmentStatus(treatmentStatusFor(date));
-        visit.setAssignedNurse(randomNurse(date));
-        visit.setPet(randomPet());
+
+        if (nurseShouldBeAssigned(date)) {
+            visit.setAssignedNurse(randomOfList(possibleNurses));
+        }
+
+        visit.setPet(randomOfList(possiblePets));
         visit.setType(randomVisitType());
         visit.setDescription(randomDescription());
 
@@ -144,27 +156,20 @@ public class VisitTestDataCreation {
         return visit;
     }
 
-    private User randomNurse(LocalDate date) {
-
-        if (nurseShouldBeAssigned(date)) {
-            return null;
-        }
-        final List<User> possibleNurses = list(UserRole.class, viewBuilder -> {
-            viewBuilder.add("roleName");
-            viewBuilder.add("user", View.LOCAL);
-        })
-            .stream()
-            .filter(userRole -> userRole.getRoleName().equals("Nurse"))
-            .map(UserRole::getUser)
-            .distinct()
-            .collect(Collectors.toList());
-
-        return randomOfList(possibleNurses);
-
+    private List<User> allNurses() {
+        return list(UserRole.class, viewBuilder -> {
+                viewBuilder.add("roleName");
+                viewBuilder.add("user", View.LOCAL);
+            })
+                .stream()
+                .filter(userRole -> userRole.getRoleName().equals("Nurse"))
+                .map(UserRole::getUser)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private boolean nurseShouldBeAssigned(LocalDate date) {
-        return date.isAfter(timeSource.now().toLocalDate().plusWeeks(1));
+        return date.isBefore(timeSource.now().toLocalDate().plusWeeks(1).plusDays(1));
     }
 
     private VisitTreatmentStatus treatmentStatusFor(LocalDate date) {
@@ -189,11 +194,6 @@ public class VisitTestDataCreation {
         return randomOfList(
                 Arrays.asList(petclinicTestdataConfig.getTestdataVisitDescriptionOptions().split(","))
         ).trim();
-    }
-
-    private Pet randomPet() {
-        List<Pet> pets = list(Pet.class);
-        return randomOfList(pets);
     }
 
     private <T> T randomOfList(List<T> list) {
