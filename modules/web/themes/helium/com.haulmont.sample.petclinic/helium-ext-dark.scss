@@ -1,0 +1,49 @@
+/* Define your theme modifications inside next mixin */
+@mixin com_haulmont_sample_petclinic-helium-ext-dark {
+
+  --border-color: #867AEB;
+
+
+  --table-hovered-row-background-color: var(--primary-color);
+  --table-hovered-row-text-color: var(--white);
+  --table-selected-row-background-color: var(--primary-color);
+  --table-selected-row-border-color: var(--primary-color);
+  --table-selected-row-text-color: var(--white);
+
+  --button-primary-disabled-color: var(--primary-dim-color);
+  --button-primary-disabled-text-color: var(--secondary-contrast-text-color);
+
+  --button-default-disabled-text-color: var(--secondary-contrast-text-color);
+  --button-error-disabled-text-color: var(--secondary-contrast-text-color);
+
+
+  --button-secondary-color: var(--secondary-color);
+  --button-secondary-text-color: var(--secondary-contrast-text-color);
+  --button-secondary-hover-color: var(--secondary-color-shade-1);
+  --button-secondary-active-color: var(--secondary-color-shade-2);
+  --button-secondary-disabled-color: var(--secondary-dim-color);
+  --button-secondary-disabled-text-color: var(--secondary-contrast-text-color);
+  --button-secondary-focused-border-color: var(--button-secondary-disabled-color);
+
+
+  --slider-handle-border-color: var(--border-color);
+
+
+  --groupbox-collapsed-caption-color: var(--secondary-contrast-text-color);
+
+  .v-calendar-month-day-today .v-calendar-event,
+  .v-calendar-month-day-today .v-calendar-event .v-calendar-event-time,
+  .v-calendar-month-day-today .v-calendar-bottom-spacer {
+    color: var(--primary-color);
+  }
+
+  .v-calendar-month-day-today .v-calendar-bottom-spacer:hover {
+    color: var(--primary-color-shade-1);
+  }
+
+  .v-reconnect-dialog {
+    background-color: var(--dark-purple);
+  }
+
+
+}

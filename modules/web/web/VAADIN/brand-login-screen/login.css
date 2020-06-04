@@ -1,0 +1,150 @@
+.c-login-layout {
+  display: flex;
+}
+
+.c-login-wrapper {
+  flex: 0 0 500px;
+}
+
+.c-login-wrapper .c-login-field {
+  height: 40px !important;
+  width: 350px !important;
+  border-radius: 0px !important;
+}
+
+.c-login-wrapper .c-login-field.password-field {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  margin-top: -15px;
+}
+
+.dark .v-caption-password-field .v-icon {
+  margin-top: -12px;
+}
+
+.c-login-wrapper .c-login-field.username-field {
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+}
+
+.c-login-wrapper .c-login-button {
+  background: #6356C0 !important;
+  border: 1px solid #867AEB !important;
+  border-radius: 6px !important;
+  color: #e8eff5 !important;
+  margin-top: 30px !important;
+  height: 45px !important;
+  width: 350px !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+}
+.c-login-wrapper .c-login-button:hover {
+  border: 1px solid #6356C0 !important;
+  background: #867AEB !important;
+  color: #e8eff5 !important;
+}
+
+.c-login-background {
+  flex-basis: auto;
+  width: 100%;
+}
+
+.c-login-logo {
+  margin-bottom: 15px;
+}
+
+.v-ie .c-login-logo {
+  width: 64px;
+}
+
+.v-label.c-login-welcome-label {
+  font-size: 25px;
+  color: #6356C0;
+  font-weight: 600;
+}
+
+.v-slot-inline-icon .v-caption-c-login-field.v-caption-inline-icon span.v-icon {
+  bottom: 0;
+  color: #9a9a9a;
+  font-size: 16px;
+  line-height: 40px;
+}
+
+.v-expand>.v-slot.v-slot-c-login-locales-select {
+  max-width: 500px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+}
+
+.c-login-locales-select.v-filterselect {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  height: 40px;
+  z-index: 1;
+}
+
+.c-login-locales-select.v-filterselect > input.v-filterselect-input {
+  text-align: right;
+}
+
+.c-login-bottom-panel {
+  padding-left: 10px;
+}
+
+.c-login-powered-by-link {
+  font-size: 11px;
+}
+
+.c-login-powered-by-link a {
+  margin-left: 2px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  color: #006bac;
+  background: url(cuba-icon-login.svg) no-repeat left center;
+  background-size: contain;
+  background-clip: border-box;
+  padding-left: 26px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.havana .v-slot-inline-icon .v-caption-inline-icon img.v-icon {
+  bottom: 13px;
+}
+
+@media (max-width: 992px) {
+  .c-login-wrapper {
+    min-width: 100%;
+  }
+
+  .c-login-bottom-panel {
+    max-width: 500px;
+    left: auto;
+  }
+
+  .v-slot-c-login-powered-by-link {
+    text-align: center;
+  }
+
+  .v-expand>.v-slot.v-slot-c-login-locales-select {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    height: 40px;
+  }
+
+  .c-login-locales-select.v-filterselect {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    height: 40px;
+  }
+
+  .c-login-remember-me-checkbox {
+    margin-top: 1px;
+  }
+}

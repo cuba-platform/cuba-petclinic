@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="fieldGroup"
+        messagesPack="com.haulmont.sample.petclinic.web.screens.visit">
+    <data>
+        <instance id="visitDc"
+                  class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                  view="visit-with-pet">
+            <loader/>
+        </instance>
+        <collection id="petsDc" class="com.haulmont.sample.petclinic.entity.pet.Pet" view="_base">
+            <loader>
+                <query>
+                    select e from petclinic_Pet e
+                </query>
+            </loader>
+        </collection>
+        <collection id="assignedNurseesDc" class="com.haulmont.cuba.security.entity.User" view="_minimal">
+            <loader>
+                <query>select u from sec$User u join u.userRoles ur where ur.roleName = 'Nurse'</query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="fieldGroup" dataContainer="visitDc">
+            <column width="250px">
+                <dateField property="visitStart"/>
+                <lookupPickerField property="pet" optionsContainer="petsDc"/>
+                <lookupField id="typeField" property="type"/>
+                <textArea rows="5" property="description" colspan="2" width="100%"/>
+            </column>
+            <column width="250px">
+                <dateField property="visitEnd"/>
+                <lookupField id="assignedNurseField" property="assignedNurse" optionsContainer="assignedNurseesDc"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

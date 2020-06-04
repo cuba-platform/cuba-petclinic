@@ -6,8 +6,8 @@
         <class>com.haulmont.sample.petclinic.entity.pet.PetType</class>
         <class>com.haulmont.sample.petclinic.entity.owner.Owner</class>
         <class>com.haulmont.sample.petclinic.entity.Person</class>
-        <class>com.haulmont.sample.petclinic.entity.vet.Vet</class>
-        <class>com.haulmont.sample.petclinic.entity.vet.Specialty</class>
+        <class>com.haulmont.sample.petclinic.entity.veterinarian.Veterinarian</class>
+        <class>com.haulmont.sample.petclinic.entity.veterinarian.Specialty</class>
         <class>com.haulmont.sample.petclinic.entity.visit.Visit</class>
     </persistence-unit>
 </persistence>

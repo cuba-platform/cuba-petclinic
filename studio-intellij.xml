@@ -5,5 +5,48 @@
     <option name="isNewFkConstraintNaming" value="false" />
     <option name="isJoinedInheritanceDeleteCascade" value="false" />
     <option name="stateVersion" value="1" />
+    <option name="savedDbProperties">
+      <list>
+        <SavedDbProperties>
+          <option name="databaseName" value="petclinic-3" />
+          <option name="dbType" value="hsql" />
+          <option name="dbmsVersion" />
+          <option name="host" value="localhost" />
+          <option name="systemPassword" value="" />
+          <option name="systemUser" value="" />
+          <option name="url" value="jdbc:hsqldb:hsql://localhost/petclinic-3" />
+          <option name="user" value="sa" />
+          <option name="additionalProperties">
+            <map>
+              <entry key="driverClassName" value="org.hsqldb.jdbc.JDBCDriver" />
+              <entry key="maxIdle" value="2" />
+              <entry key="maxTotal" value="20" />
+              <entry key="maxWaitMillis" value="5000" />
+              <entry key="type" value="javax.sql.DataSource" />
+            </map>
+          </option>
+        </SavedDbProperties>
+        <SavedDbProperties>
+          <option name="databaseName" value="petclinic" />
+          <option name="dbType" value="postgres" />
+          <option name="dbmsVersion" />
+          <option name="host" value="localhost" />
+          <option name="pass" value="postgres" />
+          <option name="systemPassword" value="" />
+          <option name="systemUser" value="" />
+          <option name="url" value="jdbc:postgresql://localhost/petclinic" />
+          <option name="user" value="postgres" />
+          <option name="additionalProperties">
+            <map>
+              <entry key="driverClassName" value="org.postgresql.Driver" />
+              <entry key="maxIdle" value="2" />
+              <entry key="maxTotal" value="20" />
+              <entry key="maxWaitMillis" value="5000" />
+              <entry key="type" value="javax.sql.DataSource" />
+            </map>
+          </option>
+        </SavedDbProperties>
+      </list>
+    </option>
   </component>
 </project>

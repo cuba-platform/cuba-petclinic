@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+  messagesPack="com.haulmont.sample.petclinic.web.screens.main"
+  caption="mainMsg://loginWindow.caption">
+  <actions>
+    <action id="submit"
+      caption="msg://loginWindow.okButton"
+      shortcut="ENTER"/>
+  </actions>
+  <facets>
+    <messageDialog id="helpDialog" caption="msg://helpLoginDialogCaption" message="msg://helpDialogMessage" contentMode="HTML" />
+  </facets>
+  <layout>
+    <cssLayout id="mainLayout"
+      height="100%"
+      stylename="c-login-layout"
+      width="100%">
+      <vbox id="loginWrapper"
+        expand="loginPanel"
+        height="100%"
+        stylename="c-login-wrapper">
+        <vbox id="loginPanel">
+          <vbox id="loginMainBox"
+            align="MIDDLE_CENTER"
+            margin="true"
+            width="AUTO">
+            <image id="logoImage"
+              align="MIDDLE_CENTER"
+              height="AUTO"
+              scaleMode="SCALE_DOWN"
+              stylename="c-login-logo"
+              width="AUTO"/>
+            <label id="welcomeLabel"
+              align="MIDDLE_CENTER"
+              stylename="c-login-welcome-label"
+              value="mainMsg://loginWindow.welcomeLabel"/>
+            <capsLockIndicator id="capsLockIndicator"
+              align="MIDDLE_CENTER"/>
+            <linkButton id="helpBtn" icon="font-icon:QUESTION_CIRCLE_O" caption="msg://loginHelp" align="BOTTOM_RIGHT" />
+            <vbox id="loginForm"
+              spacing="true">
+              <textField id="loginField"
+                htmlName="loginField"
+                icon="USER"
+                inputPrompt="mainMsg://loginWindow.loginPlaceholder"
+                stylename="c-login-field inline-icon username-field"/>
+              <passwordField id="passwordField"
+                autocomplete="true"
+                capsLockIndicator="capsLockIndicator"
+                htmlName="passwordField"
+                icon="LOCK"
+                inputPrompt="mainMsg://loginWindow.passwordPlaceholder"
+                stylename="c-login-field inline-icon password-field"/>
+              <hbox id="paramsBox"
+                align="MIDDLE_CENTER"
+                width="350px">
+                <checkBox id="rememberMeCheckBox"
+                  align="MIDDLE_LEFT"
+                  stylename="c-login-remember-me-checkbox"
+                  caption="mainMsg://loginWindow.rememberMe"/>
+                <lookupField id="localesSelect"
+                  align="MIDDLE_RIGHT"
+                  nullOptionVisible="false"
+                  stylename="c-login-locales-select borderless"
+                  textInputAllowed="false"
+                  width="100px"/>
+              </hbox>
+              <button id="loginButton"
+                action="submit"
+                align="MIDDLE_CENTER"
+                stylename="c-login-button"/>
+            </vbox>
+          </vbox>
+        </vbox>
+        <hbox id="bottomPanel"
+          align="MIDDLE_CENTER"
+          stylename="c-login-bottom-panel"
+          height="40px"
+          width="100%">
+          <label id="poweredByLink"
+            align="MIDDLE_LEFT"
+            htmlEnabled="true"
+            stylename="c-login-powered-by-link"
+            value="mainMsg://cuba.poweredBy"/>
+        </hbox>
+      </vbox>
+      <image id="backgroundImage"
+        scaleMode="COVER"
+        stylename="c-login-background">
+        <relativePath path="VAADIN/brand-login-screen/background.svg"/>
+      </image>
+    </cssLayout>
+  </layout>
+</window>

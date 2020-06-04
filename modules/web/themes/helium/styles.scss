@@ -1,0 +1,13 @@
+@import "helium-defaults";
+@import "com.haulmont.sample.petclinic/helium-ext-defaults";
+@import "app-components";
+@import "com.haulmont.sample.petclinic/helium-ext";
+@import "com.haulmont.sample.petclinic/helium-ext-dark";
+
+
+.helium {
+  // include auto-generated app components SCSS
+  @include app_components;
+
+  @include com_haulmont_sample_petclinic-helium-ext;
+}

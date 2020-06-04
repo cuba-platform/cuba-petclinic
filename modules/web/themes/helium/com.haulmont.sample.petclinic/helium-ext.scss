@@ -1,0 +1,199 @@
+@import "calendar-event";
+
+/* Define your theme modifications inside next mixin */
+@mixin com_haulmont_sample_petclinic-helium-ext {
+  --white: #FFFFFF;
+  --white_rgb: 255, 255, 255;
+
+  /* Basic */
+  --primary-color: #867AEB;
+  --primary-color_rgb: 134, 122, 235;
+
+
+  --secondary-color: #FFD042;
+  --secondary-color_rgb: 255, 208, 66;
+  --success-color: #83C93C;
+
+  /* Common */
+  --primary-color-shade-1: #6A5CE6;
+  --primary-color-shade-2: #4D3DE1;
+  --primary-dim-color: #AAA2F1;
+  --secondary-color-shade-1: #FFC61A;
+  --secondary-color-shade-2: #FABB00;
+  --secondary-contrast-text-color: #2C3436;
+  --secondary-dim-color: #FFDD75;
+  --success-color-shade-1: #75B332;
+  --success-color-shade-2: #689F2D;
+  --success-dim-color: #A7D874;
+
+  /* SideMenu */
+  --dark-purple: #584CAE;
+  --main-menu-purple: #6356C0;
+
+  --sidemenu-background-color: var(--main-menu-purple);
+  --sidemenu-text-color: var(--white);
+
+  --sidemenu-title-color: var(--sidemenu-text-color);
+  --sidemenu-title-background-color: var(--dark-purple);
+
+  --sidemenu-item-focused-color: var(--white);
+
+  --sedemenu-item-selected-color: var(--secondary-dim-color);
+  --sedemenu-item-selected-background-color: none;
+
+  --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
+  --sidemenu-item-badge-background-color: var(--secondary-color);
+
+
+  --sidemenu-collapsible-submenu-background-color: none;
+
+  --sidemenu-collapsible-controls-panel-background-color: var(--dark-purple);
+
+  --sidemenu-collapsible-action-button-color: var(--white);
+  --sidemenu-collapsible-action-button-hover-background-color: var(--primary-color);
+  --sidemenu-collapsible-action-button-active-background-color: var(--primary-color);
+
+  --sidemenu-collapsible-collapse-button-color: var(--white);
+  --sidemenu-collapsible-collapse-button-background-color: var(--dark-purple);
+  --sidemenu-collapsible-collapse-button-hover-background-color: var(--primary-color);
+  --sidemenu-collapsible-collapse-button-active-background-color: var(--primary-color);
+
+  --groupbox-collapsed-caption-color: var(--white);
+
+
+  /* Table */
+  --table-hovered-row-background-color: #DFDBFD;
+  --table-selected-row-background-color: #DFDBFD;
+  --table-selected-row-border-color: #DFDBFD;
+  --table-selected-row-text-color: var(--text-main-color);
+
+  /* Tooltip */
+  --tooltip-font-color: var(--secondary-contrast-text-color);
+
+  &.dark {
+    @include com_haulmont_sample_petclinic-helium-ext-dark();
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  // Side menu
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  .c-sidemenu-panel {
+
+    .c-sidemenu-item-action.c-sidemenu-item-focused {
+      color: var(--secondary-dim-color);
+    }
+
+    .c-sidemenu-item-header-open .c-sidemenu-item-wrap {
+      color: he-rgba(--white_rgb, .5);
+      border-bottom: 1px solid he-rgba(--white_rgb, .3);
+      margin: 0;
+    }
+
+    .c-sidemenu-item-header .c-sidemenu-item-wrap::after {
+      font-family: FontAwesome;
+      content: '\f0d7';
+      margin-left: -2em;
+    }
+
+    .c-sidemenu-item-header-open .c-sidemenu-item-wrap::after {
+      font-family: FontAwesome;
+      content: '\f0d8';
+      margin-left: -2em;
+    }
+  }
+
+  // make visit-type selection color icons round
+  .v-select-optiongroup-visit-type .v-icon {
+    border-radius: 3px;
+  }
+
+  table.possible-users th, table.possible-users td {
+    padding: 5px;
+  }
+  .possible-user {
+    background-color: var(--dark-purple);
+    color: var(--sidemenu-text-color);
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  .possible-role {
+    background-color: #BAF7FF;
+    color: #249FAF;
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  .possible-user-password {
+    background-color: #FFC8D0;
+    color: #DF6679;
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  .possible-user-password::before {
+    font-family: FontAwesome;
+    content: '\f023';
+    padding-right: 10px;
+  }
+  .possible-user::before {
+    padding-right: 10px;
+    font-family: FontAwesome;
+    content: '\f007';
+  }
+  .possible-role::before {
+    padding-right: 10px;
+    font-family: FontAwesome;
+    content: '\f0c0';
+  }
+
+
+  .v-calendar-month-day-today .v-calendar-event,
+  .v-calendar-month-day-today .v-calendar-event .v-calendar-event-time,
+  .v-calendar-month-day-today .v-calendar-bottom-spacer {
+    color: var(--white);
+  }
+
+  .v-calendar-month-day-today .v-calendar-bottom-spacer:hover {
+    color: var(--white);
+  }
+
+  .v-button.light-switch {
+    &:hover:not(.v-disabled) {
+      border-color: var(--secondary-contrast-text-color);
+    }
+
+    &:focus:not(.v-disabled) {
+      border-color: var(--secondary-contrast-text-color);
+    }
+  }
+
+  .v-button.dark-switch {
+    @include he-button-color-style(
+            $main-color: --secondary-contrast-text-color,
+            $text-color: --secondary-color,
+            $hover-color: --secondary-contrast-text-color,
+            $active-color: --secondary-contrast-text-color,
+            $disabled-color: --button-default-disabled-color,
+            $disabled-text-color: --button-default-disabled-text-color,
+            $focused-border-color: --secondary-dim-color
+    );
+
+    &:hover:not(.v-disabled) {
+      color: var(--secondary-dim-color);
+      border-color: var(--secondary-dim-color);
+    }
+
+    &:active:not(.v-disabled) {
+      color: var(--secondary-dim-color);
+    }
+  }
+
+  @include calendar-event(event-red, #DF6679, #FFC8D0);
+  @include calendar-event(event-green, #23BA75, #BAF2D8);
+  @include calendar-event(event-yellow, #E3A023, #FFE2AD);
+  @include calendar-event(event-purple, #6E64B9, #D6D0FF);
+  @include calendar-event(event-blue, #249FAF, #BAF7FF);
+
+
+}

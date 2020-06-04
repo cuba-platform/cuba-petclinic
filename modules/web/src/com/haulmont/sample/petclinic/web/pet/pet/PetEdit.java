@@ -1,5 +1,6 @@
 package com.haulmont.sample.petclinic.web.pet.pet;
 
+import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.sample.petclinic.entity.pet.Pet;
 
@@ -7,5 +8,6 @@ import com.haulmont.sample.petclinic.entity.pet.Pet;
 @UiDescriptor("pet-edit.xml")
 @EditedEntityContainer("petDc")
 @LoadDataBeforeShow
+@Route(value = "pets/edit", parentPrefix = "pets")
 public class PetEdit extends StandardEditor<Pet> {
 }

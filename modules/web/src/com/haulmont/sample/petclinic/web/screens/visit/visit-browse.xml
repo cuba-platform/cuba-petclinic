@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="visitsTable"
+        messagesPack="com.haulmont.sample.petclinic.web.screens.visit">
+    <data>
+        <collection id="visitsDc"
+                    class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                    view="visit-with-pet">
+            <loader id="visitsDl">
+                <query>
+                    <![CDATA[select e from petclinic_Visit e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="visitsCalendarDc"
+                    class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                    view="visit-with-pet">
+            <loader id="visitsCalendarDl">
+                <query>
+                    <![CDATA[select e from petclinic_Visit e where e.visitStart >= :visitStart and e.visitEnd <= :visitEnd]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.type in :type</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="contentTabSheet"
+            spacing="true">
+        <tabSheet id="contentTabSheet">
+            <tab
+                    id="calendarTab"
+                    spacing="true"
+                    margin="true"
+                    caption="msg://calendar"
+                    expand="calendarFilter"
+            >
+                <hbox spacing="true" id="calendarFilter" expand="split" width="100%">
+                    <split
+                            orientation="horizontal"
+                            id="split"
+                            pos="20"
+                            height="100%"
+                            dockable="true"
+                            dockMode="LEFT"
+                    >
+                        <vbox id="filterBox" spacing="true" align="TOP_CENTER" margin="true" width="95%">
+                            <groupBox stylename="light"
+                                      width="100%"
+                                      caption="msg://overview">
+                                <datePicker id="calendarNavigator"
+                                            datatype="localDate"
+                                            width="100%"
+                                />
+                            </groupBox>
+                            <groupBox stylename="light"
+                                      width="100%"
+                                      caption="msg://calendarMode">
+                                <radioButtonGroup
+                                        width="100%"
+                                        orientation="horizontal"
+                                        stylename="button-switcher"
+                                        optionsEnum="com.haulmont.sample.petclinic.web.screens.visit.CalendarMode"
+                                        id="calendarMode"
+                                />
+                            </groupBox>
+                            <groupBox stylename="light"
+                                      width="100%"
+                                      caption="msg://type">
+                                <checkBoxGroup id="typeMultiFilter"
+                                               stylename="visit-type"
+                                               orientation="vertical"/>
+                            </groupBox>
+                        </vbox>
+                        <vbox id="calendarBox"
+                              spacing="true"
+                              margin="true"
+                              width="100%"
+                              height="100%"
+                              expand="calendar"
+                        >
+                            <hbox expand="navigator" spacing="true" margin="true">
+                                <buttonsPanel id="navigator" align="MIDDLE_RIGHT" margin="false" spacing="false">
+                                    <button id="navigatorCurrent"
+                                            stylename="borderless-colored"
+                                            icon="HOME"/>
+                                    <button id="navigatorPrevious"
+                                            stylename="borderless-colored"
+                                            icon="CARET_LEFT"/>
+                                    <button id="navigatorNext"
+                                            stylename="borderless-colored"
+                                            icon="CARET_RIGHT"/>
+                                </buttonsPanel>
+                                <label id="calendarTitle"
+                                       stylename="h3"
+                                  align="MIDDLE_CENTER"
+                                       icon="font-icon:CALENDAR"
+                                       width="200px"/>
+                            </hbox>
+                            <calendar id="calendar"
+                                      dataContainer="visitsCalendarDc"
+                                      width="100%"
+                                      captionProperty="petName"
+                                      descriptionProperty="description"
+                                      startDateProperty="visitStart"
+                                      endDateProperty="visitEnd"
+                                      firstVisibleDayOfWeek="2"
+                                      firstVisibleHourOfDay="5"
+                                      lastVisibleHourOfDay="20"
+                                      stylenameProperty="typeStyle"
+                                      navigationButtonsVisible="false"/>
+                        </vbox>
+                    </split>
+                </hbox>
+            </tab>
+            <tab
+                    id="tableTab"
+                    spacing="true"
+                    margin="true"
+                    caption="msg://visitList"
+                    expand="visitsTable">
+                <filter id="filter"
+                        applyTo="visitsTable"
+                        dataLoader="visitsDl">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="visitsTable"
+                            multiselect="true"
+                            dataContainer="visitsDc"
+                            width="100%">
+                    <actions>
+                        <action id="create" type="create">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="edit" type="edit">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="remove" type="remove"/>
+                        <action id="bulkEdit" type="bulkEdit"/>
+                    </actions>
+                    <columns>
+                        <column id="pet"/>
+                        <column id="visitStart"/>
+                        <column id="visitEnd"/>
+                        <column id="description"/>
+                        <column id="type"/>
+                        <column id="treatmentStatus"/>
+                        <column id="assignedNurse"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="visitsTable.create"/>
+                        <button id="editBtn" action="visitsTable.edit"/>
+                        <button id="removeBtn" action="visitsTable.remove" stylename="danger"/>
+                        <button id="bulkEditBtn" action="visitsTable.bulkEdit"/>
+                    </buttonsPanel>
+                </groupTable>
+            </tab>
+        </tabSheet>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
