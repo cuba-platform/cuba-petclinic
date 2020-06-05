@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.springframework.util.CollectionUtils;
 
-@Component
+@Component("petclinic_VisitTestDataCreation")
 public class VisitTestDataCreation {
 
     @Inject
