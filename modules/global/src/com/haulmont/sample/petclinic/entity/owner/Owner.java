@@ -9,6 +9,7 @@ import com.haulmont.sample.petclinic.entity.pet.Pet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -36,6 +37,7 @@ public class Owner extends Person {
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
+    @OrderBy("identificationNumber")
     @OneToMany(mappedBy = "owner")
     protected List<Pet> pets;
 
