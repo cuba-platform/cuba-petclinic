@@ -42,7 +42,6 @@ public class VeterinarianRole extends AnnotatedRoleDefinition {
   @EntityAttributeAccess(entityClass = Specialty.class, modify = "*")
   @EntityAttributeAccess(entityClass = Veterinarian.class, modify = "*")
   @EntityAttributeAccess(entityClass = User.class, modify = "*")
-  @EntityAttributeAccess(entityClass = Visit.class, modify = "pet") // TODO: remove when https://github.com/cuba-platform/cuba/issues/2869 is solved
   @Override
   public EntityAttributePermissionsContainer entityAttributePermissions() {
     return super.entityAttributePermissions();
