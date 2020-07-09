@@ -6,7 +6,7 @@
     <data>
         <instance id="petDc"
                   class="com.haulmont.sample.petclinic.entity.pet.Pet"
-                  view="pet-with-owner-and-type">
+                  view="pet-with-owner-and-type-and-visits">
             <loader/>
         </instance>
 

@@ -20,10 +20,12 @@
     </view>
     <view class="com.haulmont.sample.petclinic.entity.pet.Pet"
           extends="_local"
-          name="pet-with-owner-and-type">
+          name="pet-with-owner-and-type-and-visits">
         <property name="type"
                   view="_minimal"/>
         <property name="owner"
+                  view="_local"/>
+        <property name="visits"
                   view="_local"/>
     </view>
 </views>
