@@ -134,6 +134,8 @@ configure(coreModule) {
 }
 
 configure(webModule) {
+  apply(plugin: 'groovy')
+
   configurations {
     webcontent
   }
@@ -143,6 +145,7 @@ configure(webModule) {
     compile(globalModule)
 
     testCompile('de.diedavids.sneferu:sneferu:0.3.1')
+    testCompile('com.haulmont.masquerade:masquerade-web:2.1.0')
   }
 
   task webArchive(type: Zip) {
