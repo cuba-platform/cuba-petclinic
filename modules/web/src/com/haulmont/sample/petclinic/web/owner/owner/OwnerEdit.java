@@ -13,15 +13,15 @@ import javax.inject.Inject;
 @LoadDataBeforeShow
 @Route(value = "owners/edit", parentPrefix = "owners")
 public class OwnerEdit extends StandardEditor<Owner> {
-    @Inject
-    protected Label<String> titleLabel;
+ /*   @Inject
+    protected Label<String> titleLabel;*/
     @Inject
     protected MessageBundle messageBundle;
 
-    @Subscribe
+/*    @Subscribe
     protected void onAfterShow(AfterShowEvent event) {
         titleLabel.setValue(messageBundle.formatMessage("ownerTitle", getEditedEntity().getName()));
-    }
+    }*/
 
 
 }

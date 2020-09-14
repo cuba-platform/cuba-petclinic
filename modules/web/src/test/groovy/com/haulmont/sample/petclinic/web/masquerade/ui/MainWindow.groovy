@@ -10,16 +10,16 @@ import static com.codeborne.selenide.Condition.visible
 import static com.codeborne.selenide.Selenide.$
 import static com.codeborne.selenide.Selenide.$x
 import static com.haulmont.masquerade.Components.wire
+import static com.haulmont.masquerade.Selectors.$c
 import static com.haulmont.masquerade.Selectors.byCubaId
 
 class MainWindow {
 
-    static <T extends MainWindow> T switchTab(String cubaId, Class<T> clazz) {
-        $x("//*[@cuba-id='$cubaId']//*[contains(@class, 'v-caption')]")
+    static <T > T switchTab(String cubaId, Class<T> clazz) {
+        $c("tab_$cubaId")
                 .shouldBe(visible)
                 .click()
-
-        return clazz.newInstance()
+        return wire(clazz)
     }
 
     /**

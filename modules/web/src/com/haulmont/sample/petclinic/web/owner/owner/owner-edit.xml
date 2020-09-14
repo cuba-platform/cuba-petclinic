@@ -14,7 +14,6 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="petsBox" spacing="true">
-        <label stylename="h2" id="titleLabel" />
         <form id="fieldGroup" dataContainer="ownerDc">
             <column width="200px">
                 <textField property="firstName"/>
