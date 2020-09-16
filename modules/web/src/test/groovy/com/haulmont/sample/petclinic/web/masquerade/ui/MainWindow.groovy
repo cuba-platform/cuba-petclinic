@@ -16,7 +16,7 @@ import static com.haulmont.masquerade.Selectors.byCubaId
 class MainWindow {
 
     static <T > T switchTab(String cubaId, Class<T> clazz) {
-        $c("tab_$cubaId")
+        $c("$cubaId")
                 .shouldBe(visible)
                 .click()
         return wire(clazz)
