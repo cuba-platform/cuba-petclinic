@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class WeekCalendarNavigationTest {
+class WeekCalendarTabNavigationTest {
 
 
     private static final LocalDate W1_MON = LocalDate.of(2020, 3, 30);

@@ -40,7 +40,4 @@ class PetEditor extends Composite<PetEditor> {
     @Wire(path = 'lookupSelectAction')
     public Button select
 
-
-
-
 }

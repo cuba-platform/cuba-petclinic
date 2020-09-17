@@ -1,13 +1,9 @@
 package com.haulmont.sample.petclinic.web.masquerade.ui
 
+
 import com.haulmont.masquerade.Wire
 import com.haulmont.masquerade.base.Composite
 import com.haulmont.masquerade.components.*
-import com.haulmont.masquerade.sys.TagNames
-
-import static com.codeborne.selenide.Selenide.$
-import static com.haulmont.masquerade.Selectors.byChain
-import static com.haulmont.masquerade.Selectors.byCubaId
 
 @Wire(path = 'dialog_petclinic_Visit.edit')
 class VisitEditor extends Composite<VisitEditor> {
@@ -15,18 +11,18 @@ class VisitEditor extends Composite<VisitEditor> {
     @Wire(path = ['visitStart', 'datepart'])
     public DateField datepartStart
 
-    public TimeField timepartStart = $(byChain(byCubaId('visitStart'),
+/*    public SelenideElement timepartStart = $(byChain(byCubaId('visitStart'),
             byCubaId('timepart'),
             TagNames.DIV,
-            TagNames.INPUT)) as TimeField
+            TagNames.INPUT))*/
 
     @Wire(path = ['visitEnd', 'datepart'])
     public DateField datepartEnd
 
-    public TimeField timepartEnd = $(byChain(byCubaId('visitEnd'),
+/*    public SelenideElement timepartEnd = $(byChain(byCubaId('visitEnd'),
             byCubaId('timepart'),
             TagNames.DIV,
-            TagNames.INPUT)) as TimeField
+            TagNames.INPUT))*/
 
     @Wire
     public LookupPickerField pet
@@ -43,5 +39,9 @@ class VisitEditor extends Composite<VisitEditor> {
     @Wire(path = 'windowCommitAndClose')
     public Button ok
 
+    @Wire(path = 'windowClose')
+    public Button cancel
 
+    @Wire
+    public LookupField treatmentStatusField
 }

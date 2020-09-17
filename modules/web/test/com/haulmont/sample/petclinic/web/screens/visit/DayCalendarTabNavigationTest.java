@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class DayCalendarNavigationTest {
+class DayCalendarTabNavigationTest {
     private static final LocalDate MON = LocalDate.of(2020, 3, 30);
     private static final LocalDate TUE = MON.plusDays(1);
     private static final LocalDate WED = TUE.plusDays(1);

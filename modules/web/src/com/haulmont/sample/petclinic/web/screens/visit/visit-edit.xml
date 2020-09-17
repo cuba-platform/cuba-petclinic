@@ -30,6 +30,7 @@
                 <lookupPickerField property="pet" optionsContainer="petsDc"/>
                 <lookupField id="typeField" property="type"/>
                 <textArea rows="5" property="description" colspan="2" width="100%"/>
+                <lookupField id="treatmentStatusField" property="treatmentStatus"/>
             </column>
             <column width="250px">
                 <dateField property="visitEnd"/>

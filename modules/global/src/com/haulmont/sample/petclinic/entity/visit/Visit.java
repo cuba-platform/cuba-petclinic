@@ -1,7 +1,5 @@
 package com.haulmont.sample.petclinic.entity.visit;
 
-import static com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus.*;
-
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
@@ -15,6 +13,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import static com.haulmont.sample.petclinic.entity.visit.VisitTreatmentStatus.*;
 
 @NamePattern("%s ()|pet")
 @Table(name = "PETCLINIC_VISIT")
