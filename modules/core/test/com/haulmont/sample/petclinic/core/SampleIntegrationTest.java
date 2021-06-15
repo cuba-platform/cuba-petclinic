@@ -12,12 +12,14 @@ import com.haulmont.cuba.security.entity.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 public class SampleIntegrationTest {
 
     @ClassRule
