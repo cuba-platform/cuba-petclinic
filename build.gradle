@@ -1,10 +1,13 @@
 buildscript {
-  ext.cubaVersion = '7.2.4'
+  ext.cubaVersion = '7.2.13'
   repositories {
-    maven {
-      url 'https://dl.bintray.com/cuba-platform/main'
-    }
-    jcenter()
+      maven {
+          url 'https://repo.cuba-platform.com/content/groups/work'
+          credentials {
+              username(rootProject.hasProperty('repoUser') ? rootProject['repoUser'] : 'cuba')
+              password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
+          }
+      }
   }
   dependencies {
     classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
@@ -31,7 +34,7 @@ cuba {
 
 dependencies {
   appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-  appComponent('com.haulmont.addon.helium:helium-global:0.2.0')
+  appComponent('com.haulmont.addon.helium:helium-global:0.3.1')
 }
 
 def hsql = 'org.hsqldb:hsqldb:2.4.1'
