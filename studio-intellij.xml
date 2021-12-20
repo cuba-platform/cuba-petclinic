@@ -8,13 +8,13 @@
     <option name="savedDbProperties">
       <list>
         <SavedDbProperties>
-          <option name="databaseName" value="petclinic-3" />
+          <option name="databaseName" value="petclinic" />
           <option name="dbType" value="hsql" />
           <option name="dbmsVersion" />
           <option name="host" value="localhost" />
           <option name="systemPassword" value="" />
           <option name="systemUser" value="" />
-          <option name="url" value="jdbc:hsqldb:hsql://localhost/petclinic-3" />
+          <option name="url" value="jdbc:hsqldb:hsql://localhost/petclinic" />
           <option name="user" value="sa" />
           <option name="additionalProperties">
             <map>

@@ -3,9 +3,9 @@ package com.haulmont.sample.petclinic.entity;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @NamePattern("#getName|firstName,lastName")
@@ -36,7 +36,6 @@ public class Person extends StandardEntity {
         return lastName;
     }
 
-    @Transient
     @MetaProperty(related = "firstName,lastName")
     public String getName() {
         String name = firstName;
